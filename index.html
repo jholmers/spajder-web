@@ -213,21 +213,96 @@
     }
 
     /* ══════════════════════════════════════════════
-       UTVALDA CASE — full-bleed carousel
+       UTVALDA CASE — grid
     ══════════════════════════════════════════════ */
-    .cases-carousel {
+    .cases {
+      background: var(--c9);
+      padding-top: clamp(40px, 5.6vw, 80px);
+      padding-bottom: clamp(40px, 5vw, 80px);
+    }
+    .cases-top {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      padding-bottom: clamp(20px, 2.5vw, 32px);
+    }
+    .cases-divider { height: 1px; background: var(--cgs); opacity: 0.2; }
+    .cases-filters {
+      display: flex; gap: 8px;
+      margin-top: clamp(16px, 2vw, 24px);
+      margin-bottom: clamp(20px, 2.5vw, 32px);
+    }
+    .filter-btn {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(11px, 0.9vw, 13px);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 8px 18px; border-radius: 100px;
+      border: 1px solid var(--cgs); cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+    }
+    .filter-btn.active   { background: var(--cgs); color: var(--cd); }
+    .filter-btn.inactive { background: transparent; color: var(--cgs); }
+    .cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 0.83vw, 12px);
+    }
+    .case-card {
+      position: relative; overflow: hidden;
+      aspect-ratio: 1 / 1;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .case-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.7s cubic-bezier(.16,1,.3,1);
+      display: block;
+    }
+    .case-card:hover img { transform: scale(1.05); }
+    .case-card .dim {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65) 100%);
+    }
+    .case-card .tag {
+      position: absolute; top: 14px; right: 14px;
+      font-family: 'Spline Sans', sans-serif; font-size: clamp(9px, 0.75vw, 11px);
+      color: rgba(255,255,255,0.7); text-align: right;
+      max-width: 55%; letter-spacing: 0.02em; line-height: 1.4;
+    }
+    .case-card .desc {
+      position: absolute; bottom: clamp(30px, 4vw, 48px);
+      left: clamp(12px, 2vw, 24px); right: clamp(12px, 2vw, 24px);
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(16px, 2.5vw, 34px); line-height: 1.15;
+      letter-spacing: -0.02em; color: #fff;
+    }
+    .case-card .client {
+      position: absolute; bottom: clamp(10px, 1.5vw, 18px);
+      left: clamp(12px, 2vw, 24px);
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(9px, 0.7vw, 11px);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    @media (max-width: 560px) {
+      .cases-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════════════
+       TANKEN BAKOM — full-bleed carousel
+    ══════════════════════════════════════════════ */
+    .tanken-carousel {
       background: var(--c9);
       padding-bottom: clamp(40px, 5vw, 80px);
     }
-    .cases-carousel-header {
+    .tanken-carousel-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       padding: clamp(24px, 3vw, 48px) var(--px) clamp(12px, 1.5vw, 20px);
       flex-wrap: wrap; gap: 12px;
     }
-    .cases-carousel-header h2 { color: var(--c1); }
-    .cases-progress-wrap {
+    .tanken-carousel-header h2 { color: var(--c1); }
+    .tanken-progress-wrap {
       width: 100%;
       height: 1px;
       background: rgba(21,46,31,0.15);
@@ -235,29 +310,29 @@
       overflow: hidden;
       margin-bottom: 0;
     }
-    .cases-progress-bar {
+    .tanken-progress-bar {
       position: absolute;
       top: 0; left: 0; bottom: 0;
       width: 100%;
       background: var(--cgs);
       transform-origin: left;
-      transform: scaleX(0.2);
+      transform: scaleX(0.333);
       transition: transform 0.55s cubic-bezier(.16,1,.3,1);
     }
-    .cases-viewport {
+    .tanken-viewport {
       width: 100%;
       overflow: hidden;
       cursor: grab;
       touch-action: pan-y;
     }
-    .cases-viewport.is-dragging { cursor: grabbing; }
-    .cases-track {
+    .tanken-viewport.is-dragging { cursor: grabbing; }
+    .tanken-track {
       display: flex;
       will-change: transform;
       transition: transform 0.6s cubic-bezier(.16,1,.3,1);
     }
-    .cases-track.no-anim { transition: none; }
-    .cases-slide {
+    .tanken-track.no-anim { transition: none; }
+    .tanken-slide {
       position: relative;
       flex: 0 0 100%;
       width: 100%;
@@ -265,26 +340,26 @@
       overflow: hidden;
       user-select: none;
     }
-    .cases-slide img {
+    .tanken-slide img {
       position: absolute; inset: 0;
       width: 100%; height: 100%; object-fit: cover;
       pointer-events: none;
       transform: scale(1.08);
       transition: transform 0.7s cubic-bezier(.16,1,.3,1);
     }
-    .cases-slide.is-active img { transform: scale(1); }
-    .cases-slide-overlay {
+    .tanken-slide.is-active img { transform: scale(1); }
+    .tanken-slide-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.06) 55%);
+      background: linear-gradient(160deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.08) 55%);
     }
-    .cases-slide-details {
+    .tanken-slide-details {
       position: absolute;
       top: clamp(32px, 7.4vw, 95px);
       left: clamp(var(--px), 9.6vw, 123px);
       color: #fff;
       max-width: min(696px, 80vw);
     }
-    .cases-slide-client {
+    .tanken-slide-label {
       font-family: 'Spline Sans', sans-serif; font-weight: 500;
       font-size: clamp(10px, 0.9vw, 13px);
       letter-spacing: 0.1em;
@@ -292,7 +367,7 @@
       color: rgba(255,255,255,0.6);
       margin-bottom: clamp(8px, 1.2vw, 16px);
     }
-    .cases-slide-title {
+    .tanken-slide-title {
       font-family: 'Instrument Serif', serif; font-weight: 400;
       font-size: clamp(26px, 7.2vw, 92px);
       line-height: 1.0;
@@ -300,7 +375,7 @@
       color: #fff;
       margin-bottom: clamp(14px, 3.1vw, 40px);
     }
-    .cases-slide-link {
+    .tanken-slide-link {
       font-family: 'Spline Sans', sans-serif; font-weight: 400;
       font-size: clamp(10px, 0.86vw, 12px);
       letter-spacing: 0.09em;
@@ -310,31 +385,6 @@
       padding-bottom: 2px;
       cursor: pointer;
     }
-    .cases-slide-tag {
-      position: absolute;
-      top: clamp(14px, 1.8vw, 20px);
-      right: clamp(16px, 1.8vw, 24px);
-      font-family: 'Spline Sans', sans-serif; font-weight: 400;
-      font-size: clamp(10px, 0.9vw, 13px);
-      color: rgba(255,255,255,0.65);
-      letter-spacing: -0.01em;
-      text-align: right;
-      max-width: 45%;
-    }
-
-    /* ══════════════════════════════════════════════
-       TANKEN BAKOM
-    ══════════════════════════════════════════════ */
-    .tanken {
-      background: var(--c9);
-      padding-top: clamp(40px, 5.6vw, 80px);
-    }
-    .tanken-top {
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 16px;
-      padding-bottom: clamp(24px, 2.5vw, 36px);
-    }
-    .tanken-divider { height: 1px; background: var(--cgs); opacity: 0.2; }
 
     /* ══════════════════════════════════════════════
        INGA KRUSIDULLER (photo)
@@ -700,102 +750,115 @@
   </section>
 
   <!-- ═══════════════════════════ UTVALDA CASE ═══════════════════════════ -->
-  <section class="cases-carousel">
+  <section class="cases">
     <div class="container">
-      <div class="cases-carousel-header">
+      <div class="cases-top">
         <h2 class="t-h1" data-fade>Utvalda case.</h2>
-        <a class="cta" href="#" data-fade data-fade-delay="1">
+        <div class="cta" data-fade data-fade-delay="1">
           <span style="color:var(--cs);">Se alla case</span>
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        </div>
       </div>
-    </div>
-    <div class="cases-progress-wrap">
-      <div class="cases-progress-bar" id="casesProgress"></div>
-    </div>
-    <div class="cases-viewport" id="casesViewport">
-      <div class="cases-track" id="casesTrack">
-
-        <div class="cases-slide is-active">
-          <img src="spajder/Images/Image-3.jpg" alt="Ecokraft" draggable="false">
-          <div class="cases-slide-overlay"></div>
-          <div class="cases-slide-details">
-            <p class="cases-slide-client">Ecokraft</p>
-            <h3 class="cases-slide-title">Förnyat varumärke för att möta nya utmaningar</h3>
-            <a href="#" class="cases-slide-link">Läs mer</a>
-          </div>
-          <span class="cases-slide-tag">Webbutveckling · Visuell identitet · Sociala medier</span>
+      <div class="cases-divider"></div>
+      <div class="cases-filters">
+        <button class="filter-btn active">Rutnät</button>
+        <button class="filter-btn inactive">Lista</button>
+      </div>
+      <div class="cases-grid">
+        <div class="case-card" data-fade-scale>
+          <img src="spajder/Images/Image-3.jpg" alt="Ecokraft">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">Ecokraft</span>
         </div>
-
-        <div class="cases-slide">
-          <img src="spajder/Images/Image-2.jpg" alt="CBS City" draggable="false">
-          <div class="cases-slide-overlay"></div>
-          <div class="cases-slide-details">
-            <p class="cases-slide-client">CBS City</p>
-            <h3 class="cases-slide-title">En ny digital närvaro för en växande stad</h3>
-            <a href="#" class="cases-slide-link">Läs mer</a>
-          </div>
-          <span class="cases-slide-tag">Webb · Sociala medier</span>
+        <div class="case-card" data-fade-scale data-fade-delay="1">
+          <img src="spajder/Images/Image-2.jpg" alt="CBS City">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">CBS City</span>
         </div>
-
-        <div class="cases-slide">
-          <img src="spajder/Images/Image-5.jpg" alt="Västerås Ventilation" draggable="false">
-          <div class="cases-slide-overlay"></div>
-          <div class="cases-slide-details">
-            <p class="cases-slide-client">Västerås Ventilation</p>
-            <h3 class="cases-slide-title">Lokal expertis med digital synlighet</h3>
-            <a href="#" class="cases-slide-link">Läs mer</a>
-          </div>
-          <span class="cases-slide-tag">SEO · Google Ads</span>
+        <div class="case-card" data-fade-scale>
+          <img src="spajder/Images/Image-5.jpg" alt="Västerås Ventilation">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">Västerås Ventilation</span>
         </div>
-
-        <div class="cases-slide">
-          <img src="spajder/Images/Image-4.jpg" alt="SR Betongdesign" draggable="false">
-          <div class="cases-slide-overlay"></div>
-          <div class="cases-slide-details">
-            <p class="cases-slide-client">SR Betongdesign</p>
-            <h3 class="cases-slide-title">Hantverkskänsla möter modern design</h3>
-            <a href="#" class="cases-slide-link">Läs mer</a>
-          </div>
-          <span class="cases-slide-tag">Visuell identitet · Webb</span>
+        <div class="case-card" data-fade-scale data-fade-delay="1">
+          <img src="spajder/Images/Image-4.jpg" alt="SR Betongdesign">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">SR Betongdesign</span>
         </div>
-
-        <div class="cases-slide">
-          <img src="spajder/Images/Image.jpg" alt="Kund 5" draggable="false">
-          <div class="cases-slide-overlay"></div>
-          <div class="cases-slide-details">
-            <p class="cases-slide-client">Kund 5</p>
-            <h3 class="cases-slide-title">Innehåll som engagerar och konverterar</h3>
-            <a href="#" class="cases-slide-link">Läs mer</a>
-          </div>
-          <span class="cases-slide-tag">Content · Sociala medier</span>
+        <div class="case-card" data-fade-scale>
+          <img src="spajder/Images/Image.jpg" alt="Kund 5">
+          <div class="dim"></div>
+          <span class="tag">Content · Sociala medier</span>
+          <span class="desc">Innehåll som engagerar och konverterar</span>
+          <span class="client">Kund 5</span>
         </div>
-
+        <div class="case-card" data-fade-scale data-fade-delay="1">
+          <img src="spajder/Images/Image-1.jpg" alt="Kund 6">
+          <div class="dim"></div>
+          <span class="tag">SEO · Google Ads</span>
+          <span class="desc">Lokal expertis med digital synlighet</span>
+          <span class="client">Kund 6</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════ TANKEN BAKOM ═══════════════════════════ -->
-  <section class="tanken">
+  <section class="tanken-carousel">
     <div class="container">
-      <div class="tanken-top">
+      <div class="tanken-carousel-header">
         <h2 class="t-h1" data-fade>Tanken bakom.</h2>
-        <div class="cta" data-fade data-fade-delay="1">
-          <span style="color:var(--cs);">Läs om vårt sätt.</span>
+        <a class="cta" href="#" data-fade data-fade-delay="1">
+          <span style="color:var(--cs);">Läs om vårt sätt</span>
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+        </a>
       </div>
-      <div class="tanken-divider"></div>
     </div>
-  </section>
+    <div class="tanken-progress-wrap">
+      <div class="tanken-progress-bar" id="tankenProgress"></div>
+    </div>
+    <div class="tanken-viewport" id="tankenViewport">
+      <div class="tanken-track" id="tankenTrack">
 
-  <!-- ═══════════════════════════ INGA KRUSIDULLER (photo) ═══════════════════════════ -->
-  <section class="photo-block" data-fade-scale>
-    <img src="spajder/Images/Desktop - 5.jpg" alt="">
-    <div class="overlay"></div>
-    <div class="content">
-      <h2 class="t-h1">Inga krusiduller</h2>
-      <p class="t-sm" style="margin-top:16px;">Vi föredrar raka puckar framför fluff och hittepå. Du vet vad vi menar, vi vet vad du vill och resten löser vi tillsammans.</p>
+        <div class="tanken-slide is-active">
+          <img src="spajder/Images/Image-4.jpg" alt="Tanken bakom" draggable="false">
+          <div class="tanken-slide-overlay"></div>
+          <div class="tanken-slide-details">
+            <p class="tanken-slide-label">Tanken bakom</p>
+            <h3 class="tanken-slide-title">Inga krusiduller — raka puckar hela vägen</h3>
+            <a href="#" class="tanken-slide-link">Läs mer</a>
+          </div>
+        </div>
+
+        <div class="tanken-slide">
+          <img src="spajder/Images/Image-3.jpg" alt="Transparens" draggable="false">
+          <div class="tanken-slide-overlay"></div>
+          <div class="tanken-slide-details">
+            <p class="tanken-slide-label">Transparens</p>
+            <h3 class="tanken-slide-title">Full koll från start till mål</h3>
+            <a href="#" class="tanken-slide-link">Läs mer</a>
+          </div>
+        </div>
+
+        <div class="tanken-slide">
+          <img src="spajder/Images/Image-5.jpg" alt="Resultat" draggable="false">
+          <div class="tanken-slide-overlay"></div>
+          <div class="tanken-slide-details">
+            <p class="tanken-slide-label">Resultat</p>
+            <h3 class="tanken-slide-title">Sånt som faktiskt ger effekt</h3>
+            <a href="#" class="tanken-slide-link">Läs mer</a>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -1049,14 +1112,14 @@
     document.querySelectorAll('.site-header [data-fade]')
       .forEach(el => el.classList.add('visible'));
 
-    // ── Cases carousel ──────────────────────────────────────────────────────
+    // ── Tanken bakom carousel ────────────────────────────────────────────────
     (function () {
-      const viewport = document.getElementById('casesViewport');
-      const track    = document.getElementById('casesTrack');
-      const progress = document.getElementById('casesProgress');
+      const viewport = document.getElementById('tankenViewport');
+      const track    = document.getElementById('tankenTrack');
+      const progress = document.getElementById('tankenProgress');
       if (!viewport || !track) return;
 
-      const slides = Array.from(track.querySelectorAll('.cases-slide'));
+      const slides = Array.from(track.querySelectorAll('.tanken-slide'));
       const total  = slides.length;
       let current  = 0;
       let startX   = 0;
