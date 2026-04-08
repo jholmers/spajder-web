@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ecokraft – Spajder Case</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Spline+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c1:  #0e2016;
+      --cgs: #152e1f;
+      --cd:  #e2f8de;
+      --c9:  #f8fcf9;
+      --cnv: #f5f0eb;
+      --cv:  #fafafa;
+      --cs:  #1a1a1a;
+      --ct:  #25573a;
+      --c7:  #bdddc4;
+      --ek-blue: #3652ed;
+      --ek-blue-text: #d0eafd;
+      --px: clamp(16px, 1.67vw, 24px);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--c9); font-family: 'Spline Sans', sans-serif; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--px); }
+
+    .cta { display: inline-flex; gap: 12px; align-items: center; cursor: pointer; }
+    .cta span { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(14px, 1.1vw, 16px); line-height: 1.4; white-space: nowrap; }
+    .cta svg { flex-shrink: 0; width: clamp(32px, 2.78vw, 40px); height: clamp(32px, 2.78vw, 40px); }
+
+    [data-fade] { opacity: 0; transform: translateY(28px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
+    [data-fade].visible { opacity: 1; transform: none; }
+    [data-fade-delay="1"] { transition-delay: 0.1s; }
+    [data-fade-delay="2"] { transition-delay: 0.2s; }
+    [data-fade-scale] { opacity: 0; transform: scale(0.97) translateY(16px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
+    [data-fade-scale].visible { opacity: 1; transform: none; }
+
+    /* ══ HEADER ══════════════════════════════════════════════ */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--c1);
+      height: clamp(64px, 7.2vw, 104px);
+      display: flex; align-items: center;
+    }
+    .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+    .site-header .logo { height: clamp(36px, 4.6vw, 66px); width: auto; display: block; }
+    .site-header nav { display: flex; gap: clamp(12px, 1.1vw, 16px); align-items: center; color: var(--cd); }
+    .site-header nav a {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      opacity: 0.85; transition: opacity 0.2s;
+    }
+    .site-header nav a:hover { opacity: 1; }
+    .site-header nav a.active { text-decoration: line-through; opacity: 0.5; pointer-events: none; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cd); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display: none; position: fixed; inset: 0; top: clamp(64px, 7.2vw, 104px); background: var(--c1); z-index: 99; flex-direction: column; align-items: flex-start; padding: 32px var(--px); }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(28px, 8vw, 48px); line-height: 1.1; color: var(--cd); padding: 14px 0; border-bottom: 1px solid rgba(226,248,222,0.12); width: 100%; }
+    .mobile-nav a:last-child { border-bottom: none; }
+    @media (max-width: 680px) { .site-header nav { display: none; } .hamburger { display: flex; } }
+
+    /* ══ HERO ══════════════════════════════════════════════ */
+    .ek-hero {
+      position: relative;
+      width: 100%;
+      height: clamp(260px, 44.5vw, 641px);
+      overflow: hidden;
+    }
+    .ek-hero img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+
+    /* ══ INFO BANNER ══════════════════════════════════════════ */
+    .ek-banner {
+      background: var(--ek-blue);
+      padding: clamp(20px, 2.22vw, 32px) var(--px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(20px, 2.78vw, 40px);
+      align-items: center;
+    }
+    .ek-banner-left {}
+    .ek-banner-client {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(16px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ek-blue-text);
+      margin-bottom: 6px;
+    }
+    .ek-banner-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: rgba(208,234,253,0.65);
+    }
+    .ek-banner-title {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(22px, 3.54vw, 51px); line-height: 1.2;
+      color: var(--ek-blue-text);
+    }
+
+    /* ══ DIVIDER ════════════════════════════════════════════ */
+    .ek-divider { height: 1px; background: rgba(21,46,31,0.12); margin: 0 var(--px); }
+    .ek-divider-full { height: 1px; background: rgba(21,46,31,0.12); }
+
+    /* ══ META SECTION ════════════════════════════════════════ */
+    .ek-meta {
+      background: var(--c9);
+      padding: clamp(28px, 2.78vw, 40px) var(--px);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: clamp(16px, 2.22vw, 32px);
+    }
+    .ek-meta-desc {
+      font-family: 'Spline Sans', sans-serif; font-weight: 400;
+      font-size: clamp(14px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--c1);
+    }
+    .ek-meta-desc p + p { margin-top: 1.2em; }
+    .ek-meta-col {}
+    .ek-meta-col-head {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs); margin-bottom: clamp(8px, 0.83vw, 12px);
+    }
+    .ek-meta-col-item {
+      font-family: 'Spline Sans', sans-serif; font-weight: 400;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--c1); padding: 3px 0;
+    }
+    @media (max-width: 800px) {
+      .ek-meta { grid-template-columns: 1fr 1fr; }
+      .ek-meta-desc { grid-column: 1 / -1; }
+    }
+    @media (max-width: 500px) {
+      .ek-meta { grid-template-columns: 1fr; }
+    }
+
+    /* ══ FULL-WIDTH IMAGE ═══════════════════════════════════ */
+    .ek-fullimg {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .ek-fullimg img {
+      width: 100%; display: block; object-fit: cover;
+    }
+    .ek-fullimg.tall img { height: clamp(300px, 53vw, 765px); object-fit: cover; }
+
+    /* ══ TEXT SECTION ════════════════════════════════════════ */
+    .ek-text {
+      background: var(--c9);
+      padding: clamp(40px, 5vw, 72px) var(--px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 3.33vw, 48px);
+      align-items: start;
+    }
+    .ek-text-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(16px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs);
+      padding-top: 4px;
+    }
+    .ek-text-body {
+      font-family: 'Spline Sans', sans-serif; font-weight: 400;
+      font-size: clamp(15px, 1.32vw, 19px); line-height: 1.3;
+      color: var(--c1);
+    }
+    .ek-text-body p + p { margin-top: 1.2em; }
+    @media (max-width: 680px) { .ek-text { grid-template-columns: 1fr; } }
+
+    /* ══ 2-COL IMAGES ════════════════════════════════════════ */
+    .ek-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 0.83vw, 12px);
+      padding: clamp(6px, 0.83vw, 12px) var(--px);
+    }
+    .ek-2col-img {
+      position: relative;
+      border-radius: clamp(8px, 1.1vw, 16px);
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+    }
+    .ek-2col-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.7s cubic-bezier(.16,1,.3,1);
+    }
+    .ek-2col-img:hover img { transform: scale(1.04); }
+    @media (max-width: 560px) { .ek-2col { grid-template-columns: 1fr; } }
+
+    /* ══ EQUIPMENT SECTION ═══════════════════════════════════ */
+    .ek-equipment {
+      background: var(--cnv);
+      border-radius: clamp(8px, 1.1vw, 16px);
+      margin: clamp(6px, 0.83vw, 12px) var(--px);
+      overflow: hidden;
+      position: relative;
+      min-height: clamp(300px, 60vw, 700px);
+      display: flex; align-items: center;
+    }
+    .ek-equipment-text {
+      position: relative; z-index: 2;
+      padding: clamp(40px, 5vw, 80px) clamp(24px, 3.33vw, 48px);
+      max-width: 480px;
+    }
+    .ek-equipment-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs); margin-bottom: 12px;
+    }
+    .ek-equipment-title {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(24px, 3.54vw, 51px); line-height: 1.2;
+      color: var(--cgs);
+    }
+    .ek-equipment-img {
+      position: absolute; right: -8%; top: 50%;
+      transform: translateY(-50%);
+      width: 70%; max-width: 900px;
+    }
+    .ek-equipment-img img { width: 100%; display: block; }
+    @media (max-width: 768px) {
+      .ek-equipment { min-height: auto; flex-direction: column; }
+      .ek-equipment-img { position: relative; right: auto; top: auto; transform: none; width: 100%; max-width: 100%; padding: 0 clamp(20px, 4vw, 40px) clamp(20px, 4vw, 40px); }
+    }
+
+    /* ══ TALL IMAGE ═════════════════════════════════════════ */
+    .ek-tall {
+      padding: clamp(6px, 0.83vw, 12px) var(--px);
+    }
+    .ek-tall-inner {
+      border-radius: clamp(8px, 1.1vw, 16px);
+      overflow: hidden;
+    }
+    .ek-tall-inner img {
+      width: 100%; display: block; object-fit: cover;
+      max-height: clamp(400px, 80vw, 860px);
+    }
+
+    /* ══ TESTIMONIAL ═════════════════════════════════════════ */
+    .ek-testimonial {
+      background: var(--c9);
+      padding: clamp(48px, 5.6vw, 80px) var(--px);
+      text-align: center;
+    }
+    .ek-testimonial-divider {
+      height: 1px; background: rgba(21,46,31,0.12);
+      margin: 0 var(--px) clamp(32px, 4vw, 56px);
+    }
+    .ek-testimonial-divider.bottom { margin: clamp(32px, 4vw, 56px) var(--px) 0; }
+    .ek-testimonial-quote {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(24px, 3.54vw, 51px); line-height: 1.2;
+      color: var(--cs);
+      max-width: min(920px, 90%);
+      margin: 0 auto clamp(24px, 2.5vw, 36px);
+    }
+    .ek-testimonial-name {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(14px, 1.32vw, 19px); line-height: 1.3;
+      color: var(--cs); text-transform: uppercase; letter-spacing: 0.02em;
+    }
+    .ek-testimonial-company {
+      font-family: 'Spline Sans', sans-serif; font-weight: 400;
+      font-size: clamp(14px, 1.32vw, 19px); line-height: 1.3;
+      color: var(--cs); text-transform: uppercase; letter-spacing: 0.02em;
+    }
+
+    /* ══ CONTACT SECTION ════════════════════════════════════ */
+    .ek-contact {
+      background: var(--c9);
+      text-align: center;
+      padding: clamp(48px, 5.6vw, 80px) var(--px) clamp(32px, 3.33vw, 48px);
+    }
+    .ek-contact-divider { height: 1px; background: rgba(21,46,31,0.12); margin: 0 var(--px); }
+    .ek-contact-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(16px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs); margin-bottom: clamp(20px, 2.5vw, 36px);
+    }
+    .ek-contact-title {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(24px, 3.54vw, 51px); line-height: 1.2;
+      color: var(--cgs);
+      max-width: min(802px, 90%);
+      margin: 0 auto clamp(28px, 3.33vw, 48px);
+    }
+    .ek-contact-divider-bottom { height: 1px; background: rgba(21,46,31,0.12); margin: clamp(32px, 4vw, 56px) var(--px) 0; }
+
+    /* ══ RELATED CASES ════════════════════════════════════ */
+    .ek-related { background: var(--c9); padding-bottom: clamp(32px, 4vw, 56px); }
+    .ek-related-heading {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(28px, 4.17vw, 60px); line-height: 1.1;
+      letter-spacing: clamp(-1px, -0.17vw, -2.4px);
+      color: var(--c1);
+      padding: clamp(28px, 2.78vw, 40px) var(--px) clamp(20px, 2vw, 28px);
+    }
+    .ek-list-divider { height: 1px; background: rgba(21,46,31,0.12); }
+    .ek-list-row {
+      display: grid;
+      grid-template-columns: clamp(120px, 22%, 320px) 1fr auto;
+      align-items: center;
+      gap: clamp(12px, 2vw, 32px);
+      padding: clamp(14px, 1.81vw, 26px) var(--px);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .ek-list-row:hover { background: rgba(21,46,31,0.03); }
+    .ek-list-row.dark { background: var(--cs); color: var(--cv); }
+    .ek-list-row.dark:hover { background: #222; }
+    .ek-list-row.current { opacity: 0.4; pointer-events: none; }
+    .ek-list-client {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+    }
+    .ek-list-info {}
+    .ek-list-title {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+    }
+    .ek-list-subtitle {
+      font-family: 'Spline Sans', sans-serif; font-weight: 400;
+      font-size: clamp(12px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      opacity: 0.55;
+    }
+    .ek-list-thumbs { display: flex; gap: clamp(4px, 0.55vw, 8px); }
+    .ek-thumb {
+      width: clamp(56px, 7.2vw, 103px);
+      height: clamp(40px, 5vw, 72px);
+      border-radius: 6px; overflow: hidden; flex-shrink: 0;
+    }
+    .ek-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (max-width: 700px) {
+      .ek-list-row { grid-template-columns: 1fr 1fr; }
+      .ek-list-thumbs { display: none; }
+    }
+
+    /* ══ FOOTER ══════════════════════════════════════════════ */
+    footer {
+      background: var(--cd);
+      padding: clamp(32px, 4.44vw, 64px) 0 0;
+      overflow: hidden;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(24px, 3.33vw, 48px);
+      padding: 0 var(--px) clamp(24px, 3.33vw, 48px);
+    }
+    .footer-group { margin-bottom: clamp(12px, 1.67vw, 24px); }
+    .footer-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs); margin-bottom: 4px;
+    }
+    .footer-val {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs); opacity: 0.65;
+    }
+    .footer-socials { display: flex; gap: 16px; }
+    .footer-tagline {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs);
+      margin-top: clamp(16px, 2.22vw, 32px);
+    }
+    .footer-cta-text {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(20px, 2.6vw, 38px); line-height: 1.2;
+      color: var(--cgs); margin-bottom: clamp(20px, 2.22vw, 32px);
+    }
+    .footer-copyright {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(12px, 1.1vw, 16px); color: var(--cgs); opacity: 0.55;
+      padding: 0 var(--px) clamp(16px, 2.22vw, 32px);
+    }
+    .footer-wordmark {
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+      line-height: 0;
+      margin-top: clamp(16px, 2.78vw, 40px);
+    }
+    .footer-wordmark img { width: 100%; display: block; max-height: 180px; object-fit: cover; object-position: bottom; }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- ═════════════════════ HEADER ═════════════════════ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html">
+        <img src="spajder/SVG/Spajder_Landscape_White.svg" alt="Spajder" class="logo">
+      </a>
+      <nav>
+        <a href="spajder-case.html" class="active">Case</a>
+        <a href="#">Vårt sätt</a>
+        <a href="#">Vi är Spajder</a>
+        <a href="#">Ska vi snacka?</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Meny">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="spajder-case.html">Case</a>
+    <a href="#">Vårt sätt</a>
+    <a href="#">Vi är Spajder</a>
+    <a href="#">Ska vi snacka?</a>
+  </nav>
+
+  <!-- ═════════════════════ HERO ═════════════════════ -->
+  <section class="ek-hero">
+    <img src="spajder/Images/Image-1.jpg" alt="Ecokraft – billboard">
+  </section>
+
+  <!-- ═════════════════════ INFO BANNER ═════════════════════ -->
+  <div class="ek-banner">
+    <div class="ek-banner-left">
+      <p class="ek-banner-client">Ecokraft</p>
+      <p class="ek-banner-label">Vägen mot ett självförsörjande norden</p>
+    </div>
+    <p class="ek-banner-title">Förnyat varumärke för att möta nya utmaningar och ta nya delar av marknaden.</p>
+  </div>
+
+  <!-- ═════════════════════ META ═════════════════════ -->
+  <div class="ek-divider"></div>
+  <section class="ek-meta">
+    <div class="ek-meta-desc" data-fade>
+      <p>Sedan 2008 har Ecokraft hjälpt företag och privatpersoner att bli mer självförsörjande med el från solen.</p>
+      <p>Idag driver Ecokraft omställningen till ett långsiktigt hållbart liv genom att fortsätta sträva efter absolut kundnöjdhet, hållbarhet i alla steg och noggrannhet i allt de gör. Med deras långa erfarenhet utbildar och inspirerar Ecokraft fler människor att göra medvetna val som främjar både miljön och deras ekonomi.</p>
+    </div>
+    <div class="ek-meta-col" data-fade data-fade-delay="1">
+      <p class="ek-meta-col-head">Strategi</p>
+      <p class="ek-meta-col-item">Research</p>
+      <p class="ek-meta-col-item">Kommunikation</p>
+      <p class="ek-meta-col-item">Positionering</p>
+      <p class="ek-meta-col-item">Varumärkesstrategi</p>
+    </div>
+    <div class="ek-meta-col" data-fade data-fade-delay="2">
+      <p class="ek-meta-col-head">Visuell identitet</p>
+      <p class="ek-meta-col-item">Logotyp</p>
+      <p class="ek-meta-col-item">Visuell identitet</p>
+      <p class="ek-meta-col-item">Varumärkesbok</p>
+    </div>
+    <div class="ek-meta-col" data-fade data-fade-delay="2">
+      <p class="ek-meta-col-head">Hemsida</p>
+      <p class="ek-meta-col-item">Webbutveckling</p>
+      <p class="ek-meta-col-item">UI/UX design</p>
+      <p class="ek-meta-col-item">SEO</p>
+    </div>
+  </section>
+  <div class="ek-divider"></div>
+
+  <!-- ═════════════════════ FULL-WIDTH IMAGE ═════════════════════ -->
+  <section class="ek-fullimg tall">
+    <img src="spajder/Images/Image-5.jpg" alt="Ecokraft – natur">
+  </section>
+
+  <!-- ═════════════════════ UTMANING ═════════════════════ -->
+  <div class="ek-divider" style="margin-top:0;"></div>
+  <section class="ek-text">
+    <p class="ek-text-label" data-fade>Utmaning.</p>
+    <div class="ek-text-body" data-fade data-fade-delay="1">
+      <p>Vi fick i uppdrag att inte bara uppdatera Ecokrafts visuella identitet, utan också ge hela energibranschen ett nytt ansikte. Målet var att blåsa liv i en traditionstyngd bransch och inspirera människor att agera – att välja förnybar energi. Energifrågan har länge präglats av låg motivation och ointresse, men det är något Ecokraft vill förändra.</p>
+      <p>Varumärket och produkten ska kännas som en naturlig del av en modern livsstil – inspirerande, lättillgänglig och hållbar utan att kräva uppoffringar.</p>
+    </div>
+  </section>
+  <div class="ek-divider"></div>
+
+  <!-- ═════════════════════ 2-COL IMAGES ═════════════════════ -->
+  <div class="ek-2col" style="padding-top: clamp(8px,1vw,12px);">
+    <div class="ek-2col-img" data-fade-scale>
+      <img src="spajder/Images/Image-3.jpg" alt="Ecokraft identitet">
+    </div>
+    <div class="ek-2col-img" data-fade-scale data-fade-delay="1">
+      <img src="spajder/Images/Image.jpg" alt="Ecokraft kampanj">
+    </div>
+  </div>
+
+  <!-- ═════════════════════ EQUIPMENT / LAPTOP MOCKUP ═════════════════════ -->
+  <div class="ek-equipment" style="margin-top: clamp(8px,1vw,12px);">
+    <div class="ek-equipment-text" data-fade>
+      <p class="ek-equipment-label">Digitalt formspråk</p>
+      <p class="ek-equipment-title">En webb som speglar kraft och rörelse i varje scroll.</p>
+    </div>
+    <div class="ek-equipment-img">
+      <img src="spajder/Images/Desktop - 5.jpg" alt="Ecokraft webbdesign">
+    </div>
+  </div>
+
+  <!-- ═════════════════════ LARGE VERTICAL IMAGE ═════════════════════ -->
+  <div class="ek-tall" style="margin-top: clamp(8px,1vw,12px);">
+    <div class="ek-tall-inner">
+      <img src="spajder/Images/Image-4.jpg" alt="Ecokraft produkt" style="max-height: clamp(400px, 65vw, 860px);">
+    </div>
+  </div>
+
+  <!-- ═════════════════════ TESTIMONIAL ═════════════════════ -->
+  <div class="ek-divider" style="margin-top: clamp(24px,2.78vw,40px);"></div>
+  <section class="ek-testimonial">
+    <p class="ek-testimonial-quote" data-fade>"Spajder har framgångsrikt skapat en identitet som fångar både storheten i vår globala ambition och den enkelhet vi alltid strävar efter."</p>
+    <p class="ek-testimonial-name" data-fade data-fade-delay="1">Leif Loket Olsson</p>
+    <p class="ek-testimonial-company" data-fade data-fade-delay="1">Ecokraft</p>
+  </section>
+  <div class="ek-divider"></div>
+
+  <!-- ═════════════════════ 2-COL IMAGES #2 ═════════════════════ -->
+  <div class="ek-2col" style="padding-top: clamp(8px,1vw,12px);">
+    <div class="ek-2col-img" style="aspect-ratio: 4/3;" data-fade-scale>
+      <img src="spajder/Images/Image-2.jpg" alt="Ecokraft visuell identitet">
+    </div>
+    <div class="ek-2col-img" style="aspect-ratio: 4/3;" data-fade-scale data-fade-delay="1">
+      <img src="spajder/Images/Image-5.jpg" alt="Ecokraft kampanjbild">
+    </div>
+  </div>
+
+  <!-- ═════════════════════ TALL IMAGE #2 ═════════════════════ -->
+  <div class="ek-tall" style="margin-top: clamp(6px,0.83vw,12px);">
+    <div class="ek-tall-inner">
+      <img src="spajder/Images/Image-1.jpg" alt="Ecokraft outdoor" style="max-height: clamp(300px, 60vw, 860px);">
+    </div>
+  </div>
+
+  <!-- ═════════════════════ LÖSNING ═════════════════════ -->
+  <div class="ek-divider" style="margin-top: clamp(24px,2.78vw,40px);"></div>
+  <section class="ek-text">
+    <p class="ek-text-label" data-fade>Lösning.</p>
+    <div class="ek-text-body" data-fade data-fade-delay="1">
+      <p>Vi tog fram ett tydligt visuellt system byggt kring idén om kraft. Genom att kombinera en ljus, elektrisk stil med uttrycksfull produktvisualisering skapade vi ett formspråk som känns fräscht, framtidsinriktat och balanserar perfekt mellan kreativitet och teknologi.</p>
+      <p>Ecokrafts varumärke är mer än bara en logotyp eller en slogan; det är summan av alla upplevelser och känslor de skapar hos sina kunder. Genom vår grafiska identitet som en guide, kan vi tillsammans bygga och vårda ett varumärke som står för trygghet, professionalitet och kraft.</p>
+    </div>
+  </section>
+  <div class="ek-divider"></div>
+
+  <!-- ═════════════════════ 2-COL IMAGES #3 ═════════════════════ -->
+  <div class="ek-2col" style="padding-top: clamp(8px,1vw,12px); padding-bottom: clamp(8px,1vw,12px);">
+    <div class="ek-2col-img" data-fade-scale>
+      <img src="spajder/Images/Image.jpg" alt="Ecokraft">
+    </div>
+    <div class="ek-2col-img" data-fade-scale data-fade-delay="1">
+      <img src="spajder/Images/Image-3.jpg" alt="Ecokraft">
+    </div>
+  </div>
+
+  <!-- ═════════════════════ CONTACT ═════════════════════ -->
+  <div class="ek-contact-divider"></div>
+  <section class="ek-contact">
+    <p class="ek-contact-label" data-fade>Låt oss snacka!</p>
+    <p class="ek-contact-title" data-fade data-fade-delay="1">Vill du göra samma grej fast på ditt sätt? Eller något helt nytt? Vi är på.</p>
+    <div data-fade data-fade-delay="2">
+      <div class="cta" style="display:inline-flex;">
+        <span style="color:var(--cs);">Kontakta oss</span>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="ek-contact-divider-bottom"></div>
+  </section>
+
+  <!-- ═════════════════════ RELATED CASES ═════════════════════ -->
+  <section class="ek-related">
+    <h2 class="ek-related-heading" data-fade>Fler case.</h2>
+
+    <div class="ek-list-divider"></div>
+    <a class="ek-list-row" href="#" data-fade>
+      <p class="ek-list-client">Norrkraft</p>
+      <div class="ek-list-info">
+        <p class="ek-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="ek-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="ek-list-thumbs">
+        <div class="ek-thumb"><img src="spajder/Images/Image-3.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
+      </div>
+    </a>
+
+    <div class="ek-list-divider"></div>
+    <a class="ek-list-row" href="#" data-fade>
+      <p class="ek-list-client">Västerås Ventilation</p>
+      <div class="ek-list-info">
+        <p class="ek-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="ek-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="ek-list-thumbs">
+        <div class="ek-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-1.jpg" alt=""></div>
+      </div>
+    </a>
+
+    <div class="ek-list-divider"></div>
+    <a class="ek-list-row dark" href="#" data-fade>
+      <p class="ek-list-client">Lock n Load</p>
+      <div class="ek-list-info">
+        <p class="ek-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="ek-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="ek-list-thumbs">
+        <div class="ek-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-1.jpg" alt=""></div>
+      </div>
+    </a>
+
+    <div class="ek-list-divider"></div>
+    <div class="ek-list-row current">
+      <p class="ek-list-client">Ecokraft</p>
+      <div class="ek-list-info">
+        <p class="ek-list-title">Förnyat varumärke för att möta nya utmaningar och ta nya delar av marknaden</p>
+        <p class="ek-list-subtitle">Research · Visuell identitet · Webbutveckling · SEO</p>
+      </div>
+      <div class="ek-list-thumbs">
+        <div class="ek-thumb"><img src="spajder/Images/Image-3.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-1.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
+      </div>
+    </div>
+    <div class="ek-list-divider"></div>
+  </section>
+
+  <!-- ═════════════════════ FOOTER ═════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid" data-fade>
+        <div>
+          <div class="footer-group">
+            <p class="footer-label">Kontakt</p>
+            <p class="footer-val">Epost – hej@spajder.se</p>
+            <p class="footer-val">Telefon – 021-548 92 92</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Sociala Medier</p>
+            <div class="footer-socials">
+              <p class="footer-val">Instagram</p>
+              <p class="footer-val">Facebook</p>
+              <p class="footer-val">LinkedIn</p>
+            </div>
+          </div>
+          <p class="footer-tagline">Vi tror på en framtid där digital marknadsföring känns enkel, effektiv och pålitlig.</p>
+        </div>
+        <div>
+          <div class="footer-group">
+            <p class="footer-label">Västerås</p>
+            <p class="footer-val">Trefasgatan 4, 721 30 Västerås</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Göteborg</p>
+            <p class="footer-val">Stigbergsliden 5, 414 63 Göteborg</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Sundsvall</p>
+            <p class="footer-val">Storgatan 26, 852 32 Sundsvall</p>
+          </div>
+        </div>
+        <div>
+          <p class="footer-cta-text">Det börjar ofta med en liten tanke. Släng iväg den till oss så ser vi vart den tar vägen.</p>
+          <div class="cta">
+            <span style="color:var(--cs);">Låt oss snacka!</span>
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+      <p class="footer-copyright">©️ Spajder</p>
+    </div>
+    <div class="footer-wordmark">
+      <img src="spajder/SVG/Spajder_Landscape_Dark.svg" alt="SPAJDER">
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('[data-fade], [data-fade-scale]').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
