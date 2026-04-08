@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>Spajder – Vi gör digital marknadsföring enklare, smartare &amp; roligare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Spline+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c1:  #0e2016; /* grön/nyans-1 */
+      --cgs: #152e1f; /* granskugga   */
+      --cd:  #e2f8de; /* daggdis      */
+      --c9:  #f8fcf9; /* grön/nyans-9 */
+      --cnv: #f5f0eb; /* naturvit     */
+      --cv:  #fafafa; /* vit          */
+      --cs:  #1a1a1a; /* svart        */
+      --ct:  #25573a; /* tallbarr     */
+      --c7:  #bdddc4; /* grön/nyans-7 */
+    }
+
+    body { background: var(--c9); min-width: 1440px; margin: 0; }
+
+    .page {
+      position: relative;
+      width: 1440px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--c9);
+      border-radius: 16px;
+      height: 11200px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .serif  { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; }
+    .serif-i{ font-family: 'Instrument Serif', serif; font-weight: 400; font-style: italic; }
+
+    /* CTA button */
+    .cta { display: flex; gap: 12px; align-items: center; cursor: pointer; }
+    .cta span {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px; white-space: nowrap;
+    }
+    .cta img { width: 40px; height: 40px; flex-shrink: 0; }
+
+    /* Case image card */
+    .case-card {
+      position: absolute; width: 693px; height: 693px;
+      border-radius: 16px; overflow: hidden;
+    }
+    .case-card > img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .case-card .dim {
+      position: absolute; inset: 0; background: rgba(0,0,0,0.25); border-radius: 16px;
+    }
+    .case-card .tag {
+      position: absolute; left: 20px; top: 19px;
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px;
+      color: var(--cv); white-space: nowrap;
+    }
+    .case-card .desc {
+      position: absolute; left: 20px; bottom: 59px;
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px;
+      color: var(--cv); white-space: nowrap;
+    }
+    .case-card .client {
+      position: absolute; right: 20px; bottom: 59px;
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px;
+      color: var(--cv); text-align: right;
+    }
+
+    /* Service row */
+    .svc-row {
+      position: relative; height: 191px; width: 100%;
+      border-top: 1px solid var(--cgs);
+      display: flex; align-items: flex-start; padding-top: 20px;
+    }
+    .svc-row:last-child { border-bottom: 1px solid var(--cgs); }
+    .svc-row .svc-title {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: 34px; line-height: 1.1; letter-spacing: -1.02px;
+      color: var(--cgs); flex: 0 0 auto;
+    }
+    .svc-row .svc-desc {
+      margin-left: auto; width: 447px;
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px;
+      color: var(--cgs);
+    }
+    /* Plus icon inside service row */
+    .svc-row .plus-v {
+      position: absolute; right: 23.5px; top: 36px;
+      width: 2px; height: 25px; background: var(--c1);
+    }
+    .svc-row .plus-h {
+      position: absolute; right: 11px; top: 47.5px;
+      width: 25px; height: 2px; background: var(--c1);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- HEADER  top:0  h:104                               -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <header style="position:absolute;left:0;top:0;width:1440px;height:104px;background:var(--c1);overflow:hidden;">
+    <div style="position:absolute;left:21px;top:19px;width:159px;height:65.657px;overflow:hidden;">
+      <img src="spajder/SVG/Spajder_Landscape_White.svg"
+           alt="Spajder" style="width:100%;height:100%;object-fit:contain;">
+    </div>
+    <nav style="position:absolute;right:0;top:32.33px;display:flex;gap:16px;align-items:center;
+                padding:10px 24px;font-family:'Spline Sans',sans-serif;font-weight:500;
+                font-size:16px;line-height:1.4;letter-spacing:-0.16px;
+                color:var(--cd);white-space:nowrap;">
+      <a href="#">Case</a>
+      <a href="#">Vårt sätt</a>
+      <a href="#">Vi är Spajder</a>
+      <a href="#">Ska vi snacka?</a>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- HERO VIDEO  top:104  h:813                         -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:104px;width:1440px;height:813px;overflow:hidden;">
+    <video autoplay loop muted playsinline
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <source src="spajder/Images/Spajder_Show.mp4">
+    </video>
+    <div style="position:absolute;left:0;top:0;width:23px;height:100%;background:var(--c1);"></div>
+    <div style="position:absolute;right:0;top:0;width:23px;height:100%;background:var(--c1);"></div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TAGLINE  top:916  h:394                            -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:916px;width:1440px;height:394px;
+                  background:var(--c1);overflow:hidden;">
+    <div style="position:absolute;left:21px;top:78px;width:1395px;">
+      <p style="font-family:'Spline Sans',sans-serif;font-weight:700;font-size:107px;
+                line-height:1;letter-spacing:-4.28px;color:var(--cd);">Vi gör digital marknadsföring</p>
+      <p style="font-family:'Spline Sans',sans-serif;font-weight:700;font-size:107px;
+                line-height:1.1;letter-spacing:-4.28px;color:var(--cd);">
+        <span style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
+                     font-size:120px;line-height:1.1;letter-spacing:0;color:#61a678;">enklare</span><span
+              style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
+                     font-size:120px;line-height:1.1;letter-spacing:0;color:var(--cd);">, </span><span
+              style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
+                     font-size:120px;line-height:1.1;letter-spacing:0;color:#f2ceda;">smartare</span><span
+              style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
+                     font-size:120px;line-height:1.1;letter-spacing:0;color:var(--cd);"> &amp; </span><span
+              style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
+                     font-size:120px;line-height:1.1;letter-spacing:0;color:#fa7d00;">roligare.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- VI ÄR SPAJDER  top:1310  h:353                     -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:1310px;width:1440px;height:353px;
+                  background:var(--cd);overflow:hidden;text-align:center;">
+    <p style="position:absolute;left:50%;top:86px;transform:translateX(-50%);
+              width:1395px;font-family:'Spline Sans',sans-serif;font-weight:400;
+              font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cgs);">Vi är Spajder</p>
+    <p class="serif" style="position:absolute;left:50%;top:121px;transform:translateX(-50%);
+              width:1153px;font-size:38px;line-height:1.2;color:var(--cgs);">En digitalbyrå som trivs
+      bäst när du förstår vad vi gör och varför. Som jobbar snabbt, testar nytt och får saker att hända.
+      Och som gillar det där lilla extra som gör att du faktiskt märker skillnad.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRE BYGGSTENAR  top:1663  h:526                    -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:1663px;width:1440px;height:526px;background:var(--c9);">
+    <p class="serif" style="position:absolute;left:24px;top:175px;width:307px;
+              font-size:51px;line-height:1.2;color:var(--c1);">Tre byggstenar våra samarbeten alltid vilar på.</p>
+
+    <!-- Pillar 1 -->
+    <p class="serif" style="position:absolute;left:calc(25% + 15px);top:186px;width:293px;
+              font-size:21px;line-height:1.2;color:var(--ct);">Transparens</p>
+    <p style="position:absolute;left:calc(25% + 15px);top:241px;width:293px;
+              font-family:'Spline Sans',sans-serif;font-weight:500;font-size:22px;
+              line-height:1.1;letter-spacing:-0.66px;color:var(--cgs);">Full koll från start till mål</p>
+    <p style="position:absolute;left:calc(25% + 15px);top:273px;width:330px;
+              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;
+              line-height:1.4;letter-spacing:-0.16px;color:var(--c1);">Att jobba med oss ska kännas
+      glasklart. Raka svar, tydliga besked och stenkoll hela vägen.</p>
+
+    <!-- Pillar 2 -->
+    <p class="serif" style="position:absolute;left:calc(50% + 11px);top:184px;width:293px;
+              font-size:21px;line-height:1.2;color:var(--ct);">Resultat</p>
+    <p style="position:absolute;left:calc(50% + 11px);top:239px;width:293px;
+              font-family:'Spline Sans',sans-serif;font-weight:500;font-size:22px;
+              line-height:1.1;letter-spacing:-0.66px;color:var(--cgs);">Sånt som faktiskt ger effekt</p>
+    <p style="position:absolute;left:calc(50% + 11px);top:271px;width:330px;
+              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;
+              line-height:1.4;letter-spacing:-0.16px;color:var(--c1);">Vi gör grejer som flyttar fram
+      din spelpjäs. Som väcker intresse, driver trafik och ger klirr i kassan.</p>
+
+    <!-- Pillar 3 -->
+    <p class="serif" style="position:absolute;left:calc(75% + 5px);top:184px;width:293px;
+              font-size:21px;line-height:1.2;color:var(--ct);">Kulkultur</p>
+    <p style="position:absolute;left:calc(75% + 5px);top:239px;width:293px;
+              font-family:'Spline Sans',sans-serif;font-weight:500;font-size:22px;
+              line-height:1.1;letter-spacing:-0.66px;color:var(--cgs);">Struktur med själ och energi</p>
+    <p style="position:absolute;left:calc(75% + 5px);top:271px;width:330px;
+              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;
+              line-height:1.4;letter-spacing:-0.16px;color:var(--c1);">Vi älskar struktur men föraktar
+      stel stämning. Här vinner bubblig byråkultur över bister byråkrati.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- UTVALDA CASE  top:2189  h:2497                     -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:2189px;width:1440px;height:2497px;background:var(--c9);">
+
+    <p style="position:absolute;left:24px;top:0;font-family:'Spline Sans',sans-serif;font-weight:700;
+              font-size:80px;line-height:1;letter-spacing:-3.2px;color:var(--c1);white-space:nowrap;">Utvalda case.</p>
+
+    <!-- Divider -->
+    <div style="position:absolute;left:24px;top:98px;width:1392px;height:1px;background:var(--cgs);opacity:0.25;"></div>
+
+    <!-- Filter -->
+    <button style="position:absolute;left:24px;top:125px;background:var(--c1);padding:8px 10px;
+                   border-radius:26px;border:none;cursor:pointer;">
+      <span style="font-family:'Spline Sans',sans-serif;font-weight:400;font-size:13px;
+                   line-height:1.4;color:var(--cv);">Rutnät</span>
+    </button>
+    <button style="position:absolute;left:88px;top:125px;background:transparent;padding:8px 10px;
+                   border-radius:26px;border:1px solid var(--c7);cursor:pointer;">
+      <span style="font-family:'Spline Sans',sans-serif;font-weight:400;font-size:13px;
+                   line-height:1.4;color:var(--c1);">Lista</span>
+    </button>
+
+    <!-- CTA "Se alla case" -->
+    <div class="cta" style="position:absolute;right:24px;top:40px;">
+      <span style="color:var(--cs);">Se alla case</span>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- ROW 1 (sec y:194) -->
+    <div class="case-card" style="left:24px;top:194px;">
+      <img src="spajder/Images/Image-3.jpg" alt="Ecokraft">
+      <div class="dim"></div>
+      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+      <span class="client">Ecokraft</span>
+    </div>
+    <div class="case-card" style="left:calc(50% + 3px);top:194px;">
+      <img src="spajder/Images/Image-2.jpg" alt="CBS City">
+      <div class="dim"></div>
+      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+      <span class="client">CBS City</span>
+    </div>
+
+    <!-- Small video (sec y:489) -->
+    <div style="position:absolute;left:calc(8.33% + 45px);top:489px;width:152px;height:152px;
+                border-radius:16px;border:1px solid var(--cd);overflow:hidden;">
+      <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;">
+        <source src="spajder/Images/Spajder_Show.mp4">
+      </video>
+    </div>
+
+    <!-- Dot (sec y:887) -->
+    <div style="position:absolute;left:calc(37.5% + 2px);top:887px;transform:translateX(-50%);
+                width:6px;height:6px;border-radius:50%;background:#d9d9d9;"></div>
+
+    <!-- ROW 2 (sec y:893) -->
+    <div class="case-card" style="left:24px;top:893px;">
+      <img src="spajder/Images/Image-5.jpg" alt="Västerås Ventilation">
+      <div class="dim"></div>
+      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+      <span class="client">Västerås Ventilation</span>
+    </div>
+    <div class="case-card" style="left:calc(50% + 3px);top:893px;">
+      <img src="spajder/Images/Image-4.jpg" alt="SR Betongdesign">
+      <div class="dim"></div>
+      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+      <span class="client">SR Betongdesign</span>
+    </div>
+
+    <!-- Dot (sec y:1586) -->
+    <div style="position:absolute;left:calc(37.5% + 2px);top:1586px;transform:translateX(-50%);
+                width:6px;height:6px;border-radius:50%;background:#d9d9d9;"></div>
+
+    <!-- ROW 3 (sec y:1592) -->
+    <div class="case-card" style="left:24px;top:1592px;">
+      <img src="spajder/Images/Image.jpg" alt="Västerås Ventilation">
+      <div class="dim"></div>
+      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+      <span class="client">Västerås Ventilation</span>
+    </div>
+    <div class="case-card" style="left:calc(50% + 3px);top:1592px;">
+      <img src="spajder/Images/Image-3.jpg" alt="ECOKRAFT">
+      <div class="dim"></div>
+      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+      <span class="client">ECOKRAFT</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TANKEN BAKOM HEADING  top:4686  h:140              -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:4686px;width:1440px;height:140px;background:var(--c9);">
+    <!-- Heading bottom-edge at page y:4766 → sec y:80 → top = 0 -->
+    <p style="position:absolute;left:24px;top:0;
+              font-family:'Spline Sans',sans-serif;font-weight:700;font-size:80px;
+              line-height:1;letter-spacing:-3.2px;color:var(--c1);white-space:nowrap;">Tanken bakom.</p>
+    <div class="cta" style="position:absolute;right:calc(8.33% + 0.5px);top:29px;">
+      <span style="color:var(--cs);">Läs om vårt sätt.</span>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <!-- Divider line (page y:4779 → sec y:93) -->
+    <div style="position:absolute;left:24px;top:93px;width:1392px;height:1px;background:var(--cgs);opacity:0.2;"></div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- INGA KRUSIDULLER  top:4826  h:930                  -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:4826px;width:1440px;height:930px;overflow:hidden;">
+    <img src="spajder/Images/Desktop - 5.jpg"
+         style="position:absolute;left:0;top:-2.97%;width:100%;height:193.33%;max-width:none;object-fit:cover;" alt="">
+    <img src="spajder/Images/Desktop - 5.jpg"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="">
+    <img src="spajder/Images/Desktop - 5.jpg"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2);"></div>
+    <p style="position:absolute;left:28px;top:60px;font-family:'Spline Sans',sans-serif;font-weight:700;
+              font-size:80px;line-height:1;letter-spacing:-3.2px;color:var(--cv);width:529px;">Inga krusiduller</p>
+    <p style="position:absolute;left:32px;top:232px;font-family:'Spline Sans',sans-serif;font-weight:400;
+              font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cv);width:385px;">Vi föredrar
+      raka puckar framför fluff och hittepå. Du vet vad vi menar, vi vet vad du vill och resten löser vi
+      tillsammans.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- VIDEO CALLOUT  top:5756  h:829                     -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:5756px;width:1440px;height:829px;overflow:hidden;background:#111;">
+    <video autoplay loop muted playsinline
+           style="position:absolute;left:-3.06%;top:-11.7%;width:114.8%;height:112.17%;
+                  max-width:none;object-fit:cover;">
+      <source src="spajder/Images/Re Reel 2024 (1080p with 25fps)_1.mp4">
+    </video>
+    <p class="serif" style="position:absolute;left:22.91px;top:562px;
+              font-size:68px;line-height:1.3;color:var(--cnv);width:705px;">Du behöver inte kunna allt.
+      Det är ju därför du har oss.</p>
+    <div class="cta" style="position:absolute;left:23px;top:754px;">
+      <span style="color:var(--cnv);">Kontakta oss</span>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#f5f0eb"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- QUOTE  top:6585  h:554                             -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:6585px;width:1440px;height:554px;
+                  background:var(--c1);overflow:hidden;">
+    <div style="position:absolute;left:27px;top:90px;width:1391px;height:1px;background:rgba(226,248,222,0.2);"></div>
+    <div style="position:absolute;left:27px;top:514px;width:1391px;height:1px;background:rgba(226,248,222,0.2);"></div>
+    <p class="serif" style="position:absolute;left:50%;top:calc(50% - 110px);transform:translateX(-50%);
+              font-size:51px;line-height:1.2;color:var(--cd);text-align:center;width:846px;">"Vi är en
+      digital fullservicebyrå som hjälper företag i hela Sverige"</p>
+    <div style="position:absolute;left:703px;top:324px;"><svg width="40" height="10" viewBox="0 0 40 10" fill="none"><circle cx="5" cy="5" r="5" fill="#e2f8de"/><circle cx="20" cy="5" r="5" fill="rgba(226,248,222,0.4)"/><circle cx="35" cy="5" r="5" fill="rgba(226,248,222,0.4)"/></svg></div>
+    <p style="position:absolute;left:50%;top:365px;transform:translateX(-50%);
+              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:19px;line-height:1.3;
+              color:var(--cd);text-align:center;width:566px;">LEIF LOKET OLSSON</p>
+    <p style="position:absolute;left:50%;top:391px;transform:translateX(-50%);
+              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:19px;line-height:1.3;
+              color:#b0b0b0;text-align:center;width:566px;">ECOKRAFT</p>
+  </section>
+
+  <!-- Decorative Layer4 (between quote and gemenskap) -->
+  <div style="position:absolute;left:calc(75% - 15px);top:6467px;
+              width:346.537px;height:190.034px;display:flex;align-items:center;
+              justify-content:center;pointer-events:none;overflow:visible;">
+    <div style="transform:rotate(6.91deg);">
+      <img src="http://localhost:3845/assets/2cf484d0cd791c4eb674acb39c9f463d1c3454f5.svg"
+           style="width:330.731px;height:151.341px;" alt="">
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- GEMENSKAP  top:7138  h:965                         -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <section style="position:absolute;left:0;top:7138px;width:1440px;height:965px;
+                  background:var(--c1);overflow:hidden;">
+    <p style="position:absolute;left:24px;top:43px;font-family:'Spline Sans',sans-serif;font-weight:700;
+              font-size:80px;line-height:1;letter-spacing:-3.2px;color:var(--cd);width:749px;">Gemenskap
+      som skapar magi</p>
+
+    <p class="serif" style="position:absolute;left:50%;top:392px;transform:translateX(-50%);
+              font-size:68px;line-height:1.3;color:var(--cd);text-align:center;width:1116px;">Vi bygger
+      en kultur där pepp, glädje och respekt sitter i väggarna. För när vi trivs och har kul ihop är det
+      lättare att utföra stordåd tillsammans.</p>
+
+    <div class="cta" style="position:absolute;left:50%;top:695px;transform:translateX(-50%);">
+      <span style="color:var(--cd);">Läs mer om oss</span>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#e2f8de"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="#0e2016" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- Polaroid 1: large center -->
+    <div style="position:absolute;left:412px;top:115px;width:582px;height:458px;
+                background:var(--cnv);overflow:hidden;
+                box-shadow:40px 116px 49px rgba(84,66,59,0.01),23px 65px 41px rgba(84,66,59,0.05),
+                            10px 29px 30px rgba(84,66,59,0.09),2px 7px 17px rgba(84,66,59,0.1);">
+      <img src="http://localhost:3845/assets/dcbd873bb448738e6a3d33e06102828ab996ab24.png"
+           style="position:absolute;left:14px;top:13px;width:553px;height:354px;object-fit:cover;" alt="">
+      <p style="position:absolute;bottom:36px;left:50%;
+                transform:translateX(-50%) rotate(-1.32deg);
+                font-family:cursive;font-size:27px;color:var(--cs);
+                white-space:nowrap;text-align:center;">Random aw på kontoret</p>
+    </div>
+
+    <!-- Polaroid 2: small left, tilted -->
+    <div style="position:absolute;left:18px;top:225px;width:330px;height:398px;
+                transform:rotate(-10deg);background:var(--cnv);overflow:hidden;
+                box-shadow:45px 128px 54px rgba(84,66,59,0.01),25px 72px 46px rgba(84,66,59,0.05),
+                            11px 32px 34px rgba(84,66,59,0.09),3px 8px 19px rgba(84,66,59,0.1);">
+      <img src="http://localhost:3845/assets/b0915d018a263144694c77a695e143101a1c5355.png"
+           style="position:absolute;left:12px;top:12px;width:307px;height:285px;object-fit:cover;" alt="">
+      <p style="position:absolute;bottom:30px;left:50%;
+                transform:translateX(-50%) rotate(-1.32deg);
+                font-family:cursive;font-size:30px;color:var(--cs);white-space:nowrap;">Spajderfighten‑24</p>
+    </div>
+
+    <!-- Polaroid 3: large right, tilted -->
+    <div style="position:absolute;left:878px;top:36px;width:428px;height:490px;
+                transform:rotate(8.94deg);background:var(--cnv);overflow:hidden;
+                box-shadow:43px 124px 52px rgba(84,66,59,0.01),24px 69px 44px rgba(84,66,59,0.05),
+                            11px 31px 33px rgba(84,66,59,0.09),2px 7px 18px rgba(84,66,59,0.1);">
+      <img src="http://localhost:3845/assets/42618e990cf02956dd47a0541078b2d1d48b1bfc.png"
+           style="position:absolute;left:16px;top:16px;width:396px;height:377px;object-fit:cover;" alt="">
+      <p style="position:absolute;bottom:36px;left:50%;
+                transform:translateX(-50%) rotate(-1deg);
+                font-family:cursive;font-size:29px;color:var(--cs);white-space:nowrap;">Spajder Open ‑26</p>
+    </div>
+
+    <!-- Decorative Layer5 -->
+    <div style="position:absolute;left:-95px;top:759px;pointer-events:none;">
+      <div style="transform:rotate(-17.32deg);">
+        <img src="http://localhost:3845/assets/51e90d0bcef14e76babd8c1333a7d5537f9d6bff.svg"
+             style="width:572px;height:249px;" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SERVICES HEADING  top:8279                         -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <p class="serif" style="position:absolute;left:24px;top:8279px;width:1193px;
+            font-size:90px;line-height:1.1;color:var(--cgs);">Grejer vi kan hjälpa dig med</p>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SERVICES FLEX COLUMN  top:8401                     -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div style="position:absolute;left:0;top:8401px;width:1440px;
+              display:flex;flex-direction:column;gap:37px;align-items:center;">
+
+    <!-- SERVICE ROWS -->
+    <div style="width:100%;padding:0 24px;">
+      <div class="svc-row">
+        <p class="svc-title">Bli hittad när det räknas</p>
+        <p class="svc-desc">När någon letar efter det du erbjuder vill du ligga steget före. Vi ser till
+          att du syns när det gäller, med rätt innehåll på rätt plats vid rätt tillfälle. Genom smart
+          annonsering och noggranna sökstrategier hjälper vi dig att bli förstahandsvalet.</p>
+        <div class="plus-v"></div><div class="plus-h"></div>
+      </div>
+      <div class="svc-row">
+        <p class="svc-title">Engagera din målgrupp</p>
+        <p class="svc-desc">Skarp kommunikation skapar starka band. Vi hjälper dig formulera budskap som
+          väcker intresse, bygger förtroende och ger effekt. Oavsett om det handlar om innehåll till
+          flödet, annonsering, nyhetsbrev eller strategier för att säga rätt sak till rätt person.</p>
+        <div class="plus-v"></div><div class="plus-h"></div>
+      </div>
+      <div class="svc-row">
+        <p class="svc-title">Visa vem du är</p>
+        <p class="svc-desc">Färg, form och feeling som känns du rakt igenom. Vi ser till att ditt
+          varumärke sticker ut och känns igen. Det ska vara snyggt, ja, men framför allt rätt. På sajten,
+          i flödet, på mässan och överallt där du möter din målgrupp.</p>
+        <div class="plus-v"></div><div class="plus-h"></div>
+      </div>
+      <div class="svc-row">
+        <p class="svc-title">Få en webb som presterar</p>
+        <p class="svc-desc">Vi bygger sajter som gör jobbet. Som är snygga, snabba och smarta. Från idé
+          och design till utveckling och lansering. Med funktion och form i perfekt harmoni skapar vi
+          hemsidor som guidar, konverterar och ger resultat.</p>
+        <div class="plus-v"></div><div class="plus-h"></div>
+      </div>
+    </div>
+
+    <!-- DET ÄR SPAJDER -->
+    <div style="width:100%;padding:0 24px;display:flex;flex-direction:column;
+                align-items:center;gap:42px;">
+      <div style="width:100%;height:1px;background:var(--cgs);"></div>
+      <p style="font-family:'Spline Sans',sans-serif;font-weight:700;font-size:19px;line-height:1.1;
+                letter-spacing:-0.38px;color:var(--cgs);text-align:center;width:100%;">Det här är Spajder</p>
+      <p class="serif" style="font-size:51px;line-height:1.2;color:var(--cgs);
+                text-align:center;width:1050px;">En sammansvetsad mix av hjärna, hjärta och
+        fingertoppskänsla. Vi gör det vi säger och säger vad vi gör. Alltid med fokus på att skapa
+        verklig skillnad för dig.</p>
+      <div class="cta">
+        <span style="color:var(--cs);">Ska vi snacka?</span>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div style="width:100%;height:1px;background:var(--cgs);opacity:0.25;"></div>
+    </div>
+
+    <!-- DARK SERVICES GRID + FOOTER -->
+    <div style="width:100%;display:flex;flex-direction:column;">
+
+      <!-- Dark grid -->
+      <div style="background:var(--cs);height:615px;position:relative;overflow:hidden;width:100%;">
+        <!-- Decorative SVGs -->
+        <div style="position:absolute;left:calc(50% - 457px);top:calc(50% + 207px);
+                    transform:translate(-50%,-50%);pointer-events:none;">
+          <div style="transform:rotate(-23.26deg);">
+            <img src="spajder/SVG/Layer_1.svg"
+                 style="width:461px;height:207px;" alt="">
+          </div>
+        </div>
+        <div style="position:absolute;left:calc(50% - 211px);top:calc(50% + 216px);
+                    transform:translate(-50%,-50%);pointer-events:none;">
+          <div style="transform:rotate(26.15deg);">
+            <img src="spajder/SVG/Layer_1-1.svg"
+                 style="width:309px;height:139px;" alt="">
+          </div>
+        </div>
+        <div style="position:absolute;left:700px;top:411px;width:611px;height:273px;pointer-events:none;">
+          <img src="spajder/SVG/Inga_Kusiduller_Orange.svg"
+               style="width:100%;height:100%;" alt="">
+        </div>
+
+        <!-- Col 1: Sökmotorer -->
+        <p class="serif" style="position:absolute;left:24px;top:117px;font-size:21px;line-height:1.2;color:var(--cd);">01</p>
+        <p style="position:absolute;left:24px;top:153px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cd);">Sökmotorer</p>
+        <p style="position:absolute;left:24px;top:191px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SEA</p>
+        <p style="position:absolute;left:24px;top:219px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SEM</p>
+        <p style="position:absolute;left:24px;top:247px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SEO</p>
+        <p style="position:absolute;left:24px;top:275px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Cookies</p>
+        <p style="position:absolute;left:24px;top:303px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Länkar</p>
+
+        <!-- Col 2: Sociala Medier -->
+        <p class="serif" style="position:absolute;left:378px;top:117px;font-size:21px;line-height:1.2;color:var(--cd);">02</p>
+        <p style="position:absolute;left:378px;top:153px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cd);">Sociala Medier</p>
+        <p style="position:absolute;left:378px;top:191px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SoMe annonsering</p>
+        <p style="position:absolute;left:378px;top:219px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SoMe organiskt</p>
+        <p style="position:absolute;left:378px;top:247px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SoMe kombo</p>
+        <p style="position:absolute;left:378px;top:275px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Nyhetsbrev</p>
+
+        <!-- Col 3: Design -->
+        <p class="serif" style="position:absolute;left:732px;top:117px;font-size:21px;line-height:1.2;color:var(--cd);">03</p>
+        <p style="position:absolute;left:732px;top:153px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cd);">Design</p>
+        <p style="position:absolute;left:732px;top:191px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Visuell identitet</p>
+        <p style="position:absolute;left:732px;top:219px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Visuell identitet #2</p>
+        <p style="position:absolute;left:732px;top:247px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Logotyp</p>
+        <p style="position:absolute;left:732px;top:275px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Rörligt</p>
+        <p style="position:absolute;left:732px;top:303px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Tryck</p>
+
+        <!-- Col 4: Webb -->
+        <p class="serif" style="position:absolute;left:1086px;top:117px;font-size:21px;line-height:1.2;color:var(--cd);">04</p>
+        <p style="position:absolute;left:1086px;top:153px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cd);">Webb</p>
+        <p style="position:absolute;left:1086px;top:191px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Hemsida – custom</p>
+        <p style="position:absolute;left:1086px;top:219px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Webbsupport</p>
+        <p style="position:absolute;left:1086px;top:247px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Hemsida – mall</p>
+        <p style="position:absolute;left:1086px;top:275px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Webbutveckling</p>
+      </div>
+
+      <!-- FOOTER -->
+      <footer style="background:var(--cd);height:756px;position:relative;overflow:hidden;width:100%;">
+        <!-- Big SPAJDER wordmark -->
+        <div style="position:absolute;left:-20px;top:542px;width:1490px;height:236px;overflow:hidden;">
+          <img src="spajder/SVG/Spajder_Landscape_Dark.svg"
+               alt="SPAJDER"
+               style="position:absolute;left:2.9%;top:16.36%;
+                      width:calc(100% - 6.4%);height:calc(100% - 34.42%);object-fit:contain;">
+        </div>
+
+        <!-- Kontakt -->
+        <p style="position:absolute;left:26px;top:30px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Kontakt</p>
+        <p style="position:absolute;left:26px;top:57px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Epost – hej@spajder</p>
+        <p style="position:absolute;left:26px;top:84px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Telefon – 021-548 92 92</p>
+        <p style="position:absolute;left:26px;top:145px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Sociala Medier</p>
+        <p style="position:absolute;left:26px;top:167px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Instagram</p>
+        <p style="position:absolute;left:111px;top:167px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Facebook</p>
+        <p style="position:absolute;left:192px;top:167px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">LinkedIn</p>
+        <p style="position:absolute;left:26px;top:531px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);width:460px;">Vi tror på en framtid där digital marknadsföring känns enkel, effektiv och pålitlig.</p>
+
+        <!-- Locations -->
+        <p style="position:absolute;left:496px;top:30px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Västerås</p>
+        <p style="position:absolute;left:496px;top:52px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Trefasgatan 4, 721 30 Västerås</p>
+        <p style="position:absolute;left:496px;top:86px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Göteborg</p>
+        <p style="position:absolute;left:496px;top:108px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Stigbergsliden 5, 414 63 Göteborg</p>
+        <p style="position:absolute;left:496px;top:142px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Sundsvall</p>
+        <p style="position:absolute;left:496px;top:164px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Storgatan 26, 852 32 Sundsvall</p>
+
+        <!-- CTA -->
+        <p class="serif" style="position:absolute;left:1086px;top:30px;font-size:38px;line-height:1.2;
+                  color:var(--cgs);width:329px;">Det börjar ofta med en liten tanke. Släng iväg den till
+          oss så ser vi vart den tar vägen.</p>
+        <div class="cta" style="position:absolute;left:1086px;top:244px;">
+          <span style="color:var(--cs);">Låt oss snacka!</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p style="position:absolute;left:1086px;top:531px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);white-space:nowrap;">©️ Spajder</p>
+      </footer>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const y = new URLSearchParams(location.search).get('y');
+  if (y) window.addEventListener('load', () => window.scrollTo(0, +y));
+</script>
+</body>
+</html>
