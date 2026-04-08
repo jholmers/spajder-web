@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vi är Spajder – Digital marknadsföring</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Spline+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c1:  #0e2016;
+      --cgs: #152e1f;
+      --cd:  #e2f8de;
+      --c9:  #f8fcf9;
+      --cnv: #f5f0eb;
+      --cv:  #fafafa;
+      --cs:  #1a1a1a;
+      --tallbarr: #25573a;
+      --hallon: #db3d52;
+      --fjallblom: #f2ceda;
+      --hostvlov: #fa7d00;
+      --rose: #fbeada;
+      --ljusgra: #e7e7e7;
+      --px: clamp(16px, 1.67vw, 24px);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--c9); font-family: 'Spline Sans', sans-serif; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    .cta { display: inline-flex; gap: 12px; align-items: center; cursor: pointer; }
+    .cta span { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(14px, 1.1vw, 16px); white-space: nowrap; }
+    .cta img { flex-shrink: 0; width: clamp(32px, 2.78vw, 40px); height: clamp(32px, 2.78vw, 40px); }
+
+    [data-fade] { opacity: 0; transform: translateY(24px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
+    [data-fade].visible { opacity: 1; transform: none; }
+    [data-fade-delay="1"] { transition-delay: 0.1s; }
+    [data-fade-delay="2"] { transition-delay: 0.2s; }
+    [data-fade-delay="3"] { transition-delay: 0.3s; }
+    [data-fade-scale] { opacity: 0; transform: scale(0.97) translateY(12px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
+    [data-fade-scale].visible { opacity: 1; transform: none; }
+
+    /* ══════════════════ HEADER ══════════════════════════════ */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--c1);
+      height: clamp(64px, 7.2vw, 104px);
+      display: flex; align-items: center;
+    }
+    .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+    .site-header .logo { height: clamp(36px, 4.6vw, 66px); width: auto; display: block; }
+    .site-header nav { display: flex; gap: clamp(12px, 1.1vw, 16px); color: var(--cd); }
+    .site-header nav a { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(13px, 1.1vw, 16px); letter-spacing: -0.01em; opacity: 0.85; transition: opacity 0.2s; }
+    .site-header nav a:hover { opacity: 1; }
+    .site-header nav a.active { text-decoration: line-through; opacity: 0.5; pointer-events: none; }
+    .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--px); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cd); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display: none; position: fixed; inset: 0; top: clamp(64px, 7.2vw, 104px); background: var(--c1); z-index: 99; flex-direction: column; align-items: flex-start; padding: 32px var(--px); }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(28px, 8vw, 48px); line-height: 1.1; color: var(--cd); padding: 14px 0; border-bottom: 1px solid rgba(226,248,222,0.12); width: 100%; }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav a.active { text-decoration: line-through; opacity: 0.5; pointer-events: none; }
+    @media (max-width: 680px) { .site-header nav { display: none; } .hamburger { display: flex; } }
+
+    /* ══════════════════ HERO ════════════════════════════════ */
+    .sp-hero {
+      height: clamp(360px, 57.9vw, 834px);
+      position: relative;
+      overflow: hidden;
+    }
+    .sp-hero-bg {
+      position: absolute;
+      width: 100%;
+      height: 115.83%;
+      top: -14.93%;
+      object-fit: cover;
+      display: block;
+    }
+    .sp-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+    }
+    .sp-hero-content {
+      position: absolute;
+      inset: 0;
+      padding: 0 clamp(16px, 1.67vw, 24px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: clamp(36px, 6vw, 86px);
+    }
+    .sp-hero-title {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 700;
+      font-size: clamp(36px, 7.43vw, 107px);
+      line-height: 1;
+      letter-spacing: clamp(-1.5px, -0.3vw, -4.28px);
+      color: var(--cv);
+      max-width: 860px;
+      margin-bottom: clamp(14px, 1.67vw, 24px);
+    }
+    .sp-hero-sub {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 400;
+      font-size: clamp(14px, 1.6vw, 23px);
+      line-height: 1.3;
+      letter-spacing: -0.03em;
+      color: var(--cv);
+      max-width: min(1034px, 80%);
+    }
+
+    /* ══════════════════ EN BYRÅ TEXT SECTION ════════════════ */
+    .sp-enbyrra {
+      background: var(--cnv);
+      padding: clamp(60px, 9.72vw, 140px) var(--px) clamp(60px, 9.72vw, 140px);
+      position: relative;
+      overflow: hidden;
+      min-height: clamp(420px, 78.9vw, 1137px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sp-enbyrra-text {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(22px, 3.54vw, 51px);
+      line-height: 1.2;
+      color: var(--c1);
+      max-width: min(1216px, 100%);
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .sp-enbyrra-text p + p { margin-top: 1em; }
+    .sp-enbyrra-deco {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (max-width: 900px) { .sp-enbyrra-deco { display: none; } }
+
+    /* ══════════════════ STATS SECTION (dark) ════════════════ */
+    .sp-stats {
+      background: var(--cs);
+      overflow: hidden;
+    }
+    .sp-stats-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: clamp(400px, 58.3vw, 840px);
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: clamp(20px, 1.74vw, 25px) var(--px) clamp(30px, 3vw, 48px);
+      gap: 0;
+    }
+    .sp-stats-left {
+      display: flex;
+      flex-direction: column;
+      padding-right: clamp(12px, 2vw, 32px);
+    }
+    .sp-stats-heading {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 500;
+      font-size: clamp(28px, 4.17vw, 60px);
+      line-height: 1;
+      letter-spacing: clamp(-1px, -0.17vw, -2.4px);
+      color: var(--ljusgra);
+      margin-bottom: clamp(16px, 3vw, 56px);
+      white-space: pre-line;
+    }
+    .sp-stats-sub {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 400;
+      font-size: clamp(13px, 1.32vw, 19px);
+      line-height: 1.3;
+      color: var(--ljusgra);
+      opacity: 0.8;
+      max-width: 325px;
+      margin-bottom: clamp(20px, 2.5vw, 36px);
+    }
+    .sp-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .sp-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: clamp(8px, 1.11vw, 16px);
+      height: clamp(120px, 17.3vw, 249px);
+    }
+    .sp-card-spajderfajten {
+      background: var(--tallbarr);
+      color: var(--cd);
+      width: calc(50% - 3px);
+    }
+    .sp-card-3 {
+      background: var(--fjallblom);
+      color: var(--hallon);
+      width: calc(50% - 3px);
+    }
+    .sp-card-0 {
+      background: var(--cd);
+      color: var(--tallbarr);
+      width: calc(32.2% - 3px);
+      text-align: center;
+    }
+    .sp-card-kulkultur {
+      background: var(--hostvlov);
+      color: var(--rose);
+      width: calc(67.8% - 3px);
+    }
+    .sp-card-name {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(18px, 3.54vw, 51px);
+      line-height: 1.2;
+      position: absolute;
+      top: clamp(10px, 1.32vw, 19px);
+      left: clamp(12px, 1.32vw, 19px);
+      right: clamp(12px, 1.32vw, 19px);
+    }
+    .sp-card-bignum {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 700;
+      font-size: clamp(52px, 9.93vw, 143px);
+      line-height: 1;
+      letter-spacing: clamp(-2px, -0.4vw, -5.72px);
+      white-space: nowrap;
+      position: absolute;
+      top: clamp(6px, 0.76vw, 11px);
+      left: clamp(12px, 1.32vw, 19px);
+    }
+    .sp-card-0 .sp-card-bignum {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .sp-card-kulkultur-name {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(32px, 7.43vw, 107px);
+      line-height: 1;
+      letter-spacing: clamp(-1.5px, -0.3vw, -4.28px);
+      white-space: nowrap;
+      position: absolute;
+      top: clamp(8px, 0.83vw, 12px);
+      left: clamp(12px, 1.32vw, 19px);
+    }
+    .sp-card-desc {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(12px, 1.46vw, 21px);
+      line-height: 1.2;
+      position: absolute;
+      bottom: clamp(10px, 1.32vw, 19px);
+      left: clamp(12px, 1.32vw, 19px);
+      right: clamp(12px, 1.32vw, 19px);
+    }
+    .sp-card-0 .sp-card-desc {
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - clamp(24px, 2.64vw, 38px));
+      text-align: center;
+    }
+    .sp-stats-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .sp-stats-right img {
+      position: absolute;
+      top: 0;
+      right: calc(-1 * var(--px));
+      width: 100%;
+      height: auto;
+      max-width: 684px;
+      object-fit: contain;
+      object-position: top right;
+    }
+    @media (max-width: 900px) {
+      .sp-stats-inner { grid-template-columns: 1fr; }
+      .sp-stats-right { display: none; }
+    }
+    @media (max-width: 560px) {
+      .sp-card-spajderfajten, .sp-card-3 { width: 100%; }
+      .sp-card-0 { width: calc(40% - 3px); }
+      .sp-card-kulkultur { width: calc(60% - 3px); }
+    }
+
+    /* ══════════════════ CULTURE SECTION (raspberry) ══════════ */
+    .sp-culture {
+      background: var(--hallon);
+      overflow: hidden;
+    }
+    .sp-culture-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: clamp(400px, 58.3vw, 840px);
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: clamp(20px, 1.74vw, 25px) var(--px) clamp(24px, 3vw, 48px);
+      gap: clamp(20px, 3.47vw, 50px);
+      align-items: stretch;
+    }
+    .sp-culture-photo {
+      position: relative;
+      overflow: hidden;
+      min-height: clamp(200px, 40vw, 790px);
+    }
+    .sp-culture-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .sp-culture-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: clamp(20px, 2.78vw, 40px);
+    }
+    .sp-culture-title {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 500;
+      font-size: clamp(24px, 4.17vw, 60px);
+      line-height: 1;
+      letter-spacing: clamp(-1px, -0.17vw, -2.4px);
+      color: var(--fjallblom);
+    }
+    .sp-culture-body {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 500;
+      font-size: clamp(13px, 1.6vw, 23px);
+      line-height: 1.3;
+      letter-spacing: -0.03em;
+      color: var(--fjallblom);
+      opacity: 0.8;
+      margin-top: auto;
+    }
+    .sp-culture-thumbs {
+      display: flex;
+      gap: clamp(4px, 0.56vw, 8px);
+      align-items: flex-end;
+    }
+    .sp-culture-thumb {
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .sp-culture-thumb img {
+      display: block;
+      width: clamp(70px, 14.7vw, 212px);
+      height: auto;
+      object-fit: cover;
+    }
+    .sp-culture-thumb-tall img { aspect-ratio: 212/301; }
+    .sp-culture-thumb-short img { aspect-ratio: 212/141; }
+    @media (max-width: 768px) {
+      .sp-culture-inner { grid-template-columns: 1fr; }
+      .sp-culture-photo { min-height: clamp(180px, 50vw, 400px); }
+    }
+
+    /* ══════════════════ RESULTAT SECTION ════════════════════ */
+    .sp-resultat {
+      background: #888;
+      overflow: hidden;
+    }
+    .sp-resultat-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: clamp(20px, 1.88vw, 27px) var(--px) clamp(36px, 4.17vw, 60px);
+    }
+    .sp-resultat-title {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 500;
+      font-size: clamp(28px, 4.17vw, 60px);
+      line-height: 1;
+      letter-spacing: clamp(-1px, -0.17vw, -2.4px);
+      color: var(--cv);
+      margin-bottom: clamp(20px, 2.22vw, 32px);
+    }
+    .sp-resultat-title .dim { opacity: 0.6; }
+    .sp-resultat-video {
+      width: 100%;
+      aspect-ratio: 1392 / 790;
+      overflow: hidden;
+      background: #222;
+      border-radius: clamp(8px, 1.11vw, 16px);
+      margin-bottom: clamp(20px, 2.22vw, 32px);
+    }
+    .sp-resultat-video video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .sp-resultat-body {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 500;
+      font-size: clamp(14px, 1.94vw, 28px);
+      line-height: 1.2;
+      letter-spacing: clamp(-0.5px, -0.04vw, -0.56px);
+      color: var(--cv);
+    }
+
+    /* ══════════════════ KOMPISBOKEN ═════════════════════════ */
+    .sp-kompis {
+      background: var(--c9);
+      padding: clamp(40px, 5.56vw, 80px) var(--px) clamp(32px, 4.44vw, 64px);
+    }
+    .sp-kompis-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(20px, 3.33vw, 48px);
+      margin-bottom: clamp(24px, 3.33vw, 48px);
+      align-items: end;
+    }
+    .sp-kompis-title {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(28px, 3.54vw, 51px);
+      line-height: 1.2;
+      color: var(--cgs);
+    }
+    .sp-kompis-desc {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 400;
+      font-size: clamp(13px, 1.32vw, 19px);
+      line-height: 1.3;
+      color: var(--cgs);
+      opacity: 0.7;
+    }
+    .sp-kompis-div {
+      height: 1px;
+      background: rgba(136,136,136,0.35);
+    }
+    .sp-kompis-list {
+      max-width: 920px;
+    }
+    .sp-kompis-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(14px, 1.67vw, 24px) clamp(6px, 0.56vw, 8px);
+      border-bottom: 1px solid rgba(136,136,136,0.35);
+    }
+    .sp-kompis-name {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 500;
+      font-size: clamp(14px, 1.46vw, 21px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--cgs);
+    }
+    .sp-kompis-role {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 400;
+      font-size: clamp(11px, 0.97vw, 14px);
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      color: var(--cgs);
+      opacity: 0.7;
+    }
+    @media (max-width: 600px) {
+      .sp-kompis-header { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════ VÅRT SÄTT CTA ═══════════════════════ */
+    .sp-vart-satt {
+      background: var(--c9);
+      padding: clamp(32px, 4.44vw, 64px) var(--px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(20px, 2.92vw, 42px);
+    }
+    .sp-vart-div {
+      height: 1px;
+      background: rgba(21,46,31,0.12);
+      width: 100%;
+    }
+    .sp-vart-label {
+      font-family: 'Spline Sans', sans-serif;
+      font-weight: 700;
+      font-size: clamp(13px, 1.32vw, 19px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--cgs);
+    }
+    .sp-vart-quote {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(24px, 4.72vw, 68px);
+      line-height: 1.3;
+      color: var(--cgs);
+      max-width: min(1104px, 100%);
+    }
+
+    /* ══════════════════ FOOTER ══════════════════════════════ */
+    footer { background: var(--cd); padding: clamp(32px, 4.44vw, 64px) 0 0; overflow: hidden; }
+    .footer-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(24px, 3.33vw, 48px);
+      padding: 0 var(--px) clamp(24px, 3.33vw, 48px);
+    }
+    .footer-group { margin-bottom: clamp(12px, 1.67vw, 24px); }
+    .footer-label { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em; color: var(--cgs); margin-bottom: 4px; }
+    .footer-val { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em; color: var(--cgs); opacity: 0.65; }
+    .footer-socials { display: flex; gap: 16px; }
+    .footer-tagline { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; color: var(--cgs); margin-top: clamp(16px, 2.22vw, 32px); }
+    .footer-cta-text { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 38px); line-height: 1.2; color: var(--cgs); margin-bottom: clamp(20px, 2.22vw, 32px); }
+    .footer-copy { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(12px, 1.1vw, 16px); color: var(--cgs); opacity: 0.55; padding: 0 var(--px) clamp(16px, 2.22vw, 32px); }
+    .footer-wordmark { overflow: hidden; line-height: 0; margin-top: clamp(16px, 2.78vw, 40px); }
+    .footer-wordmark img { width: 100%; display: block; max-height: 180px; object-fit: cover; object-position: bottom; }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html">
+        <img src="spajder/SVG/Spajder_Landscape_White.svg" alt="Spajder" class="logo">
+      </a>
+      <nav>
+        <a href="spajder-case.html">Case</a>
+        <a href="#">Vårt sätt</a>
+        <a href="spajder-vi-ar-spajder.html" class="active">Vi är Spajder</a>
+        <a href="#">Ska vi snacka?</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Meny">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="spajder-case.html">Case</a>
+    <a href="#">Vårt sätt</a>
+    <a href="spajder-vi-ar-spajder.html" class="active">Vi är Spajder</a>
+    <a href="#">Ska vi snacka?</a>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="sp-hero">
+    <img class="sp-hero-bg" src="http://localhost:3845/assets/736546948f0685e9bad7683427c9325263fdcc3b.png" alt="">
+    <div class="sp-hero-overlay"></div>
+    <div class="sp-hero-content">
+      <h1 class="sp-hero-title" data-fade>En byrå utan krusiduller</h1>
+      <p class="sp-hero-sub" data-fade data-fade-delay="1">Hos Spajder kan man andas ut. Här slipper du byråjargong, märkliga buzzwords och stela möten. Vi tror nämligen att förtroende vinner över tomma ord. Tillsammans strävar vi istället efter samma sak: att göra ett sjujäkla bra jobb, utan att göra det krångligare än det behöver vara.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ EN BYRÅ TEXT SECTION ═══════════ -->
+  <section class="sp-enbyrra">
+    <!-- Decorative SVG – left edge, rotated -->
+    <div class="sp-enbyrra-deco" style="left: clamp(-120px, -11vw, -50px); top: 57%; transform: rotate(-19.03deg);">
+      <img src="http://localhost:3845/assets/79565ae345dab062887dadf6e49ba661846cc29f.svg" alt="" width="87" height="110">
+    </div>
+    <!-- Decorative SVG – top-right, rotated -->
+    <div class="sp-enbyrra-deco" style="right: clamp(-60px, -9vw, -20px); top: clamp(-70px, -9vw, -30px); transform: rotate(16.58deg);">
+      <img src="http://localhost:3845/assets/7d91f0e7be98a2dabd76c2f8f1281c4401cde48a.svg" alt="" width="126" height="57">
+    </div>
+    <!-- Decorative SVG – right mid, rotated -->
+    <div class="sp-enbyrra-deco" style="right: clamp(-100px, -12vw, -50px); top: 62%; transform: rotate(-22.85deg);">
+      <img src="http://localhost:3845/assets/17e71254ea80e3571b830a08bbfb985cfd66a56d.svg" alt="" width="240" height="114">
+    </div>
+
+    <div class="sp-enbyrra-text" data-fade>
+      <p>Spajder föddes ur en rätt enkel idé: att bygga en byrå med sunt bondförnuft. Vi hade sett motsatsen. När prydliga presentationer tar över verkligheten och fluff väger tyngre än faktiskt värde. Det ville vi göra annorlunda.</p>
+      <p>Flera av oss är uppvuxna med lera på skorna och traktorer på gården. Vi vet hur det känns att se tydliga resultat av det man gör. Man sår, man skördar. Det kräver tålamod, envishet och en hel del slit. Samma grej gäller här, bara med andra verktyg.</p>
+      <p>Idag finns Spajder i Västerås, Göteborg och Sundsvall. Vi har vuxit, förändrats och lärt oss massor. Men grundidén är densamma som när vi startade. Jobba smart. Var schysst. Gör skillnad.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ IMSE. VIMSE. SPAJDER. (STATS) ═══════════ -->
+  <section class="sp-stats">
+    <div class="sp-stats-inner">
+      <div class="sp-stats-left">
+        <h2 class="sp-stats-heading" data-fade>Imse.
+Vimse.
+Spajder.</h2>
+        <p class="sp-stats-sub" data-fade data-fade-delay="1">Bakom varje siffra, kundmöte och kampanj finns något mer. Det som binder oss samman. Som gör Spajder till Spajder. Det där som inte syns i offerten, men som märks i allt vi gör.</p>
+        <div class="sp-cards" data-fade data-fade-delay="2">
+          <!-- Spajderfajten -->
+          <div class="sp-card sp-card-spajderfajten">
+            <p class="sp-card-name">Spajderfajten</p>
+            <p class="sp-card-desc">Vårt årliga mästerskap där kollegor blir fiender, vänskaper sätts på prov och exakt allt står på spel (förutom kanske ens anställning).</p>
+          </div>
+          <!-- 3 cities -->
+          <div class="sp-card sp-card-3">
+            <p class="sp-card-bignum">3</p>
+            <p class="sp-card-desc">Städer vi kallar hem: Västerås, Sundsvall och Göteborg.</p>
+          </div>
+          <!-- 0 difference -->
+          <div class="sp-card sp-card-0">
+            <p class="sp-card-bignum">0</p>
+            <p class="sp-card-desc">Skillnad på folk och folk. Oavsett om du är VD, rörkrökare, marknadschef eller kabeldragare.</p>
+          </div>
+          <!-- Kulkultur -->
+          <div class="sp-card sp-card-kulkultur">
+            <p class="sp-card-kulkultur-name">Kulkultur</p>
+            <p class="sp-card-desc">Vi tar jobbet på stort allvar, men aldrig oss själva. Det ska vara kul att gå till jobbet. Punkt.</p>
+          </div>
+        </div>
+      </div>
+      <div class="sp-stats-right">
+        <img src="http://localhost:3845/assets/0e83f2ffe14cf026d73ff5cfbbaa3b96f092202d.png" alt="" data-fade>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ETT GÄNG SOM GILLAR ATT HA KUL (CULTURE) ═══════════ -->
+  <section class="sp-culture">
+    <div class="sp-culture-inner">
+      <div class="sp-culture-photo" data-fade-scale>
+        <img src="http://localhost:3845/assets/e288395ffce30df32a5066ef70edae8ccb9254d6.png" alt="Spajder-teamet">
+      </div>
+      <div class="sp-culture-right">
+        <h2 class="sp-culture-title" data-fade>Ett gäng som gillar att ha kul</h2>
+        <div class="sp-culture-thumbs" data-fade data-fade-delay="1">
+          <div class="sp-culture-thumb sp-culture-thumb-tall">
+            <img src="http://localhost:3845/assets/b7c7a2ce4536872ed195bd45d40d9bb151d42053.png" alt="">
+          </div>
+          <div class="sp-culture-thumb sp-culture-thumb-short">
+            <img src="http://localhost:3845/assets/dc4bfec212d4f03249e4ed703dd8681ac7b93a05.png" alt="">
+          </div>
+          <div class="sp-culture-thumb sp-culture-thumb-short">
+            <img src="http://localhost:3845/assets/e5aecdbc9ded51ef4bfa30136a2fdb8ce35450ce.png" alt="">
+          </div>
+        </div>
+        <p class="sp-culture-body" data-fade data-fade-delay="2">Trots att vi sitter i olika delar av landet ser vi till att ses, skratta och hitta på dumheter tillsammans. Vi har kastat pappersflygplan, byggt robotar och raceat med radiostyrda båtar i Svartån. Vi har simhoppat, dansat salsa och skådespelat oss igenom mordmysterier med tveksam inlevelse. Vi gillar att tävla, skoja och ta oseriösa lekar seriöst. Stökigt, stimmigt och väldigt mycket Spajder.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ RESULTAT FÖRST. ALLTID. ═══════════ -->
+  <section class="sp-resultat">
+    <div class="sp-resultat-inner">
+      <h2 class="sp-resultat-title" data-fade>
+        <span class="dim">Resultat först.</span><br>
+        Alltid.
+      </h2>
+      <div class="sp-resultat-video" data-fade-scale>
+        <video autoplay loop muted playsinline>
+          <!-- Video source not available in static build -->
+        </video>
+      </div>
+      <p class="sp-resultat-body" data-fade>Att vi har kul ihop krockar aldrig med det vi är här för att göra. Att leverera pangresultat till våra kunder. För bakom allt det roliga finns ett gäng som kan sitt jobb på riktigt. Oavsett om det handlar om content, annonser, strategi, design eller kod sitter vi på en samlad kompetens som tål att jämföras med de bästa. Vi kommer från olika håll, men drivs av samma sak: att varje projekt med Spajder ska kännas roligt, proffsigt och ge resultat som märks.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ KOMPISBOKEN ═══════════ -->
+  <section class="sp-kompis">
+    <div class="sp-kompis-header" data-fade>
+      <h2 class="sp-kompis-title">Kompisboken.</h2>
+      <p class="sp-kompis-desc">Här är alla vi som bygger Spajder varje dag. Från kampanjer och kod till kaffe och skratt — det är dessa människor som gör allt möjligt.</p>
+    </div>
+    <div class="sp-kompis-list">
+      <div class="sp-kompis-div"></div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Joakim Holmer</span>
+        <span class="sp-kompis-role">(Digital designer)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Wictor Palmgren</span>
+        <span class="sp-kompis-role">(Kommunikatör)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Johnny Persson</span>
+        <span class="sp-kompis-role">(SEA-Strateg / Senior Projektledare)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Jasmine Alexandersson</span>
+        <span class="sp-kompis-role">(Senior Projektledare)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Joakim Holmer</span>
+        <span class="sp-kompis-role">(Digital designer)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Wictor Palmgren</span>
+        <span class="sp-kompis-role">(Kommunikatör)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Johnny Persson</span>
+        <span class="sp-kompis-role">(SEA-Strateg / Senior Projektledare)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Jasmine Alexandersson</span>
+        <span class="sp-kompis-role">(Senior Projektledare)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Joakim Holmer</span>
+        <span class="sp-kompis-role">(Digital designer)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Wictor Palmgren</span>
+        <span class="sp-kompis-role">(Kommunikatör)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Johnny Persson</span>
+        <span class="sp-kompis-role">(SEA-Strateg / Senior Projektledare)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Jasmine Alexandersson</span>
+        <span class="sp-kompis-role">(Senior Projektledare)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Joakim Holmer</span>
+        <span class="sp-kompis-role">(Digital designer)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Wictor Palmgren</span>
+        <span class="sp-kompis-role">(Kommunikatör)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Johnny Persson</span>
+        <span class="sp-kompis-role">(SEA-Strateg / Senior Projektledare)</span>
+      </div>
+      <div class="sp-kompis-row" data-fade>
+        <span class="sp-kompis-name">Jasmine Alexandersson</span>
+        <span class="sp-kompis-role">(Senior Projektledare)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ VÅRT SÄTT CTA ═══════════ -->
+  <section class="sp-vart-satt">
+    <div class="sp-vart-div"></div>
+    <p class="sp-vart-label" data-fade>Vårt sätt</p>
+    <p class="sp-vart-quote" data-fade data-fade-delay="1">Tempo, tydlighet och teamwork är vår grej. Vi kavlar upp ärmarna, hittar lösningar och ser till att det händer.</p>
+    <div class="cta" data-fade data-fade-delay="2">
+      <span style="color: var(--cs);">Läs mer om hur vi jobbar</span>
+      <img src="http://localhost:3845/assets/9bedfbab57f79d089dfcd4cd96beb194c051c11d.svg" alt="" width="40" height="40">
+    </div>
+    <div class="sp-vart-div"></div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid" data-fade>
+        <div>
+          <div class="footer-group">
+            <p class="footer-label">Kontakt</p>
+            <p class="footer-val">Epost – hej@spajder.se</p>
+            <p class="footer-val">Telefon – 021-548 92 92</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Sociala Medier</p>
+            <div class="footer-socials">
+              <p class="footer-val">Instagram</p>
+              <p class="footer-val">Facebook</p>
+              <p class="footer-val">LinkedIn</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-group">
+            <a href="index.html">
+              <img src="spajder/SVG/Spajder_Landscape_Dark.svg" alt="Spajder" style="height: clamp(24px, 3.47vw, 50px); width: auto; display: block;">
+            </a>
+          </div>
+          <p class="footer-tagline">Vi tror på en framtid där digital marknadsföring känns enkel, effektiv och pålitlig.</p>
+        </div>
+        <div>
+          <div class="footer-group">
+            <p class="footer-label">Västerås</p>
+            <p class="footer-val">Trefasgatan 4, 721 30 Västerås</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Göteborg</p>
+            <p class="footer-val">Stigbergsliden 5, 414 63 Göteborg</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Sundsvall</p>
+            <p class="footer-val">Storgatan 26, 852 32 Sundsvall</p>
+          </div>
+        </div>
+      </div>
+      <p class="footer-copy">©️ Spajder</p>
+    </div>
+    <div class="footer-wordmark">
+      <img src="spajder/SVG/Spajder_Landscape_Dark.svg" alt="SPAJDER">
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('[data-fade], [data-fade-scale]').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
