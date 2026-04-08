@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Case – Spajder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Spline+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c1:  #0e2016;
+      --cgs: #152e1f;
+      --cd:  #e2f8de;
+      --c9:  #f8fcf9;
+      --cnv: #f5f0eb;
+      --cv:  #fafafa;
+      --cs:  #1a1a1a;
+      --ct:  #25573a;
+      --c7:  #bdddc4;
+      --accent-green: #61a678;
+      --accent-pink:  #f2ceda;
+      --accent-orange:#fa7d00;
+      --px: clamp(16px, 1.67vw, 24px);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--c9); font-family: 'Spline Sans', sans-serif; }
+    a { color: inherit; text-decoration: none; }
+
+    .serif { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; }
+
+    .t-h4 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 38px); line-height: 1.2; }
+    .t-sm  { font-family: 'Spline Sans', sans-serif; font-weight: 400; font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em; }
+
+    .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--px); }
+
+    .cta { display: inline-flex; gap: 12px; align-items: center; cursor: pointer; }
+    .cta span { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(14px, 1.1vw, 16px); line-height: 1.4; white-space: nowrap; }
+    .cta svg  { flex-shrink: 0; width: clamp(32px, 2.78vw, 40px); height: clamp(32px, 2.78vw, 40px); }
+
+    [data-fade] {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1);
+    }
+    [data-fade].visible { opacity: 1; transform: none; }
+    [data-fade-delay="1"] { transition-delay: 0.1s; }
+    [data-fade-delay="2"] { transition-delay: 0.2s; }
+    [data-fade-delay="3"] { transition-delay: 0.3s; }
+    [data-fade-scale] {
+      opacity: 0; transform: scale(0.96);
+      transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+    }
+    [data-fade-scale].visible { opacity: 1; transform: none; }
+
+    /* ══ HEADER ══════════════════════════════════════════════ */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--c1);
+      height: clamp(64px, 7.2vw, 104px);
+      display: flex; align-items: center;
+    }
+    .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+    .site-header .logo { height: clamp(36px, 4.6vw, 66px); width: auto; }
+    .site-header nav { display: flex; gap: clamp(12px, 1.1vw, 16px); align-items: center; color: var(--cd); }
+    .site-header nav a {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      opacity: 0.85; transition: opacity 0.2s;
+    }
+    .site-header nav a:hover { opacity: 1; }
+    .site-header nav a.active { text-decoration: line-through; opacity: 0.5; pointer-events: none; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cd); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display: none; position: fixed; inset: 0; top: clamp(64px, 7.2vw, 104px); background: var(--c1); z-index: 99; flex-direction: column; align-items: flex-start; padding: 32px var(--px); }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(28px, 8vw, 48px); line-height: 1.1; color: var(--cd); padding: 14px 0; border-bottom: 1px solid rgba(226,248,222,0.12); width: 100%; }
+    .mobile-nav a:last-child { border-bottom: none; }
+    @media (max-width: 680px) { .site-header nav { display: none; } .hamburger { display: flex; } }
+
+    /* ══ PAGE HEADER DIVIDER ══════════════════════════════════ */
+    .page-divider { height: 1px; background: rgba(21,46,31,0.15); margin: 0 var(--px); }
+
+    /* ══ SENASTE SECTION ═════════════════════════════════════ */
+    .senaste {
+      background: var(--c9);
+      padding: clamp(24px, 2.5vw, 36px) 0 clamp(40px, 5vw, 72px);
+    }
+    .senaste-heading {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(36px, 5.56vw, 80px);
+      line-height: 1.0; letter-spacing: clamp(-1.5px, -0.22vw, -3.2px);
+      color: var(--c1);
+      padding: clamp(20px, 2.5vw, 36px) var(--px) clamp(20px, 2.5vw, 36px);
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 0.83vw, 12px);
+      padding: 0 var(--px);
+    }
+    .case-card {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: clamp(8px, 1.1vw, 16px);
+      overflow: hidden;
+      cursor: pointer;
+      background: #1a1a1a;
+    }
+    .case-card img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform 0.7s cubic-bezier(.16,1,.3,1);
+    }
+    .case-card:hover img { transform: scale(1.04); }
+    .case-card-dim {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.22);
+      pointer-events: none;
+    }
+    .case-card-meta {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: clamp(10px, 1.4vw, 20px) clamp(12px, 1.67vw, 24px);
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 12px;
+    }
+    .case-card-desc {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(11px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cv);
+    }
+    .case-card-client {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(11px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cv); text-align: right; white-space: nowrap; flex-shrink: 0;
+    }
+    .case-card-tags {
+      position: absolute;
+      top: clamp(10px, 1.4vw, 20px);
+      left: clamp(12px, 1.67vw, 24px);
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(10px, 0.9vw, 14px); line-height: 1.4; letter-spacing: -0.01em;
+      color: rgba(250,250,250,0.75);
+    }
+    .case-card-dot {
+      position: absolute;
+      bottom: clamp(30px, 4.2vw, 60px); left: 50%; transform: translateX(-50%);
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(217,217,217,0.6);
+    }
+
+    @media (max-width: 600px) {
+      .case-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══ FLER CASE SECTION ═══════════════════════════════════ */
+    .fler-case {
+      background: var(--c9);
+      padding: clamp(32px, 4.4vw, 64px) 0 0;
+    }
+    .fler-heading {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(28px, 4.17vw, 60px);
+      line-height: 1.1; letter-spacing: clamp(-1px, -0.17vw, -2.4px);
+      color: var(--c1);
+      padding: 0 var(--px) clamp(20px, 2.78vw, 40px);
+    }
+
+    .case-list-divider { height: 1px; background: rgba(21,46,31,0.15); margin: 0 var(--px); }
+
+    .case-list-row {
+      display: grid;
+      grid-template-columns: clamp(120px, 22%, 320px) 1fr auto;
+      align-items: center;
+      gap: clamp(12px, 2vw, 32px);
+      padding: clamp(14px, 1.81vw, 26px) var(--px);
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .case-list-row:hover { background: rgba(14,32,22,0.03); }
+    .case-list-row.dark { background: var(--cs); }
+    .case-list-row.dark:hover { background: #222; }
+
+    .case-list-client {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs);
+    }
+    .case-list-row.dark .case-list-client { color: var(--cv); }
+
+    .case-list-info {}
+    .case-list-title {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs); margin-bottom: 2px;
+    }
+    .case-list-row.dark .case-list-title { color: var(--cv); }
+    .case-list-subtitle {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(11px, 0.97vw, 14px); line-height: 1.4; letter-spacing: -0.01em;
+      color: #888;
+    }
+    .case-list-row.dark .case-list-subtitle { color: rgba(250,250,250,0.55); }
+
+    .case-list-thumbs {
+      display: flex; gap: clamp(4px, 0.56vw, 8px); align-items: center; flex-shrink: 0;
+    }
+    .case-thumb {
+      width: clamp(56px, 7.2vw, 103px);
+      height: clamp(40px, 5vw, 72px);
+      border-radius: 6px; overflow: hidden; background: #d9d9d9; flex-shrink: 0;
+    }
+    .case-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .case-list-arrow {
+      width: clamp(28px, 2.78vw, 40px); height: clamp(28px, 2.78vw, 40px);
+      display: none; /* hidden in fler case rows per Figma */
+    }
+
+    @media (max-width: 700px) {
+      .case-list-row { grid-template-columns: 1fr auto; }
+      .case-list-info { display: none; }
+      .case-list-thumbs { display: none; }
+    }
+
+    /* ══ CTA SECTION ═════════════════════════════════════════ */
+    .case-cta {
+      background: var(--c9);
+      padding: clamp(40px, 5.6vw, 80px) 0 clamp(32px, 4.4vw, 64px);
+      text-align: center;
+    }
+    .case-cta-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(14px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs); margin-bottom: clamp(20px, 2.78vw, 40px);
+    }
+    .case-cta-text {
+      font-family: 'Instrument Serif', serif; font-weight: 400;
+      font-size: clamp(22px, 2.64vw, 38px); line-height: 1.2;
+      color: var(--cgs);
+      max-width: min(638px, 90%); margin: 0 auto clamp(28px, 3.47vw, 50px);
+    }
+    .case-cta-divider { height: 1px; background: rgba(21,46,31,0.15); margin: clamp(32px, 4.4vw, 64px) var(--px) 0; }
+
+    /* ══ FOOTER ══════════════════════════════════════════════ */
+    footer {
+      background: var(--cd);
+      padding: clamp(32px, 4.4vw, 56px) 0 0;
+      overflow: hidden;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(24px, 3vw, 48px);
+      padding-bottom: clamp(24px, 3vw, 48px);
+    }
+    .footer-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs); margin-bottom: 4px;
+    }
+    .footer-val {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs); opacity: 0.7;
+    }
+    .footer-group { margin-bottom: clamp(16px, 2vw, 28px); }
+    .footer-socials { display: flex; gap: 20px; }
+    .footer-cta-text { color: var(--cgs); margin-bottom: clamp(20px, 2.5vw, 36px); }
+    .footer-tagline {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs); margin-top: clamp(16px, 2vw, 24px);
+    }
+    .footer-copyright {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--cgs); margin-top: clamp(16px, 2.2vw, 32px);
+    }
+    .footer-wordmark {
+      width: 100%; margin-top: clamp(24px, 3.3vw, 48px);
+      overflow: hidden;
+    }
+    .footer-wordmark img { width: 104%; max-width: 104%; display: block; margin-left: -2%; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- ═════════════════════ HEADER ═════════════════════ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html">
+        <img src="spajder/SVG/Spajder_Landscape_White.svg" alt="Spajder" class="logo">
+      </a>
+      <nav>
+        <a href="spajder-case.html" class="active">Case</a>
+        <a href="#">Vårt sätt</a>
+        <a href="#">Vi är Spajder</a>
+        <a href="#">Ska vi snacka?</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Meny">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="spajder-case.html">Case</a>
+    <a href="#">Vårt sätt</a>
+    <a href="#">Vi är Spajder</a>
+    <a href="#">Ska vi snacka?</a>
+  </nav>
+
+  <!-- ═════════════════════ SENASTE ═════════════════════ -->
+  <section class="senaste">
+    <div class="page-divider"></div>
+    <h1 class="senaste-heading" data-fade>Senaste.</h1>
+
+    <div class="case-grid">
+
+      <!-- Row 1 -->
+      <a class="case-card" data-fade-scale href="#">
+        <img src="spajder/Images/Image-3.jpg" alt="Ecokraft">
+        <div class="case-card-dim"></div>
+        <p class="case-card-tags">Webbutveckling, Visuell identitet och Sociala medier</p>
+        <div class="case-card-meta">
+          <p class="case-card-desc">Förnyat varumärke för att möta nya utmaningar</p>
+          <p class="case-card-client">Ecokraft</p>
+        </div>
+      </a>
+
+      <a class="case-card" data-fade-scale data-fade-delay="1" href="#">
+        <img src="spajder/Images/Image-2.jpg" alt="CBS City">
+        <div class="case-card-dim"></div>
+        <p class="case-card-tags">Webbutveckling, Visuell identitet och Sociala medier</p>
+        <div class="case-card-meta">
+          <p class="case-card-desc">Förnyat varumärke för att möta nya utmaningar</p>
+          <p class="case-card-client">CBS City</p>
+        </div>
+      </a>
+
+      <!-- Row 2 -->
+      <a class="case-card" data-fade-scale href="#">
+        <img src="spajder/Images/Image-5.jpg" alt="Västerås Ventilation">
+        <div class="case-card-dim"></div>
+        <p class="case-card-tags">Webbutveckling, Visuell identitet och Sociala medier</p>
+        <div class="case-card-meta">
+          <p class="case-card-desc">Förnyat varumärke för att möta nya utmaningar</p>
+          <p class="case-card-client">Västerås Ventilation</p>
+        </div>
+        <div class="case-card-dot"></div>
+      </a>
+
+      <a class="case-card" data-fade-scale data-fade-delay="1" href="#">
+        <img src="spajder/Images/Image-4.jpg" alt="SR Betongdesign">
+        <div class="case-card-dim"></div>
+        <p class="case-card-tags">Webbutveckling, Visuell identitet och Sociala medier</p>
+        <div class="case-card-meta">
+          <p class="case-card-desc">Förnyat varumärke för att möta nya utmaningar</p>
+          <p class="case-card-client">SR Betongdesign</p>
+        </div>
+        <div class="case-card-dot"></div>
+      </a>
+
+      <!-- Row 3 -->
+      <a class="case-card" data-fade-scale href="#">
+        <img src="spajder/Images/Image.jpg" alt="Västerås Ventilation">
+        <div class="case-card-dim"></div>
+        <p class="case-card-tags">Webbutveckling, Visuell identitet och Sociala medier</p>
+        <div class="case-card-meta">
+          <p class="case-card-desc">Förnyat varumärke för att möta nya utmaningar</p>
+          <p class="case-card-client">Västerås Ventilation</p>
+        </div>
+      </a>
+
+      <a class="case-card" data-fade-scale data-fade-delay="1" href="#">
+        <img src="spajder/Images/Image-1.jpg" alt="Ecokraft">
+        <div class="case-card-dim"></div>
+        <p class="case-card-tags">Webbutveckling, Visuell identitet och Sociala medier</p>
+        <div class="case-card-meta">
+          <p class="case-card-desc">Förnyat varumärke för att möta nya utmaningar</p>
+          <p class="case-card-client">Ecokraft</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═════════════════════ FLER CASE ═════════════════════ -->
+  <section class="fler-case">
+    <h2 class="fler-heading" data-fade>Fler case.</h2>
+
+    <div class="case-list-divider"></div>
+
+    <div class="case-list-row" data-fade>
+      <p class="case-list-client">Nor Kraft</p>
+      <div class="case-list-info">
+        <p class="case-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="case-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="case-list-thumbs">
+        <div class="case-thumb"><img src="spajder/Images/Image-3.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
+      </div>
+    </div>
+
+    <div class="case-list-divider"></div>
+
+    <div class="case-list-row" data-fade>
+      <p class="case-list-client">Västerås Ventilation</p>
+      <div class="case-list-info">
+        <p class="case-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="case-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="case-list-thumbs">
+        <div class="case-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-3.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
+      </div>
+    </div>
+
+    <div class="case-list-divider"></div>
+
+    <div class="case-list-row dark" data-fade>
+      <p class="case-list-client">Lock n Load</p>
+      <div class="case-list-info">
+        <p class="case-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="case-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="case-list-thumbs">
+        <div class="case-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-1.jpg" alt=""></div>
+      </div>
+    </div>
+
+    <div class="case-list-divider"></div>
+
+    <div class="case-list-row" data-fade>
+      <p class="case-list-client">Ecokraft</p>
+      <div class="case-list-info">
+        <p class="case-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="case-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="case-list-thumbs">
+        <div class="case-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-3.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-1.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
+      </div>
+    </div>
+
+    <div class="case-list-divider"></div>
+
+    <div class="case-list-row" data-fade>
+      <p class="case-list-client">Nor Kraft</p>
+      <div class="case-list-info">
+        <p class="case-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="case-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="case-list-thumbs">
+        <div class="case-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-3.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
+      </div>
+    </div>
+
+    <div class="case-list-divider"></div>
+
+    <div class="case-list-row" data-fade>
+      <p class="case-list-client">Nor Kraft</p>
+      <div class="case-list-info">
+        <p class="case-list-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="case-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+      </div>
+      <div class="case-list-thumbs">
+        <div class="case-thumb"><img src="spajder/Images/Image-1.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
+        <div class="case-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
+      </div>
+    </div>
+
+    <div class="case-list-divider"></div>
+  </section>
+
+  <!-- ═════════════════════ CTA ═════════════════════ -->
+  <section class="case-cta">
+    <p class="case-cta-label" data-fade>Låt oss snacka!</p>
+    <p class="case-cta-text" data-fade data-fade-delay="1">Har du en känsla för vart du vill, men behöver någon att bolla med på vägen dit?</p>
+    <div data-fade data-fade-delay="2">
+      <div class="cta" style="display:inline-flex;">
+        <span style="color:var(--cs);">Kontakta oss</span>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="case-cta-divider"></div>
+  </section>
+
+  <!-- ═════════════════════ FOOTER ═════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid" data-fade>
+        <div>
+          <div class="footer-group">
+            <p class="footer-label">Kontakt</p>
+            <p class="footer-val">Epost – hej@spajder.se</p>
+            <p class="footer-val">Telefon – 021-548 92 92</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Sociala Medier</p>
+            <div class="footer-socials">
+              <p class="footer-val">Instagram</p>
+              <p class="footer-val">Facebook</p>
+              <p class="footer-val">LinkedIn</p>
+            </div>
+          </div>
+          <p class="footer-tagline">Vi tror på en framtid där digital marknadsföring känns enkel, effektiv och pålitlig.</p>
+        </div>
+        <div>
+          <div class="footer-group">
+            <p class="footer-label">Västerås</p>
+            <p class="footer-val">Trefasgatan 4, 721 30 Västerås</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Göteborg</p>
+            <p class="footer-val">Stigbergsliden 5, 414 63 Göteborg</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Sundsvall</p>
+            <p class="footer-val">Storgatan 26, 852 32 Sundsvall</p>
+          </div>
+        </div>
+        <div>
+          <p class="t-h4 serif footer-cta-text">Det börjar ofta med en liten tanke. Släng iväg den till oss så ser vi vart den tar vägen.</p>
+          <div class="cta">
+            <span style="color:var(--cs);">Låt oss snacka!</span>
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+      <p class="footer-copyright">©️ Spajder</p>
+    </div>
+    <div class="footer-wordmark">
+      <img src="spajder/SVG/Spajder_Landscape_Dark.svg" alt="SPAJDER">
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('[data-fade], [data-fade-scale]').forEach(el => observer.observe(el));
+    document.querySelectorAll('.site-header [data-fade]').forEach(el => el.classList.add('visible'));
+  </script>
+</body>
+</html>
