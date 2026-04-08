@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1440">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Spajder – Vi gör digital marknadsföring enklare, smartare &amp; roligare</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,622 +11,989 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --c1:  #0e2016; /* grön/nyans-1 */
-      --cgs: #152e1f; /* granskugga   */
-      --cd:  #e2f8de; /* daggdis      */
-      --c9:  #f8fcf9; /* grön/nyans-9 */
-      --cnv: #f5f0eb; /* naturvit     */
-      --cv:  #fafafa; /* vit          */
-      --cs:  #1a1a1a; /* svart        */
-      --ct:  #25573a; /* tallbarr     */
-      --c7:  #bdddc4; /* grön/nyans-7 */
+      --c1:  #0e2016;
+      --cgs: #152e1f;
+      --cd:  #e2f8de;
+      --c9:  #f8fcf9;
+      --cnv: #f5f0eb;
+      --cv:  #fafafa;
+      --cs:  #1a1a1a;
+      --ct:  #25573a;
+      --c7:  #bdddc4;
+      --accent-green: #61a678;
+      --accent-pink:  #f2ceda;
+      --accent-orange:#fa7d00;
+      --px: clamp(16px, 1.67vw, 24px);
     }
 
-    body { background: var(--c9); min-width: 1440px; margin: 0; }
-
-    .page {
-      position: relative;
-      width: 1440px;
-      margin: 0 auto;
-      overflow: hidden;
-      background: var(--c9);
-      border-radius: 16px;
-      height: 11200px;
-    }
-
+    html { scroll-behavior: smooth; }
+    body { background: var(--c9); font-family: 'Spline Sans', sans-serif; }
     a { color: inherit; text-decoration: none; }
 
-    .serif  { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; }
-    .serif-i{ font-family: 'Instrument Serif', serif; font-weight: 400; font-style: italic; }
+    .serif   { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: normal; }
+    .serif-i { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: italic; }
+
+    /* Fluid type scale */
+    .t-mega   { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(36px, 7.4vw, 107px); line-height: 1; letter-spacing: clamp(-1.5px, -0.297vw, -4.28px); }
+    .t-mega-s { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(40px, 8.3vw, 120px); line-height: 1.05; }
+    .t-h1     { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(28px, 5.5vw, 80px); line-height: 1; letter-spacing: clamp(-1px, -0.22vw, -3.2px); }
+    .t-h2     { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(26px, 4.7vw, 68px); line-height: 1.3; }
+    .t-h3     { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(22px, 3.5vw, 51px); line-height: 1.2; }
+    .t-h4     { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 38px); line-height: 1.2; }
+    .t-h4b    { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(18px, 2.36vw, 34px); line-height: 1.1; letter-spacing: clamp(-0.5px, -0.07vw, -1.02px); }
+    .t-h5     { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(14px, 1.53vw, 22px); line-height: 1.1; letter-spacing: -0.04em; }
+    .t-h6s    { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(14px, 1.46vw, 21px); line-height: 1.2; }
+    .t-body   { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(14px, 1.6vw, 23px); line-height: 1.3; letter-spacing: -0.03em; }
+    .t-sm     { font-family: 'Spline Sans', sans-serif; font-weight: 400; font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em; }
+    .t-xs     { font-family: 'Spline Sans', sans-serif; font-weight: 400; font-size: 13px; line-height: 1.4; }
+
+    /* Layout */
+    .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--px); }
 
     /* CTA button */
-    .cta { display: flex; gap: 12px; align-items: center; cursor: pointer; }
-    .cta span {
-      font-family: 'Spline Sans', sans-serif; font-weight: 500;
-      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px; white-space: nowrap;
-    }
-    .cta img { width: 40px; height: 40px; flex-shrink: 0; }
+    .cta { display: inline-flex; gap: 12px; align-items: center; cursor: pointer; }
+    .cta span { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(14px, 1.1vw, 16px); line-height: 1.4; white-space: nowrap; }
+    .cta svg { flex-shrink: 0; width: clamp(32px, 2.78vw, 40px); height: clamp(32px, 2.78vw, 40px); }
 
-    /* Case image card */
-    .case-card {
-      position: absolute; width: 693px; height: 693px;
-      border-radius: 16px; overflow: hidden;
+    /* ── Scroll animation ── */
+    [data-fade] {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1);
     }
-    .case-card > img {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    [data-fade].visible {
+      opacity: 1;
+      transform: none;
     }
-    .case-card .dim {
-      position: absolute; inset: 0; background: rgba(0,0,0,0.25); border-radius: 16px;
+    [data-fade-delay="1"] { transition-delay: 0.1s; }
+    [data-fade-delay="2"] { transition-delay: 0.2s; }
+    [data-fade-delay="3"] { transition-delay: 0.3s; }
+    [data-fade-delay="4"] { transition-delay: 0.4s; }
+    [data-fade-scale] {
+      opacity: 0;
+      transform: scale(0.94);
+      transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
     }
-    .case-card .tag {
-      position: absolute; left: 20px; top: 19px;
-      font-family: 'Spline Sans', sans-serif; font-weight: 500;
-      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px;
-      color: var(--cv); white-space: nowrap;
-    }
-    .case-card .desc {
-      position: absolute; left: 20px; bottom: 59px;
-      font-family: 'Spline Sans', sans-serif; font-weight: 500;
-      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px;
-      color: var(--cv); white-space: nowrap;
-    }
-    .case-card .client {
-      position: absolute; right: 20px; bottom: 59px;
-      font-family: 'Spline Sans', sans-serif; font-weight: 500;
-      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px;
-      color: var(--cv); text-align: right;
-    }
+    [data-fade-scale].visible { opacity: 1; transform: none; }
 
-    /* Service row */
-    .svc-row {
-      position: relative; height: 191px; width: 100%;
-      border-top: 1px solid var(--cgs);
-      display: flex; align-items: flex-start; padding-top: 20px;
+    /* ══════════════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════════════ */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--c1);
+      height: clamp(64px, 7.2vw, 104px);
+      display: flex; align-items: center;
     }
-    .svc-row:last-child { border-bottom: 1px solid var(--cgs); }
-    .svc-row .svc-title {
+    .site-header .container {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .site-header .logo { height: clamp(36px, 4.6vw, 66px); width: auto; }
+    .site-header nav {
+      display: flex; gap: clamp(12px, 1.1vw, 16px); align-items: center;
+      color: var(--cd);
+    }
+    .site-header nav a {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      opacity: 0.85; transition: opacity 0.2s;
+    }
+    .site-header nav a:hover { opacity: 1; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--cd); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed; inset: 0; top: clamp(64px, 7.2vw, 104px);
+      background: var(--c1); z-index: 99;
+      flex-direction: column; align-items: flex-start;
+      padding: 32px var(--px);
+      gap: 0;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
       font-family: 'Spline Sans', sans-serif; font-weight: 700;
-      font-size: 34px; line-height: 1.1; letter-spacing: -1.02px;
-      color: var(--cgs); flex: 0 0 auto;
+      font-size: clamp(28px, 8vw, 48px); line-height: 1.1;
+      color: var(--cd); padding: 14px 0;
+      border-bottom: 1px solid rgba(226,248,222,0.12);
+      width: 100%;
     }
-    .svc-row .svc-desc {
-      margin-left: auto; width: 447px;
-      font-family: 'Spline Sans', sans-serif; font-weight: 500;
-      font-size: 16px; line-height: 1.4; letter-spacing: -0.16px;
+    .mobile-nav a:last-child { border-bottom: none; }
+
+    @media (max-width: 680px) {
+      .site-header nav { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ══════════════════════════════════════════════
+       HERO VIDEO
+    ══════════════════════════════════════════════ */
+    .hero-video {
+      position: relative;
+      width: 100%;
+      height: clamp(320px, 56.5vw, 813px);
+      overflow: hidden;
+    }
+    .hero-video video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-edge {
+      position: absolute; top: 0; bottom: 0;
+      width: clamp(10px, 1.6vw, 23px);
+      background: var(--c1);
+    }
+    .hero-edge.left  { left: 0; }
+    .hero-edge.right { right: 0; }
+
+    /* ══════════════════════════════════════════════
+       TAGLINE
+    ══════════════════════════════════════════════ */
+    .tagline {
+      background: var(--c1);
+      padding: clamp(48px, 5.4vw, 78px) 0 clamp(48px, 5.4vw, 78px);
+    }
+    .tagline .container { overflow: hidden; }
+    .tagline-text { color: var(--cd); }
+    .tagline-row1 { display: block; }
+    .tagline-row2 { display: block; white-space: normal; }
+    @media (min-width: 900px) { .tagline-row2 { white-space: nowrap; } }
+
+    /* ══════════════════════════════════════════════
+       VI ÄR SPAJDER
+    ══════════════════════════════════════════════ */
+    .about-intro {
+      background: var(--cd);
+      padding: clamp(60px, 6vw, 86px) 0;
+      text-align: center;
+    }
+    .about-intro .label { color: var(--cgs); margin-bottom: 14px; }
+    .about-intro .body-text {
+      max-width: min(1153px, 90%);
+      margin: 0 auto;
       color: var(--cgs);
     }
-    /* Plus icon inside service row */
-    .svc-row .plus-v {
-      position: absolute; right: 23.5px; top: 36px;
-      width: 2px; height: 25px; background: var(--c1);
+
+    /* ══════════════════════════════════════════════
+       TRE BYGGSTENAR
+    ══════════════════════════════════════════════ */
+    .pillars {
+      background: var(--c9);
+      padding: clamp(60px, 8vw, 175px) 0;
     }
-    .svc-row .plus-h {
-      position: absolute; right: 11px; top: 47.5px;
-      width: 25px; height: 2px; background: var(--c1);
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(24px, 2vw, 40px);
+    }
+    .pillar-lead { color: var(--c1); }
+    .pillar .serif { color: var(--ct); display: block; margin-bottom: 10px; }
+    .pillar .title { color: var(--cgs); margin-bottom: 8px; }
+    .pillar .desc  { color: var(--c1); }
+
+    @media (max-width: 900px) {
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .pillar-lead  { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════════════
+       UTVALDA CASE
+    ══════════════════════════════════════════════ */
+    .cases {
+      background: var(--c9);
+      padding-bottom: clamp(60px, 6vw, 100px);
+    }
+    .cases-top {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      padding-bottom: clamp(16px, 1.6vw, 24px);
+      flex-wrap: wrap; gap: 16px;
+    }
+    .cases-top h2 { color: var(--c1); }
+    .cases-divider {
+      height: 1px; background: var(--cgs); opacity: 0.25;
+      margin-bottom: clamp(12px, 1.4vw, 20px);
+    }
+    .cases-filters {
+      display: flex; gap: 8px; margin-bottom: clamp(20px, 2vw, 30px);
+    }
+    .filter-btn {
+      padding: 8px 14px; border-radius: 26px; border: none; cursor: pointer;
+      font-family: 'Spline Sans', sans-serif; font-size: 13px; line-height: 1.4;
+    }
+    .filter-btn.active { background: var(--c1); color: var(--cv); }
+    .filter-btn.inactive { background: transparent; border: 1px solid var(--c7); color: var(--c1); }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 0.83vw, 12px);
+    }
+    .case-card {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: clamp(8px, 1.1vw, 16px);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .case-card img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s cubic-bezier(.16,1,.3,1);
+    }
+    .case-card:hover img { transform: scale(1.04); }
+    .case-card .dim {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.25);
+      transition: background 0.3s;
+    }
+    .case-card:hover .dim { background: rgba(0,0,0,0.35); }
+    .case-card .tag {
+      position: absolute; left: clamp(12px, 1.4vw, 20px); top: clamp(12px, 1.4vw, 19px);
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(10px, 1.1vw, 16px); color: var(--cv);
+    }
+    .case-card .desc {
+      position: absolute; left: clamp(12px, 1.4vw, 20px); bottom: clamp(32px, 4.1vw, 59px);
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(10px, 1.1vw, 16px); color: var(--cv);
+    }
+    .case-card .client {
+      position: absolute; right: clamp(12px, 1.4vw, 20px); bottom: clamp(32px, 4.1vw, 59px);
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(10px, 1.1vw, 16px); color: var(--cv); text-align: right;
+    }
+    @media (max-width: 600px) {
+      .cases-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════════════
+       TANKEN BAKOM
+    ══════════════════════════════════════════════ */
+    .tanken {
+      background: var(--c9);
+      padding-top: clamp(40px, 5.6vw, 80px);
+    }
+    .tanken-top {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      padding-bottom: clamp(24px, 2.5vw, 36px);
+    }
+    .tanken-divider { height: 1px; background: var(--cgs); opacity: 0.2; }
+
+    /* ══════════════════════════════════════════════
+       INGA KRUSIDULLER (photo)
+    ══════════════════════════════════════════════ */
+    .photo-block {
+      position: relative;
+      width: 100%;
+      height: clamp(380px, 64.5vw, 930px);
+      overflow: hidden;
+    }
+    .photo-block img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .photo-block .overlay {
+      position: absolute; inset: 0; background: rgba(0,0,0,0.2);
+    }
+    .photo-block .content {
+      position: absolute;
+      left: var(--px); bottom: clamp(40px, 5.6vw, 80px);
+    }
+    .photo-block h2 { color: var(--cv); margin-bottom: 24px; }
+    .photo-block p  { color: var(--cv); max-width: min(385px, 80%); }
+
+    /* ══════════════════════════════════════════════
+       VIDEO CALLOUT
+    ══════════════════════════════════════════════ */
+    .video-callout {
+      position: relative;
+      width: 100%;
+      height: clamp(380px, 57.5vw, 829px);
+      overflow: hidden; background: #111;
+    }
+    .video-callout video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.85;
+    }
+    .video-callout .content {
+      position: absolute;
+      left: var(--px);
+      bottom: clamp(40px, 5.2vw, 75px);
+      max-width: min(705px, 90%);
+    }
+    .video-callout h2 { color: var(--cnv); margin-bottom: clamp(24px, 2.8vw, 40px); }
+
+    /* ══════════════════════════════════════════════
+       QUOTE
+    ══════════════════════════════════════════════ */
+    .quote-section {
+      background: var(--c1);
+      padding: clamp(60px, 6.25vw, 90px) 0;
+    }
+    .quote-inner {
+      max-width: 900px; margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+    .quote-lines::before,
+    .quote-lines::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: rgba(226,248,222,0.2);
+    }
+    .quote-lines::before { margin-bottom: clamp(32px, 3.5vw, 50px); }
+    .quote-lines::after  { margin-top: clamp(32px, 3.5vw, 50px); }
+    .quote-text { color: var(--cd); margin-bottom: clamp(16px, 2vw, 28px); }
+    .quote-dots { margin-bottom: 16px; display: flex; justify-content: center; }
+    .quote-name { color: var(--cd); letter-spacing: 0.05em; }
+    .quote-co   { color: #b0b0b0;   letter-spacing: 0.05em; }
+
+    /* ══════════════════════════════════════════════
+       GEMENSKAP
+    ══════════════════════════════════════════════ */
+    .gemenskap {
+      background: var(--c1);
+      overflow: hidden;
+      padding: clamp(40px, 5.6vw, 80px) 0 clamp(60px, 8vw, 120px);
+    }
+    .gemenskap-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 24px;
+      margin-bottom: clamp(40px, 5.6vw, 80px);
+    }
+    .gemenskap-title { color: var(--cd); max-width: 55%; }
+    @media (max-width: 700px) { .gemenskap-title { max-width: 100%; } }
+
+    .polaroids {
+      position: relative;
+      height: clamp(320px, 33vw, 480px);
+      margin-bottom: clamp(40px, 5.6vw, 80px);
+    }
+    .polaroid {
+      position: absolute;
+      background: var(--cnv);
+      box-shadow: 3px 8px 24px rgba(84,66,59,0.18);
+      overflow: visible;
+    }
+    .polaroid img {
+      display: block;
+      width: 100%; height: auto;
+      object-fit: cover;
+    }
+    .polaroid .caption {
+      font-family: cursive; color: var(--cs);
+      text-align: center;
+      padding: 10px 12px 14px;
+      font-size: clamp(13px, 1.2vw, 18px);
+    }
+    /* Polaroid 1 – center large */
+    .polaroid-1 {
+      left: 50%; transform: translateX(-50%) rotate(-1deg);
+      width: clamp(200px, 38vw, 550px);
+      top: 0;
+    }
+    /* Polaroid 2 – left tilted */
+    .polaroid-2 {
+      left: clamp(8px, 3vw, 40px);
+      top: clamp(20px, 3.5vw, 60px);
+      width: clamp(140px, 22vw, 310px);
+      transform: rotate(-10deg);
+    }
+    /* Polaroid 3 – right tilted */
+    .polaroid-3 {
+      right: clamp(8px, 3vw, 40px);
+      top: 0;
+      width: clamp(140px, 27vw, 390px);
+      transform: rotate(9deg);
+    }
+    .polaroid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+    .gemenskap-body {
+      text-align: center;
+      color: var(--cd);
+      max-width: min(1116px, 90%);
+      margin: 0 auto clamp(32px, 3.5vw, 50px);
+    }
+    .gemenskap-cta { text-align: center; }
+
+    /* ══════════════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════════════ */
+    .services {
+      background: var(--c9);
+      padding: clamp(24px, 4vw, 60px) 0 0;
+    }
+    .services-heading { color: var(--cgs); margin-bottom: clamp(20px, 3vw, 40px); }
+
+    .svc-row {
+      position: relative;
+      border-top: 1px solid var(--cgs);
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(16px, 4vw, 60px);
+      padding: clamp(16px, 2.2vw, 32px) clamp(32px, 4vw, 56px) clamp(16px, 2.2vw, 32px) 0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .svc-row:last-child { border-bottom: 1px solid var(--cgs); }
+    .svc-row:hover { background: rgba(14,32,22,0.03); }
+    .svc-title {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(18px, 2.36vw, 34px); line-height: 1.1; letter-spacing: -0.03em;
+      color: var(--cgs); flex: 0 0 clamp(200px, 35%, 480px);
+    }
+    .svc-desc {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.5; letter-spacing: -0.01em;
+      color: var(--cgs); flex: 1;
+    }
+    .svc-plus {
+      position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      width: 24px; height: 24px; flex-shrink: 0;
+    }
+    .svc-plus::before, .svc-plus::after {
+      content: ''; position: absolute; background: var(--c1);
+    }
+    .svc-plus::before { left: 50%; top: 0; width: 2px; height: 100%; transform: translateX(-50%); }
+    .svc-plus::after  { top: 50%; left: 0; height: 2px; width: 100%; transform: translateY(-50%); }
+    @media (max-width: 700px) {
+      .svc-row { flex-direction: column; }
+      .svc-desc { display: none; }
+    }
+
+    /* ══════════════════════════════════════════════
+       DET ÄR SPAJDER
+    ══════════════════════════════════════════════ */
+    .det-ar-spajder {
+      background: var(--c9);
+      padding: clamp(48px, 5.6vw, 80px) 0;
+      text-align: center;
+    }
+    .das-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 700;
+      font-size: clamp(14px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs); margin-bottom: clamp(20px, 2.5vw, 36px);
+    }
+    .das-text {
+      max-width: min(1050px, 90%); margin: 0 auto;
+      color: var(--cgs); margin-bottom: clamp(28px, 3.5vw, 50px);
+    }
+    .das-divider { height: 1px; background: var(--cgs); margin-top: clamp(40px, 5.6vw, 80px); }
+
+    /* ══════════════════════════════════════════════
+       DARK SERVICES GRID
+    ══════════════════════════════════════════════ */
+    .dark-grid {
+      background: var(--cs);
+      padding: clamp(60px, 8vw, 117px) 0 clamp(60px, 8vw, 117px);
+      position: relative; overflow: hidden;
+    }
+    .dark-grid-cols {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(20px, 2.5vw, 40px);
+      position: relative; z-index: 1;
+    }
+    .dark-col .num   { color: var(--cd); margin-bottom: 12px; }
+    .dark-col .name  { color: var(--cd); margin-bottom: clamp(12px, 1.4vw, 20px); }
+    .dark-col .item  { color: var(--cd); opacity: 0.7; margin-bottom: 6px; }
+    .dark-deco {
+      position: absolute; pointer-events: none; z-index: 0;
+    }
+    @media (max-width: 800px) {
+      .dark-grid-cols { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .dark-grid-cols { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════ */
+    footer {
+      background: var(--cd);
+      padding: clamp(32px, 4.2vw, 60px) 0 0;
+      overflow: hidden;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(24px, 4vw, 60px);
+      align-items: start;
+      margin-bottom: clamp(32px, 5.6vw, 80px);
+    }
+    .footer-label {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); color: var(--cgs);
+      margin-bottom: 6px;
+    }
+    .footer-val {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(13px, 1.1vw, 16px); color: var(--cgs); opacity: 0.7;
+      margin-bottom: 4px;
+    }
+    .footer-group { margin-bottom: clamp(16px, 2vw, 28px); }
+    .footer-socials { display: flex; gap: 20px; }
+    .footer-cta-text { color: var(--cgs); margin-bottom: clamp(20px, 2.5vw, 36px); }
+    .footer-tagline {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(12px, 1.1vw, 16px); color: var(--cgs);
+      max-width: 380px;
+    }
+    .footer-copyright {
+      font-family: 'Spline Sans', sans-serif; font-weight: 500;
+      font-size: clamp(12px, 1.1vw, 16px); color: var(--cgs);
+      padding-bottom: clamp(16px, 2vw, 24px);
+    }
+    .footer-wordmark {
+      width: 100%; display: block;
+      padding: 0;
+    }
+    .footer-wordmark img {
+      width: 100%; height: auto; display: block;
+      opacity: 0.9;
+    }
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .footer-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- HEADER  top:0  h:104                               -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <header style="position:absolute;left:0;top:0;width:1440px;height:104px;background:var(--c1);overflow:hidden;">
-    <div style="position:absolute;left:21px;top:19px;width:159px;height:65.657px;overflow:hidden;">
-      <img src="spajder/SVG/Spajder_Landscape_White.svg"
-           alt="Spajder" style="width:100%;height:100%;object-fit:contain;">
+  <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+  <header class="site-header">
+    <div class="container">
+      <img src="spajder/SVG/Spajder_Landscape_White.svg" alt="Spajder" class="logo">
+      <nav>
+        <a href="#">Case</a>
+        <a href="#">Vårt sätt</a>
+        <a href="#">Vi är Spajder</a>
+        <a href="#">Ska vi snacka?</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Meny">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <nav style="position:absolute;right:0;top:32.33px;display:flex;gap:16px;align-items:center;
-                padding:10px 24px;font-family:'Spline Sans',sans-serif;font-weight:500;
-                font-size:16px;line-height:1.4;letter-spacing:-0.16px;
-                color:var(--cd);white-space:nowrap;">
-      <a href="#">Case</a>
-      <a href="#">Vårt sätt</a>
-      <a href="#">Vi är Spajder</a>
-      <a href="#">Ska vi snacka?</a>
-    </nav>
   </header>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- HERO VIDEO  top:104  h:813                         -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:104px;width:1440px;height:813px;overflow:hidden;">
-    <video autoplay loop muted playsinline
-           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+  <!-- Mobile nav overlay -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="#">Case</a>
+    <a href="#">Vårt sätt</a>
+    <a href="#">Vi är Spajder</a>
+    <a href="#">Ska vi snacka?</a>
+  </nav>
+
+  <!-- ═══════════════════════════ HERO VIDEO ═══════════════════════════ -->
+  <section class="hero-video">
+    <video autoplay loop muted playsinline>
       <source src="spajder/Images/Spajder_Show.mp4">
     </video>
-    <div style="position:absolute;left:0;top:0;width:23px;height:100%;background:var(--c1);"></div>
-    <div style="position:absolute;right:0;top:0;width:23px;height:100%;background:var(--c1);"></div>
+    <div class="hero-edge left"></div>
+    <div class="hero-edge right"></div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- TAGLINE  top:916  h:394                            -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:916px;width:1440px;height:394px;
-                  background:var(--c1);overflow:hidden;">
-    <div style="position:absolute;left:21px;top:78px;width:1395px;">
-      <p style="font-family:'Spline Sans',sans-serif;font-weight:700;font-size:107px;
-                line-height:1;letter-spacing:-4.28px;color:var(--cd);">Vi gör digital marknadsföring</p>
-      <p style="font-family:'Spline Sans',sans-serif;font-weight:700;font-size:107px;
-                line-height:1.1;letter-spacing:-4.28px;color:var(--cd);">
-        <span style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
-                     font-size:120px;line-height:1.1;letter-spacing:0;color:#61a678;">enklare</span><span
-              style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
-                     font-size:120px;line-height:1.1;letter-spacing:0;color:var(--cd);">, </span><span
-              style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
-                     font-size:120px;line-height:1.1;letter-spacing:0;color:#f2ceda;">smartare</span><span
-              style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
-                     font-size:120px;line-height:1.1;letter-spacing:0;color:var(--cd);"> &amp; </span><span
-              style="font-family:'Instrument Serif',serif;font-weight:400;font-style:normal;
-                     font-size:120px;line-height:1.1;letter-spacing:0;color:#fa7d00;">roligare.</span>
-      </p>
+  <!-- ═══════════════════════════ TAGLINE ═══════════════════════════ -->
+  <section class="tagline">
+    <div class="container">
+      <div class="tagline-text" data-fade>
+        <span class="t-mega tagline-row1">Vi gör digital marknadsföring</span>
+        <span class="t-mega tagline-row2">
+          <span class="t-mega-s" style="color:var(--accent-green);">enklare</span><span class="t-mega-s" style="color:var(--cd);">, </span><span class="t-mega-s" style="color:var(--accent-pink);">smartare</span><span class="t-mega-s" style="color:var(--cd);"> &amp; </span><span class="t-mega-s" style="color:var(--accent-orange);">roligare.</span>
+        </span>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- VI ÄR SPAJDER  top:1310  h:353                     -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:1310px;width:1440px;height:353px;
-                  background:var(--cd);overflow:hidden;text-align:center;">
-    <p style="position:absolute;left:50%;top:86px;transform:translateX(-50%);
-              width:1395px;font-family:'Spline Sans',sans-serif;font-weight:400;
-              font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cgs);">Vi är Spajder</p>
-    <p class="serif" style="position:absolute;left:50%;top:121px;transform:translateX(-50%);
-              width:1153px;font-size:38px;line-height:1.2;color:var(--cgs);">En digitalbyrå som trivs
-      bäst när du förstår vad vi gör och varför. Som jobbar snabbt, testar nytt och får saker att hända.
-      Och som gillar det där lilla extra som gör att du faktiskt märker skillnad.</p>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- TRE BYGGSTENAR  top:1663  h:526                    -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:1663px;width:1440px;height:526px;background:var(--c9);">
-    <p class="serif" style="position:absolute;left:24px;top:175px;width:307px;
-              font-size:51px;line-height:1.2;color:var(--c1);">Tre byggstenar våra samarbeten alltid vilar på.</p>
-
-    <!-- Pillar 1 -->
-    <p class="serif" style="position:absolute;left:calc(25% + 15px);top:186px;width:293px;
-              font-size:21px;line-height:1.2;color:var(--ct);">Transparens</p>
-    <p style="position:absolute;left:calc(25% + 15px);top:241px;width:293px;
-              font-family:'Spline Sans',sans-serif;font-weight:500;font-size:22px;
-              line-height:1.1;letter-spacing:-0.66px;color:var(--cgs);">Full koll från start till mål</p>
-    <p style="position:absolute;left:calc(25% + 15px);top:273px;width:330px;
-              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;
-              line-height:1.4;letter-spacing:-0.16px;color:var(--c1);">Att jobba med oss ska kännas
-      glasklart. Raka svar, tydliga besked och stenkoll hela vägen.</p>
-
-    <!-- Pillar 2 -->
-    <p class="serif" style="position:absolute;left:calc(50% + 11px);top:184px;width:293px;
-              font-size:21px;line-height:1.2;color:var(--ct);">Resultat</p>
-    <p style="position:absolute;left:calc(50% + 11px);top:239px;width:293px;
-              font-family:'Spline Sans',sans-serif;font-weight:500;font-size:22px;
-              line-height:1.1;letter-spacing:-0.66px;color:var(--cgs);">Sånt som faktiskt ger effekt</p>
-    <p style="position:absolute;left:calc(50% + 11px);top:271px;width:330px;
-              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;
-              line-height:1.4;letter-spacing:-0.16px;color:var(--c1);">Vi gör grejer som flyttar fram
-      din spelpjäs. Som väcker intresse, driver trafik och ger klirr i kassan.</p>
-
-    <!-- Pillar 3 -->
-    <p class="serif" style="position:absolute;left:calc(75% + 5px);top:184px;width:293px;
-              font-size:21px;line-height:1.2;color:var(--ct);">Kulkultur</p>
-    <p style="position:absolute;left:calc(75% + 5px);top:239px;width:293px;
-              font-family:'Spline Sans',sans-serif;font-weight:500;font-size:22px;
-              line-height:1.1;letter-spacing:-0.66px;color:var(--cgs);">Struktur med själ och energi</p>
-    <p style="position:absolute;left:calc(75% + 5px);top:271px;width:330px;
-              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;
-              line-height:1.4;letter-spacing:-0.16px;color:var(--c1);">Vi älskar struktur men föraktar
-      stel stämning. Här vinner bubblig byråkultur över bister byråkrati.</p>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- UTVALDA CASE  top:2189  h:2497                     -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:2189px;width:1440px;height:2497px;background:var(--c9);">
-
-    <p style="position:absolute;left:24px;top:0;font-family:'Spline Sans',sans-serif;font-weight:700;
-              font-size:80px;line-height:1;letter-spacing:-3.2px;color:var(--c1);white-space:nowrap;">Utvalda case.</p>
-
-    <!-- Divider -->
-    <div style="position:absolute;left:24px;top:98px;width:1392px;height:1px;background:var(--cgs);opacity:0.25;"></div>
-
-    <!-- Filter -->
-    <button style="position:absolute;left:24px;top:125px;background:var(--c1);padding:8px 10px;
-                   border-radius:26px;border:none;cursor:pointer;">
-      <span style="font-family:'Spline Sans',sans-serif;font-weight:400;font-size:13px;
-                   line-height:1.4;color:var(--cv);">Rutnät</span>
-    </button>
-    <button style="position:absolute;left:88px;top:125px;background:transparent;padding:8px 10px;
-                   border-radius:26px;border:1px solid var(--c7);cursor:pointer;">
-      <span style="font-family:'Spline Sans',sans-serif;font-weight:400;font-size:13px;
-                   line-height:1.4;color:var(--c1);">Lista</span>
-    </button>
-
-    <!-- CTA "Se alla case" -->
-    <div class="cta" style="position:absolute;right:24px;top:40px;">
-      <span style="color:var(--cs);">Se alla case</span>
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-
-    <!-- ROW 1 (sec y:194) -->
-    <div class="case-card" style="left:24px;top:194px;">
-      <img src="spajder/Images/Image-3.jpg" alt="Ecokraft">
-      <div class="dim"></div>
-      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
-      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
-      <span class="client">Ecokraft</span>
-    </div>
-    <div class="case-card" style="left:calc(50% + 3px);top:194px;">
-      <img src="spajder/Images/Image-2.jpg" alt="CBS City">
-      <div class="dim"></div>
-      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
-      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
-      <span class="client">CBS City</span>
-    </div>
-
-    <!-- Small video (sec y:489) -->
-    <div style="position:absolute;left:calc(8.33% + 45px);top:489px;width:152px;height:152px;
-                border-radius:16px;border:1px solid var(--cd);overflow:hidden;">
-      <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;">
-        <source src="spajder/Images/Spajder_Show.mp4">
-      </video>
-    </div>
-
-    <!-- Dot (sec y:887) -->
-    <div style="position:absolute;left:calc(37.5% + 2px);top:887px;transform:translateX(-50%);
-                width:6px;height:6px;border-radius:50%;background:#d9d9d9;"></div>
-
-    <!-- ROW 2 (sec y:893) -->
-    <div class="case-card" style="left:24px;top:893px;">
-      <img src="spajder/Images/Image-5.jpg" alt="Västerås Ventilation">
-      <div class="dim"></div>
-      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
-      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
-      <span class="client">Västerås Ventilation</span>
-    </div>
-    <div class="case-card" style="left:calc(50% + 3px);top:893px;">
-      <img src="spajder/Images/Image-4.jpg" alt="SR Betongdesign">
-      <div class="dim"></div>
-      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
-      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
-      <span class="client">SR Betongdesign</span>
-    </div>
-
-    <!-- Dot (sec y:1586) -->
-    <div style="position:absolute;left:calc(37.5% + 2px);top:1586px;transform:translateX(-50%);
-                width:6px;height:6px;border-radius:50%;background:#d9d9d9;"></div>
-
-    <!-- ROW 3 (sec y:1592) -->
-    <div class="case-card" style="left:24px;top:1592px;">
-      <img src="spajder/Images/Image.jpg" alt="Västerås Ventilation">
-      <div class="dim"></div>
-      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
-      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
-      <span class="client">Västerås Ventilation</span>
-    </div>
-    <div class="case-card" style="left:calc(50% + 3px);top:1592px;">
-      <img src="spajder/Images/Image-3.jpg" alt="ECOKRAFT">
-      <div class="dim"></div>
-      <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
-      <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
-      <span class="client">ECOKRAFT</span>
+  <!-- ═══════════════════════════ VI ÄR SPAJDER ═══════════════════════════ -->
+  <section class="about-intro">
+    <div class="container">
+      <p class="t-sm label" data-fade>Vi är Spajder</p>
+      <p class="t-h4 serif body-text" data-fade data-fade-delay="1">En digitalbyrå som trivs bäst när du förstår vad vi gör och varför. Som jobbar snabbt, testar nytt och får saker att hända. Och som gillar det där lilla extra som gör att du faktiskt märker skillnad.</p>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- TANKEN BAKOM HEADING  top:4686  h:140              -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:4686px;width:1440px;height:140px;background:var(--c9);">
-    <!-- Heading bottom-edge at page y:4766 → sec y:80 → top = 0 -->
-    <p style="position:absolute;left:24px;top:0;
-              font-family:'Spline Sans',sans-serif;font-weight:700;font-size:80px;
-              line-height:1;letter-spacing:-3.2px;color:var(--c1);white-space:nowrap;">Tanken bakom.</p>
-    <div class="cta" style="position:absolute;right:calc(8.33% + 0.5px);top:29px;">
-      <span style="color:var(--cs);">Läs om vårt sätt.</span>
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <!-- ═══════════════════════════ TRE BYGGSTENAR ═══════════════════════════ -->
+  <section class="pillars">
+    <div class="container pillars-grid">
+      <div class="pillar-lead" data-fade>
+        <p class="t-h3 serif">Tre byggstenar våra samarbeten alltid vilar på.</p>
+      </div>
+      <div class="pillar" data-fade data-fade-delay="1">
+        <span class="t-h6s serif">Transparens</span>
+        <p class="t-h5 title">Full koll från start till mål</p>
+        <p class="t-sm desc">Att jobba med oss ska kännas glasklart. Raka svar, tydliga besked och stenkoll hela vägen.</p>
+      </div>
+      <div class="pillar" data-fade data-fade-delay="2">
+        <span class="t-h6s serif">Resultat</span>
+        <p class="t-h5 title">Sånt som faktiskt ger effekt</p>
+        <p class="t-sm desc">Vi gör grejer som flyttar fram din spelpjäs. Som väcker intresse, driver trafik och ger klirr i kassan.</p>
+      </div>
+      <div class="pillar" data-fade data-fade-delay="3">
+        <span class="t-h6s serif">Kulkultur</span>
+        <p class="t-h5 title">Struktur med själ och energi</p>
+        <p class="t-sm desc">Vi älskar struktur men föraktar stel stämning. Här vinner bubblig byråkultur över bister byråkrati.</p>
+      </div>
     </div>
-    <!-- Divider line (page y:4779 → sec y:93) -->
-    <div style="position:absolute;left:24px;top:93px;width:1392px;height:1px;background:var(--cgs);opacity:0.2;"></div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- INGA KRUSIDULLER  top:4826  h:930                  -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:4826px;width:1440px;height:930px;overflow:hidden;">
-    <img src="spajder/Images/Desktop - 5.jpg"
-         style="position:absolute;left:0;top:-2.97%;width:100%;height:193.33%;max-width:none;object-fit:cover;" alt="">
-    <img src="spajder/Images/Desktop - 5.jpg"
-         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="">
-    <img src="spajder/Images/Desktop - 5.jpg"
-         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" alt="">
-    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2);"></div>
-    <p style="position:absolute;left:28px;top:60px;font-family:'Spline Sans',sans-serif;font-weight:700;
-              font-size:80px;line-height:1;letter-spacing:-3.2px;color:var(--cv);width:529px;">Inga krusiduller</p>
-    <p style="position:absolute;left:32px;top:232px;font-family:'Spline Sans',sans-serif;font-weight:400;
-              font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cv);width:385px;">Vi föredrar
-      raka puckar framför fluff och hittepå. Du vet vad vi menar, vi vet vad du vill och resten löser vi
-      tillsammans.</p>
+  <!-- ═══════════════════════════ UTVALDA CASE ═══════════════════════════ -->
+  <section class="cases">
+    <div class="container">
+      <div class="cases-top">
+        <h2 class="t-h1" data-fade>Utvalda case.</h2>
+        <div class="cta" data-fade data-fade-delay="1">
+          <span style="color:var(--cs);">Se alla case</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="cases-divider"></div>
+      <div class="cases-filters">
+        <button class="filter-btn active">Rutnät</button>
+        <button class="filter-btn inactive">Lista</button>
+      </div>
+      <div class="cases-grid">
+        <div class="case-card" data-fade-scale>
+          <img src="spajder/Images/Image-3.jpg" alt="Ecokraft">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">Ecokraft</span>
+        </div>
+        <div class="case-card" data-fade-scale data-fade-delay="1">
+          <img src="spajder/Images/Image-2.jpg" alt="CBS City">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">CBS City</span>
+        </div>
+        <div class="case-card" data-fade-scale>
+          <img src="spajder/Images/Image-5.jpg" alt="Västerås Ventilation">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">Västerås Ventilation</span>
+        </div>
+        <div class="case-card" data-fade-scale data-fade-delay="1">
+          <img src="spajder/Images/Image-4.jpg" alt="SR Betongdesign">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">SR Betongdesign</span>
+        </div>
+        <div class="case-card" data-fade-scale>
+          <img src="spajder/Images/Image.jpg" alt="Västerås Ventilation">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">Västerås Ventilation</span>
+        </div>
+        <div class="case-card" data-fade-scale data-fade-delay="1">
+          <img src="spajder/Images/Image-3.jpg" alt="ECOKRAFT">
+          <div class="dim"></div>
+          <span class="tag">Webbutveckling, Visuell identitet och Sociala medier</span>
+          <span class="desc">Förnyat varumärke för att möta nya utmaningar</span>
+          <span class="client">ECOKRAFT</span>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- VIDEO CALLOUT  top:5756  h:829                     -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:5756px;width:1440px;height:829px;overflow:hidden;background:#111;">
-    <video autoplay loop muted playsinline
-           style="position:absolute;left:-3.06%;top:-11.7%;width:114.8%;height:112.17%;
-                  max-width:none;object-fit:cover;">
+  <!-- ═══════════════════════════ TANKEN BAKOM ═══════════════════════════ -->
+  <section class="tanken">
+    <div class="container">
+      <div class="tanken-top">
+        <h2 class="t-h1" data-fade>Tanken bakom.</h2>
+        <div class="cta" data-fade data-fade-delay="1">
+          <span style="color:var(--cs);">Läs om vårt sätt.</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="tanken-divider"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ INGA KRUSIDULLER (photo) ═══════════════════════════ -->
+  <section class="photo-block" data-fade-scale>
+    <img src="spajder/Images/Desktop - 5.jpg" alt="">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2 class="t-h1">Inga krusiduller</h2>
+      <p class="t-sm" style="margin-top:16px;">Vi föredrar raka puckar framför fluff och hittepå. Du vet vad vi menar, vi vet vad du vill och resten löser vi tillsammans.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ VIDEO CALLOUT ═══════════════════════════ -->
+  <section class="video-callout">
+    <video autoplay loop muted playsinline>
       <source src="spajder/Images/Re Reel 2024 (1080p with 25fps)_1.mp4">
     </video>
-    <p class="serif" style="position:absolute;left:22.91px;top:562px;
-              font-size:68px;line-height:1.3;color:var(--cnv);width:705px;">Du behöver inte kunna allt.
-      Det är ju därför du har oss.</p>
-    <div class="cta" style="position:absolute;left:23px;top:754px;">
-      <span style="color:var(--cnv);">Kontakta oss</span>
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#f5f0eb"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- QUOTE  top:6585  h:554                             -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:6585px;width:1440px;height:554px;
-                  background:var(--c1);overflow:hidden;">
-    <div style="position:absolute;left:27px;top:90px;width:1391px;height:1px;background:rgba(226,248,222,0.2);"></div>
-    <div style="position:absolute;left:27px;top:514px;width:1391px;height:1px;background:rgba(226,248,222,0.2);"></div>
-    <p class="serif" style="position:absolute;left:50%;top:calc(50% - 110px);transform:translateX(-50%);
-              font-size:51px;line-height:1.2;color:var(--cd);text-align:center;width:846px;">"Vi är en
-      digital fullservicebyrå som hjälper företag i hela Sverige"</p>
-    <div style="position:absolute;left:703px;top:324px;"><svg width="40" height="10" viewBox="0 0 40 10" fill="none"><circle cx="5" cy="5" r="5" fill="#e2f8de"/><circle cx="20" cy="5" r="5" fill="rgba(226,248,222,0.4)"/><circle cx="35" cy="5" r="5" fill="rgba(226,248,222,0.4)"/></svg></div>
-    <p style="position:absolute;left:50%;top:365px;transform:translateX(-50%);
-              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:19px;line-height:1.3;
-              color:var(--cd);text-align:center;width:566px;">LEIF LOKET OLSSON</p>
-    <p style="position:absolute;left:50%;top:391px;transform:translateX(-50%);
-              font-family:'Spline Sans',sans-serif;font-weight:400;font-size:19px;line-height:1.3;
-              color:#b0b0b0;text-align:center;width:566px;">ECOKRAFT</p>
-  </section>
-
-  <!-- Decorative Layer4 (between quote and gemenskap) -->
-  <div style="position:absolute;left:calc(75% - 15px);top:6467px;
-              width:346.537px;height:190.034px;display:flex;align-items:center;
-              justify-content:center;pointer-events:none;overflow:visible;">
-    <div style="transform:rotate(6.91deg);">
-      <img src="http://localhost:3845/assets/2cf484d0cd791c4eb674acb39c9f463d1c3454f5.svg"
-           style="width:330.731px;height:151.341px;" alt="">
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- GEMENSKAP  top:7138  h:965                         -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <section style="position:absolute;left:0;top:7138px;width:1440px;height:965px;
-                  background:var(--c1);overflow:hidden;">
-    <p style="position:absolute;left:24px;top:43px;font-family:'Spline Sans',sans-serif;font-weight:700;
-              font-size:80px;line-height:1;letter-spacing:-3.2px;color:var(--cd);width:749px;">Gemenskap
-      som skapar magi</p>
-
-    <p class="serif" style="position:absolute;left:50%;top:392px;transform:translateX(-50%);
-              font-size:68px;line-height:1.3;color:var(--cd);text-align:center;width:1116px;">Vi bygger
-      en kultur där pepp, glädje och respekt sitter i väggarna. För när vi trivs och har kul ihop är det
-      lättare att utföra stordåd tillsammans.</p>
-
-    <div class="cta" style="position:absolute;left:50%;top:695px;transform:translateX(-50%);">
-      <span style="color:var(--cd);">Läs mer om oss</span>
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#e2f8de"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="#0e2016" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-
-    <!-- Polaroid 1: large center -->
-    <div style="position:absolute;left:412px;top:115px;width:582px;height:458px;
-                background:var(--cnv);overflow:hidden;
-                box-shadow:40px 116px 49px rgba(84,66,59,0.01),23px 65px 41px rgba(84,66,59,0.05),
-                            10px 29px 30px rgba(84,66,59,0.09),2px 7px 17px rgba(84,66,59,0.1);">
-      <img src="http://localhost:3845/assets/dcbd873bb448738e6a3d33e06102828ab996ab24.png"
-           style="position:absolute;left:14px;top:13px;width:553px;height:354px;object-fit:cover;" alt="">
-      <p style="position:absolute;bottom:36px;left:50%;
-                transform:translateX(-50%) rotate(-1.32deg);
-                font-family:cursive;font-size:27px;color:var(--cs);
-                white-space:nowrap;text-align:center;">Random aw på kontoret</p>
-    </div>
-
-    <!-- Polaroid 2: small left, tilted -->
-    <div style="position:absolute;left:18px;top:225px;width:330px;height:398px;
-                transform:rotate(-10deg);background:var(--cnv);overflow:hidden;
-                box-shadow:45px 128px 54px rgba(84,66,59,0.01),25px 72px 46px rgba(84,66,59,0.05),
-                            11px 32px 34px rgba(84,66,59,0.09),3px 8px 19px rgba(84,66,59,0.1);">
-      <img src="http://localhost:3845/assets/b0915d018a263144694c77a695e143101a1c5355.png"
-           style="position:absolute;left:12px;top:12px;width:307px;height:285px;object-fit:cover;" alt="">
-      <p style="position:absolute;bottom:30px;left:50%;
-                transform:translateX(-50%) rotate(-1.32deg);
-                font-family:cursive;font-size:30px;color:var(--cs);white-space:nowrap;">Spajderfighten‑24</p>
-    </div>
-
-    <!-- Polaroid 3: large right, tilted -->
-    <div style="position:absolute;left:878px;top:36px;width:428px;height:490px;
-                transform:rotate(8.94deg);background:var(--cnv);overflow:hidden;
-                box-shadow:43px 124px 52px rgba(84,66,59,0.01),24px 69px 44px rgba(84,66,59,0.05),
-                            11px 31px 33px rgba(84,66,59,0.09),2px 7px 18px rgba(84,66,59,0.1);">
-      <img src="http://localhost:3845/assets/42618e990cf02956dd47a0541078b2d1d48b1bfc.png"
-           style="position:absolute;left:16px;top:16px;width:396px;height:377px;object-fit:cover;" alt="">
-      <p style="position:absolute;bottom:36px;left:50%;
-                transform:translateX(-50%) rotate(-1deg);
-                font-family:cursive;font-size:29px;color:var(--cs);white-space:nowrap;">Spajder Open ‑26</p>
-    </div>
-
-    <!-- Decorative Layer5 -->
-    <div style="position:absolute;left:-95px;top:759px;pointer-events:none;">
-      <div style="transform:rotate(-17.32deg);">
-        <img src="http://localhost:3845/assets/51e90d0bcef14e76babd8c1333a7d5537f9d6bff.svg"
-             style="width:572px;height:249px;" alt="">
+    <div class="content" data-fade>
+      <h2 class="t-h2 serif">Du behöver inte kunna allt. Det är ju därför du har oss.</h2>
+      <div class="cta" style="margin-top: clamp(24px, 2.8vw, 40px);">
+        <span style="color:var(--cnv);">Kontakta oss</span>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#f5f0eb"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- SERVICES HEADING  top:8279                         -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <p class="serif" style="position:absolute;left:24px;top:8279px;width:1193px;
-            font-size:90px;line-height:1.1;color:var(--cgs);">Grejer vi kan hjälpa dig med</p>
+  <!-- ═══════════════════════════ QUOTE ═══════════════════════════ -->
+  <section class="quote-section">
+    <div class="container">
+      <div class="quote-inner quote-lines" data-fade>
+        <p class="t-h3 serif quote-text">"Vi är en digital fullservicebyrå som hjälper företag i hela Sverige"</p>
+        <div class="quote-dots">
+          <svg width="40" height="10" viewBox="0 0 40 10" fill="none">
+            <circle cx="5" cy="5" r="5" fill="#e2f8de"/>
+            <circle cx="20" cy="5" r="5" fill="rgba(226,248,222,0.4)"/>
+            <circle cx="35" cy="5" r="5" fill="rgba(226,248,222,0.4)"/>
+          </svg>
+        </div>
+        <p class="t-xs quote-name" style="letter-spacing:0.05em;">LEIF LOKET OLSSON</p>
+        <p class="t-xs quote-co"   style="letter-spacing:0.05em; margin-top:4px;">ECOKRAFT</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!-- SERVICES FLEX COLUMN  top:8401                     -->
-  <!-- ═══════════════════════════════════════════════════ -->
-  <div style="position:absolute;left:0;top:8401px;width:1440px;
-              display:flex;flex-direction:column;gap:37px;align-items:center;">
+  <!-- ═══════════════════════════ GEMENSKAP ═══════════════════════════ -->
+  <section class="gemenskap">
+    <div class="container">
+      <div class="gemenskap-top">
+        <h2 class="t-h1 gemenskap-title" data-fade>Gemenskap som skapar magi</h2>
+      </div>
 
-    <!-- SERVICE ROWS -->
-    <div style="width:100%;padding:0 24px;">
-      <div class="svc-row">
+      <!-- Polaroid photos -->
+      <div class="polaroids" data-fade>
+        <div class="polaroid polaroid-2">
+          <img src="http://localhost:3845/assets/b0915d018a263144694c77a695e143101a1c5355.png" alt="Spajderfighten">
+          <p class="caption">Spajderfighten‑24</p>
+        </div>
+        <div class="polaroid polaroid-1">
+          <img src="http://localhost:3845/assets/dcbd873bb448738e6a3d33e06102828ab996ab24.png" alt="På kontoret">
+          <p class="caption">Random aw på kontoret</p>
+        </div>
+        <div class="polaroid polaroid-3">
+          <img src="http://localhost:3845/assets/42618e990cf02956dd47a0541078b2d1d48b1bfc.png" alt="Spajder Open">
+          <p class="caption">Spajder Open ‑26</p>
+        </div>
+      </div>
+
+      <p class="t-h2 serif gemenskap-body" data-fade>Vi bygger en kultur där pepp, glädje och respekt sitter i väggarna. För när vi trivs och har kul ihop är det lättare att utföra stordåd tillsammans.</p>
+
+      <div class="gemenskap-cta" data-fade>
+        <div class="cta" style="display:inline-flex;">
+          <span style="color:var(--cd);">Läs mer om oss</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#e2f8de"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="#0e2016" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ SERVICES ═══════════════════════════ -->
+  <section class="services">
+    <div class="container">
+      <h2 class="t-h2 serif services-heading" data-fade>Grejer vi kan hjälpa dig med</h2>
+
+      <div class="svc-row" data-fade>
         <p class="svc-title">Bli hittad när det räknas</p>
-        <p class="svc-desc">När någon letar efter det du erbjuder vill du ligga steget före. Vi ser till
-          att du syns när det gäller, med rätt innehåll på rätt plats vid rätt tillfälle. Genom smart
-          annonsering och noggranna sökstrategier hjälper vi dig att bli förstahandsvalet.</p>
-        <div class="plus-v"></div><div class="plus-h"></div>
+        <p class="svc-desc">När någon letar efter det du erbjuder vill du ligga steget före. Vi ser till att du syns när det gäller, med rätt innehåll på rätt plats vid rätt tillfälle. Genom smart annonsering och noggranna sökstrategier hjälper vi dig att bli förstahandsvalet.</p>
+        <div class="svc-plus"></div>
       </div>
-      <div class="svc-row">
+      <div class="svc-row" data-fade data-fade-delay="1">
         <p class="svc-title">Engagera din målgrupp</p>
-        <p class="svc-desc">Skarp kommunikation skapar starka band. Vi hjälper dig formulera budskap som
-          väcker intresse, bygger förtroende och ger effekt. Oavsett om det handlar om innehåll till
-          flödet, annonsering, nyhetsbrev eller strategier för att säga rätt sak till rätt person.</p>
-        <div class="plus-v"></div><div class="plus-h"></div>
+        <p class="svc-desc">Skarp kommunikation skapar starka band. Vi hjälper dig formulera budskap som väcker intresse, bygger förtroende och ger effekt. Oavsett om det handlar om innehåll till flödet, annonsering, nyhetsbrev eller strategier för att säga rätt sak till rätt person.</p>
+        <div class="svc-plus"></div>
       </div>
-      <div class="svc-row">
+      <div class="svc-row" data-fade data-fade-delay="2">
         <p class="svc-title">Visa vem du är</p>
-        <p class="svc-desc">Färg, form och feeling som känns du rakt igenom. Vi ser till att ditt
-          varumärke sticker ut och känns igen. Det ska vara snyggt, ja, men framför allt rätt. På sajten,
-          i flödet, på mässan och överallt där du möter din målgrupp.</p>
-        <div class="plus-v"></div><div class="plus-h"></div>
+        <p class="svc-desc">Färg, form och feeling som känns du rakt igenom. Vi ser till att ditt varumärke sticker ut och känns igen. Det ska vara snyggt, ja, men framför allt rätt. På sajten, i flödet, på mässan och överallt där du möter din målgrupp.</p>
+        <div class="svc-plus"></div>
       </div>
-      <div class="svc-row">
+      <div class="svc-row" data-fade data-fade-delay="3">
         <p class="svc-title">Få en webb som presterar</p>
-        <p class="svc-desc">Vi bygger sajter som gör jobbet. Som är snygga, snabba och smarta. Från idé
-          och design till utveckling och lansering. Med funktion och form i perfekt harmoni skapar vi
-          hemsidor som guidar, konverterar och ger resultat.</p>
-        <div class="plus-v"></div><div class="plus-h"></div>
+        <p class="svc-desc">Vi bygger sajter som gör jobbet. Som är snygga, snabba och smarta. Från idé och design till utveckling och lansering. Med funktion och form i perfekt harmoni skapar vi hemsidor som guidar, konverterar och ger resultat.</p>
+        <div class="svc-plus"></div>
       </div>
     </div>
+  </section>
 
-    <!-- DET ÄR SPAJDER -->
-    <div style="width:100%;padding:0 24px;display:flex;flex-direction:column;
-                align-items:center;gap:42px;">
-      <div style="width:100%;height:1px;background:var(--cgs);"></div>
-      <p style="font-family:'Spline Sans',sans-serif;font-weight:700;font-size:19px;line-height:1.1;
-                letter-spacing:-0.38px;color:var(--cgs);text-align:center;width:100%;">Det här är Spajder</p>
-      <p class="serif" style="font-size:51px;line-height:1.2;color:var(--cgs);
-                text-align:center;width:1050px;">En sammansvetsad mix av hjärna, hjärta och
-        fingertoppskänsla. Vi gör det vi säger och säger vad vi gör. Alltid med fokus på att skapa
-        verklig skillnad för dig.</p>
-      <div class="cta">
-        <span style="color:var(--cs);">Ska vi snacka?</span>
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <!-- ═══════════════════════════ DET ÄR SPAJDER ═══════════════════════════ -->
+  <section class="det-ar-spajder">
+    <div class="container">
+      <p class="das-label" data-fade>Det här är Spajder</p>
+      <p class="t-h3 serif das-text" data-fade data-fade-delay="1">En sammansvetsad mix av hjärna, hjärta och fingertoppskänsla. Vi gör det vi säger och säger vad vi gör. Alltid med fokus på att skapa verklig skillnad för dig.</p>
+      <div data-fade data-fade-delay="2">
+        <div class="cta" style="display:inline-flex;">
+          <span style="color:var(--cs);">Ska vi snacka?</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
       </div>
-      <div style="width:100%;height:1px;background:var(--cgs);opacity:0.25;"></div>
+      <div class="das-divider"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ DARK SERVICES GRID ═══════════════════════════ -->
+  <section class="dark-grid">
+    <!-- decorative SVGs -->
+    <div class="dark-deco" style="left:2%;bottom:10%;transform:rotate(-23deg);">
+      <img src="spajder/SVG/Layer_1.svg" style="width:clamp(200px,32vw,461px);height:auto;opacity:0.6;" alt="">
+    </div>
+    <div class="dark-deco" style="left:14%;bottom:8%;transform:rotate(26deg);">
+      <img src="spajder/SVG/Layer_1-1.svg" style="width:clamp(140px,21vw,309px);height:auto;opacity:0.6;" alt="">
+    </div>
+    <div class="dark-deco" style="right:4%;bottom:10%;">
+      <img src="spajder/SVG/Inga_Kusiduller_Orange.svg" style="width:clamp(200px,42vw,611px);height:auto;opacity:0.7;" alt="">
     </div>
 
-    <!-- DARK SERVICES GRID + FOOTER -->
-    <div style="width:100%;display:flex;flex-direction:column;">
+    <div class="container">
+      <div class="dark-grid-cols">
+        <div class="dark-col" data-fade>
+          <p class="t-h6s serif num">01</p>
+          <p class="t-body name">Sökmotorer</p>
+          <p class="t-sm item">SEA</p>
+          <p class="t-sm item">SEM</p>
+          <p class="t-sm item">SEO</p>
+          <p class="t-sm item">Cookies</p>
+          <p class="t-sm item">Länkar</p>
+        </div>
+        <div class="dark-col" data-fade data-fade-delay="1">
+          <p class="t-h6s serif num">02</p>
+          <p class="t-body name">Sociala Medier</p>
+          <p class="t-sm item">SoMe annonsering</p>
+          <p class="t-sm item">SoMe organiskt</p>
+          <p class="t-sm item">SoMe kombo</p>
+          <p class="t-sm item">Nyhetsbrev</p>
+        </div>
+        <div class="dark-col" data-fade data-fade-delay="2">
+          <p class="t-h6s serif num">03</p>
+          <p class="t-body name">Design</p>
+          <p class="t-sm item">Visuell identitet</p>
+          <p class="t-sm item">Logotyp</p>
+          <p class="t-sm item">Rörligt</p>
+          <p class="t-sm item">Tryck</p>
+        </div>
+        <div class="dark-col" data-fade data-fade-delay="3">
+          <p class="t-h6s serif num">04</p>
+          <p class="t-body name">Webb</p>
+          <p class="t-sm item">Hemsida – custom</p>
+          <p class="t-sm item">Webbsupport</p>
+          <p class="t-sm item">Hemsida – mall</p>
+          <p class="t-sm item">Webbutveckling</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- Dark grid -->
-      <div style="background:var(--cs);height:615px;position:relative;overflow:hidden;width:100%;">
-        <!-- Decorative SVGs -->
-        <div style="position:absolute;left:calc(50% - 457px);top:calc(50% + 207px);
-                    transform:translate(-50%,-50%);pointer-events:none;">
-          <div style="transform:rotate(-23.26deg);">
-            <img src="spajder/SVG/Layer_1.svg"
-                 style="width:461px;height:207px;" alt="">
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid" data-fade>
+        <!-- Col 1: Contact -->
+        <div>
+          <div class="footer-group">
+            <p class="footer-label">Kontakt</p>
+            <p class="footer-val">Epost – hej@spajder.se</p>
+            <p class="footer-val">Telefon – 021-548 92 92</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Sociala Medier</p>
+            <div class="footer-socials">
+              <p class="footer-val">Instagram</p>
+              <p class="footer-val">Facebook</p>
+              <p class="footer-val">LinkedIn</p>
+            </div>
+          </div>
+          <p class="footer-tagline">Vi tror på en framtid där digital marknadsföring känns enkel, effektiv och pålitlig.</p>
+        </div>
+
+        <!-- Col 2: Locations -->
+        <div>
+          <div class="footer-group">
+            <p class="footer-label">Västerås</p>
+            <p class="footer-val">Trefasgatan 4, 721 30 Västerås</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Göteborg</p>
+            <p class="footer-val">Stigbergsliden 5, 414 63 Göteborg</p>
+          </div>
+          <div class="footer-group">
+            <p class="footer-label">Sundsvall</p>
+            <p class="footer-val">Storgatan 26, 852 32 Sundsvall</p>
           </div>
         </div>
-        <div style="position:absolute;left:calc(50% - 211px);top:calc(50% + 216px);
-                    transform:translate(-50%,-50%);pointer-events:none;">
-          <div style="transform:rotate(26.15deg);">
-            <img src="spajder/SVG/Layer_1-1.svg"
-                 style="width:309px;height:139px;" alt="">
+
+        <!-- Col 3: CTA -->
+        <div>
+          <p class="t-h4 serif footer-cta-text">Det börjar ofta med en liten tanke. Släng iväg den till oss så ser vi vart den tar vägen.</p>
+          <div class="cta">
+            <span style="color:var(--cs);">Låt oss snacka!</span>
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
         </div>
-        <div style="position:absolute;left:700px;top:411px;width:611px;height:273px;pointer-events:none;">
-          <img src="spajder/SVG/Inga_Kusiduller_Orange.svg"
-               style="width:100%;height:100%;" alt="">
-        </div>
-
-        <!-- Col 1: Sökmotorer -->
-        <p class="serif" style="position:absolute;left:24px;top:117px;font-size:21px;line-height:1.2;color:var(--cd);">01</p>
-        <p style="position:absolute;left:24px;top:153px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cd);">Sökmotorer</p>
-        <p style="position:absolute;left:24px;top:191px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SEA</p>
-        <p style="position:absolute;left:24px;top:219px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SEM</p>
-        <p style="position:absolute;left:24px;top:247px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SEO</p>
-        <p style="position:absolute;left:24px;top:275px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Cookies</p>
-        <p style="position:absolute;left:24px;top:303px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Länkar</p>
-
-        <!-- Col 2: Sociala Medier -->
-        <p class="serif" style="position:absolute;left:378px;top:117px;font-size:21px;line-height:1.2;color:var(--cd);">02</p>
-        <p style="position:absolute;left:378px;top:153px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cd);">Sociala Medier</p>
-        <p style="position:absolute;left:378px;top:191px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SoMe annonsering</p>
-        <p style="position:absolute;left:378px;top:219px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SoMe organiskt</p>
-        <p style="position:absolute;left:378px;top:247px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">SoMe kombo</p>
-        <p style="position:absolute;left:378px;top:275px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Nyhetsbrev</p>
-
-        <!-- Col 3: Design -->
-        <p class="serif" style="position:absolute;left:732px;top:117px;font-size:21px;line-height:1.2;color:var(--cd);">03</p>
-        <p style="position:absolute;left:732px;top:153px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cd);">Design</p>
-        <p style="position:absolute;left:732px;top:191px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Visuell identitet</p>
-        <p style="position:absolute;left:732px;top:219px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Visuell identitet #2</p>
-        <p style="position:absolute;left:732px;top:247px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Logotyp</p>
-        <p style="position:absolute;left:732px;top:275px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Rörligt</p>
-        <p style="position:absolute;left:732px;top:303px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Tryck</p>
-
-        <!-- Col 4: Webb -->
-        <p class="serif" style="position:absolute;left:1086px;top:117px;font-size:21px;line-height:1.2;color:var(--cd);">04</p>
-        <p style="position:absolute;left:1086px;top:153px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:23px;line-height:1.3;letter-spacing:-0.69px;color:var(--cd);">Webb</p>
-        <p style="position:absolute;left:1086px;top:191px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Hemsida – custom</p>
-        <p style="position:absolute;left:1086px;top:219px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Webbsupport</p>
-        <p style="position:absolute;left:1086px;top:247px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Hemsida – mall</p>
-        <p style="position:absolute;left:1086px;top:275px;font-family:'Spline Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cd);">Webbutveckling</p>
       </div>
 
-      <!-- FOOTER -->
-      <footer style="background:var(--cd);height:756px;position:relative;overflow:hidden;width:100%;">
-        <!-- Big SPAJDER wordmark -->
-        <div style="position:absolute;left:-20px;top:542px;width:1490px;height:236px;overflow:hidden;">
-          <img src="spajder/SVG/Spajder_Landscape_Dark.svg"
-               alt="SPAJDER"
-               style="position:absolute;left:2.9%;top:16.36%;
-                      width:calc(100% - 6.4%);height:calc(100% - 34.42%);object-fit:contain;">
-        </div>
-
-        <!-- Kontakt -->
-        <p style="position:absolute;left:26px;top:30px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Kontakt</p>
-        <p style="position:absolute;left:26px;top:57px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Epost – hej@spajder</p>
-        <p style="position:absolute;left:26px;top:84px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Telefon – 021-548 92 92</p>
-        <p style="position:absolute;left:26px;top:145px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Sociala Medier</p>
-        <p style="position:absolute;left:26px;top:167px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Instagram</p>
-        <p style="position:absolute;left:111px;top:167px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Facebook</p>
-        <p style="position:absolute;left:192px;top:167px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">LinkedIn</p>
-        <p style="position:absolute;left:26px;top:531px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);width:460px;">Vi tror på en framtid där digital marknadsföring känns enkel, effektiv och pålitlig.</p>
-
-        <!-- Locations -->
-        <p style="position:absolute;left:496px;top:30px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Västerås</p>
-        <p style="position:absolute;left:496px;top:52px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Trefasgatan 4, 721 30 Västerås</p>
-        <p style="position:absolute;left:496px;top:86px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Göteborg</p>
-        <p style="position:absolute;left:496px;top:108px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Stigbergsliden 5, 414 63 Göteborg</p>
-        <p style="position:absolute;left:496px;top:142px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);">Sundsvall</p>
-        <p style="position:absolute;left:496px;top:164px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);opacity:0.7;">Storgatan 26, 852 32 Sundsvall</p>
-
-        <!-- CTA -->
-        <p class="serif" style="position:absolute;left:1086px;top:30px;font-size:38px;line-height:1.2;
-                  color:var(--cgs);width:329px;">Det börjar ofta med en liten tanke. Släng iväg den till
-          oss så ser vi vart den tar vägen.</p>
-        <div class="cta" style="position:absolute;left:1086px;top:244px;">
-          <span style="color:var(--cs);">Låt oss snacka!</span>
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink:0"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <p style="position:absolute;left:1086px;top:531px;font-family:'Spline Sans',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:-0.16px;color:var(--cgs);white-space:nowrap;">©️ Spajder</p>
-      </footer>
+      <p class="footer-copyright">©️ Spajder</p>
     </div>
-  </div>
 
-</div>
+    <!-- Big wordmark -->
+    <div class="footer-wordmark">
+      <img src="spajder/SVG/Spajder_Landscape_Dark.svg" alt="SPAJDER">
+    </div>
+  </footer>
 
-<script>
-  const y = new URLSearchParams(location.search).get('y');
-  if (y) window.addEventListener('load', () => window.scrollTo(0, +y));
-</script>
+  <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }));
+
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('[data-fade], [data-fade-scale]')
+      .forEach(el => observer.observe(el));
+
+    // Make header elements immediately visible
+    document.querySelectorAll('.site-header [data-fade]')
+      .forEach(el => el.classList.add('visible'));
+  </script>
 </body>
 </html>
