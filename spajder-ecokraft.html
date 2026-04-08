@@ -18,31 +18,27 @@
       --cnv: #f5f0eb;
       --cv:  #fafafa;
       --cs:  #1a1a1a;
-      --ct:  #25573a;
-      --c7:  #bdddc4;
       --ek-blue: #3652ed;
-      --ek-blue-text: #d0eafd;
+      --ek-light: #d0eafd;
       --px: clamp(16px, 1.67vw, 24px);
     }
 
     html { scroll-behavior: smooth; }
-    body { background: var(--c9); font-family: 'Spline Sans', sans-serif; }
+    body { background: var(--c9); font-family: 'Spline Sans', sans-serif; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
 
-    .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--px); }
-
     .cta { display: inline-flex; gap: 12px; align-items: center; cursor: pointer; }
-    .cta span { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(14px, 1.1vw, 16px); line-height: 1.4; white-space: nowrap; }
+    .cta span { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(14px, 1.1vw, 16px); white-space: nowrap; }
     .cta svg { flex-shrink: 0; width: clamp(32px, 2.78vw, 40px); height: clamp(32px, 2.78vw, 40px); }
 
-    [data-fade] { opacity: 0; transform: translateY(28px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
+    [data-fade] { opacity: 0; transform: translateY(24px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
     [data-fade].visible { opacity: 1; transform: none; }
     [data-fade-delay="1"] { transition-delay: 0.1s; }
     [data-fade-delay="2"] { transition-delay: 0.2s; }
-    [data-fade-scale] { opacity: 0; transform: scale(0.97) translateY(16px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
+    [data-fade-scale] { opacity: 0; transform: scale(0.97) translateY(12px); transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1); }
     [data-fade-scale].visible { opacity: 1; transform: none; }
 
-    /* ══ HEADER ══════════════════════════════════════════════ */
+    /* ══════════════════ HEADER ══════════════════════════════ */
     .site-header {
       position: sticky; top: 0; z-index: 100;
       background: var(--c1);
@@ -51,14 +47,11 @@
     }
     .site-header .container { display: flex; justify-content: space-between; align-items: center; }
     .site-header .logo { height: clamp(36px, 4.6vw, 66px); width: auto; display: block; }
-    .site-header nav { display: flex; gap: clamp(12px, 1.1vw, 16px); align-items: center; color: var(--cd); }
-    .site-header nav a {
-      font-family: 'Spline Sans', sans-serif; font-weight: 500;
-      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
-      opacity: 0.85; transition: opacity 0.2s;
-    }
+    .site-header nav { display: flex; gap: clamp(12px, 1.1vw, 16px); color: var(--cd); }
+    .site-header nav a { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(13px, 1.1vw, 16px); letter-spacing: -0.01em; opacity: 0.85; transition: opacity 0.2s; }
     .site-header nav a:hover { opacity: 1; }
     .site-header nav a.active { text-decoration: line-through; opacity: 0.5; pointer-events: none; }
+    .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--px); }
 
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
     .hamburger span { display: block; width: 24px; height: 2px; background: var(--cd); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
@@ -71,97 +64,94 @@
     .mobile-nav a:last-child { border-bottom: none; }
     @media (max-width: 680px) { .site-header nav { display: none; } .hamburger { display: flex; } }
 
-    /* ══ HERO ══════════════════════════════════════════════ */
+    /* ══════════════════ HERO ════════════════════════════════ */
     .ek-hero {
-      position: relative;
       width: 100%;
       height: clamp(260px, 44.5vw, 641px);
       overflow: hidden;
+      line-height: 0;
     }
-    .ek-hero img {
-      width: 100%; height: 100%; object-fit: cover;
-      display: block;
+    .ek-hero img, .ek-hero video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
 
-    /* ══ INFO BANNER ══════════════════════════════════════════ */
+    /* ══════════════════ INFO BANNER ═════════════════════════ */
     .ek-banner {
       background: var(--ek-blue);
-      padding: clamp(20px, 2.22vw, 32px) var(--px);
+      padding: clamp(24px, 2.64vw, 38px) var(--px);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(20px, 2.78vw, 40px);
+      gap: clamp(20px, 3.33vw, 48px);
       align-items: center;
     }
-    .ek-banner-left {}
     .ek-banner-client {
       font-family: 'Spline Sans', sans-serif; font-weight: 700;
-      font-size: clamp(16px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
-      color: var(--ek-blue-text);
-      margin-bottom: 6px;
+      font-size: clamp(15px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ek-light); margin-bottom: 8px;
     }
-    .ek-banner-label {
+    .ek-banner-sub {
       font-family: 'Spline Sans', sans-serif; font-weight: 500;
       font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
-      color: rgba(208,234,253,0.65);
+      color: rgba(208,234,253,0.6);
     }
     .ek-banner-title {
       font-family: 'Instrument Serif', serif; font-weight: 400;
-      font-size: clamp(22px, 3.54vw, 51px); line-height: 1.2;
-      color: var(--ek-blue-text);
+      font-size: clamp(20px, 3.54vw, 51px); line-height: 1.2;
+      color: var(--ek-light);
+    }
+    @media (max-width: 680px) {
+      .ek-banner { grid-template-columns: 1fr; }
     }
 
-    /* ══ DIVIDER ════════════════════════════════════════════ */
-    .ek-divider { height: 1px; background: rgba(21,46,31,0.12); margin: 0 var(--px); }
-    .ek-divider-full { height: 1px; background: rgba(21,46,31,0.12); }
+    /* ══════════════════ DIVIDER ═════════════════════════════ */
+    .ek-div { height: 1px; background: rgba(21,46,31,0.12); margin: 0 var(--px); }
 
-    /* ══ META SECTION ════════════════════════════════════════ */
+    /* ══════════════════ META ════════════════════════════════ */
     .ek-meta {
       background: var(--c9);
-      padding: clamp(28px, 2.78vw, 40px) var(--px);
+      padding: clamp(24px, 2.78vw, 40px) var(--px);
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: clamp(16px, 2.22vw, 32px);
+      align-items: start;
     }
     .ek-meta-desc {
       font-family: 'Spline Sans', sans-serif; font-weight: 400;
-      font-size: clamp(14px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      font-size: clamp(13px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
       color: var(--c1);
     }
-    .ek-meta-desc p + p { margin-top: 1.2em; }
-    .ek-meta-col {}
+    .ek-meta-desc p + p { margin-top: 1.1em; }
     .ek-meta-col-head {
       font-family: 'Spline Sans', sans-serif; font-weight: 700;
-      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.1; letter-spacing: -0.02em;
-      color: var(--cgs); margin-bottom: clamp(8px, 0.83vw, 12px);
+      font-size: clamp(13px, 1.11vw, 16px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs); margin-bottom: 8px;
     }
     .ek-meta-col-item {
       font-family: 'Spline Sans', sans-serif; font-weight: 400;
-      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
-      color: var(--c1); padding: 3px 0;
+      font-size: clamp(13px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
+      color: var(--c1); padding: 2px 0;
     }
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .ek-meta { grid-template-columns: 1fr 1fr; }
       .ek-meta-desc { grid-column: 1 / -1; }
     }
-    @media (max-width: 500px) {
-      .ek-meta { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px) { .ek-meta { grid-template-columns: 1fr; } }
 
-    /* ══ FULL-WIDTH IMAGE ═══════════════════════════════════ */
-    .ek-fullimg {
-      position: relative;
+    /* ══════════════════ HIGHLIGHTED SECTION ════════════════ */
+    /* Full-bleed, no border-radius, no horizontal padding */
+    .ek-highlighted {
       width: 100%;
-      overflow: hidden;
+      height: clamp(260px, 53.1vw, 765px);
+      overflow: hidden; line-height: 0;
     }
-    .ek-fullimg img {
-      width: 100%; display: block; object-fit: cover;
+    .ek-highlighted img, .ek-highlighted video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
-    .ek-fullimg.tall img { height: clamp(300px, 53vw, 765px); object-fit: cover; }
 
-    /* ══ TEXT SECTION ════════════════════════════════════════ */
+    /* ══════════════════ TEXT SECTION ════════════════════════ */
     .ek-text {
       background: var(--c9);
-      padding: clamp(40px, 5vw, 72px) var(--px);
+      padding: clamp(36px, 4.44vw, 64px) var(--px);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(24px, 3.33vw, 48px);
@@ -169,9 +159,8 @@
     }
     .ek-text-label {
       font-family: 'Spline Sans', sans-serif; font-weight: 700;
-      font-size: clamp(16px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
+      font-size: clamp(15px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
       color: var(--cgs);
-      padding-top: 4px;
     }
     .ek-text-body {
       font-family: 'Spline Sans', sans-serif; font-weight: 400;
@@ -181,220 +170,230 @@
     .ek-text-body p + p { margin-top: 1.2em; }
     @media (max-width: 680px) { .ek-text { grid-template-columns: 1fr; } }
 
-    /* ══ 2-COL IMAGES ════════════════════════════════════════ */
+    /* ══════════════════ 2-COL IMAGES ════════════════════════ */
     .ek-2col {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(6px, 0.83vw, 12px);
       padding: clamp(6px, 0.83vw, 12px) var(--px);
     }
-    .ek-2col-img {
-      position: relative;
-      border-radius: clamp(8px, 1.1vw, 16px);
+    .ek-2col-sq {
+      border-radius: clamp(8px, 1.11vw, 16px);
       overflow: hidden;
       aspect-ratio: 1 / 1;
+      background: var(--cs);
+      line-height: 0;
     }
-    .ek-2col-img img {
+    .ek-2col-rect {
+      border-radius: clamp(8px, 1.11vw, 16px);
+      overflow: hidden;
+      aspect-ratio: 693 / 582;
+      background: var(--cs);
+      line-height: 0;
+    }
+    .ek-2col-sq img, .ek-2col-sq video,
+    .ek-2col-rect img, .ek-2col-rect video {
       width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform 0.7s cubic-bezier(.16,1,.3,1);
     }
-    .ek-2col-img:hover img { transform: scale(1.04); }
-    @media (max-width: 560px) { .ek-2col { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) {
+      .ek-2col { grid-template-columns: 1fr; }
+    }
 
-    /* ══ EQUIPMENT SECTION ═══════════════════════════════════ */
+    /* ══════════════════ EQUIPMENT SECTION ══════════════════ */
     .ek-equipment {
-      background: var(--cnv);
-      border-radius: clamp(8px, 1.1vw, 16px);
       margin: clamp(6px, 0.83vw, 12px) var(--px);
+      background: var(--cnv);
+      border-radius: clamp(8px, 1.11vw, 16px);
       overflow: hidden;
       position: relative;
-      min-height: clamp(300px, 60vw, 700px);
+      min-height: clamp(300px, 60vw, 860px);
       display: flex; align-items: center;
     }
     .ek-equipment-text {
       position: relative; z-index: 2;
       padding: clamp(40px, 5vw, 80px) clamp(24px, 3.33vw, 48px);
-      max-width: 480px;
+      max-width: min(440px, 45%);
     }
     .ek-equipment-label {
       font-family: 'Spline Sans', sans-serif; font-weight: 700;
-      font-size: clamp(13px, 1.1vw, 16px); line-height: 1.1; letter-spacing: -0.02em;
-      color: var(--cgs); margin-bottom: 12px;
+      font-size: clamp(13px, 1.11vw, 16px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs); margin-bottom: 14px;
     }
     .ek-equipment-title {
       font-family: 'Instrument Serif', serif; font-weight: 400;
-      font-size: clamp(24px, 3.54vw, 51px); line-height: 1.2;
+      font-size: clamp(22px, 3.54vw, 51px); line-height: 1.2;
       color: var(--cgs);
     }
     .ek-equipment-img {
-      position: absolute; right: -8%; top: 50%;
-      transform: translateY(-50%);
-      width: 70%; max-width: 900px;
+      position: absolute;
+      right: -6%;
+      top: 50%; transform: translateY(-50%);
+      width: 68%;
     }
-    .ek-equipment-img img { width: 100%; display: block; }
+    .ek-equipment-img img { width: 100%; height: auto; display: block; }
     @media (max-width: 768px) {
-      .ek-equipment { min-height: auto; flex-direction: column; }
-      .ek-equipment-img { position: relative; right: auto; top: auto; transform: none; width: 100%; max-width: 100%; padding: 0 clamp(20px, 4vw, 40px) clamp(20px, 4vw, 40px); }
+      .ek-equipment { flex-direction: column; min-height: auto; }
+      .ek-equipment-text { max-width: 100%; padding-bottom: clamp(20px, 4vw, 40px); }
+      .ek-equipment-img { position: relative; right: auto; top: auto; transform: none; width: 100%; padding: 0 clamp(20px, 4vw, 48px) clamp(20px, 4vw, 40px); }
     }
 
-    /* ══ TALL IMAGE ═════════════════════════════════════════ */
+    /* ══════════════════ TALL COMPOSITE IMAGE ═══════════════ */
+    /* Image-2.jpg: 1392×2746 at 1440px — natural height, full width */
     .ek-tall {
       padding: clamp(6px, 0.83vw, 12px) var(--px);
+      line-height: 0;
     }
     .ek-tall-inner {
-      border-radius: clamp(8px, 1.1vw, 16px);
+      border-radius: clamp(8px, 1.11vw, 16px);
       overflow: hidden;
     }
-    .ek-tall-inner img {
-      width: 100%; display: block; object-fit: cover;
-      max-height: clamp(400px, 80vw, 860px);
+    .ek-tall-inner img, .ek-tall-inner video {
+      width: 100%; height: auto; display: block;
     }
 
-    /* ══ TESTIMONIAL ═════════════════════════════════════════ */
+    /* ══════════════════ LARGE IMAGE ════════════════════════ */
+    /* 1392×861 → aspect-ratio 1392/861 */
+    .ek-large {
+      padding: clamp(6px, 0.83vw, 12px) var(--px);
+      line-height: 0;
+    }
+    .ek-large-inner {
+      border-radius: clamp(8px, 1.11vw, 16px);
+      overflow: hidden;
+      aspect-ratio: 1392 / 861;
+    }
+    .ek-large-inner img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* ══════════════════ TESTIMONIAL ════════════════════════ */
     .ek-testimonial {
       background: var(--c9);
-      padding: clamp(48px, 5.6vw, 80px) var(--px);
-      text-align: center;
+      padding: clamp(40px, 5vw, 72px) var(--px);
     }
-    .ek-testimonial-divider {
-      height: 1px; background: rgba(21,46,31,0.12);
-      margin: 0 var(--px) clamp(32px, 4vw, 56px);
-    }
-    .ek-testimonial-divider.bottom { margin: clamp(32px, 4vw, 56px) var(--px) 0; }
-    .ek-testimonial-quote {
+    .ek-test-top-div { height: 1px; background: rgba(21,46,31,0.12); margin-bottom: clamp(28px, 3.54vw, 51px); }
+    .ek-test-bot-div { height: 1px; background: rgba(21,46,31,0.12); margin-top: clamp(28px, 3.54vw, 51px); }
+    .ek-test-quote {
       font-family: 'Instrument Serif', serif; font-weight: 400;
-      font-size: clamp(24px, 3.54vw, 51px); line-height: 1.2;
-      color: var(--cs);
-      max-width: min(920px, 90%);
-      margin: 0 auto clamp(24px, 2.5vw, 36px);
+      font-size: clamp(22px, 3.54vw, 51px); line-height: 1.2;
+      color: var(--cs); text-align: center;
+      max-width: min(920px, 90%); margin: 0 auto clamp(20px, 2.5vw, 36px);
     }
-    .ek-testimonial-name {
+    .ek-test-name {
       font-family: 'Spline Sans', sans-serif; font-weight: 500;
       font-size: clamp(14px, 1.32vw, 19px); line-height: 1.3;
-      color: var(--cs); text-transform: uppercase; letter-spacing: 0.02em;
+      color: var(--cs); text-align: center; text-transform: uppercase; letter-spacing: 0.02em;
     }
-    .ek-testimonial-company {
+    .ek-test-company {
       font-family: 'Spline Sans', sans-serif; font-weight: 400;
       font-size: clamp(14px, 1.32vw, 19px); line-height: 1.3;
-      color: var(--cs); text-transform: uppercase; letter-spacing: 0.02em;
+      color: var(--cs); text-align: center; text-transform: uppercase; letter-spacing: 0.02em;
     }
 
-    /* ══ CONTACT SECTION ════════════════════════════════════ */
+    /* ══════════════════ RIGHT-ONLY IMAGE (no border-radius) ═ */
+    /* Image-4.jpg at Figma position left=50%+3px, no rounded */
+    .ek-right-img {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 0.83vw, 12px);
+      padding: clamp(6px, 0.83vw, 12px) var(--px);
+    }
+    .ek-right-img-placeholder { /* empty left column */ }
+    .ek-right-img-asset {
+      overflow: hidden;
+      aspect-ratio: 693 / 582;
+      background: var(--cs);
+      line-height: 0;
+      /* no border-radius — matches Figma */
+    }
+    .ek-right-img-asset img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    @media (max-width: 560px) {
+      .ek-right-img { grid-template-columns: 1fr; }
+      .ek-right-img-placeholder { display: none; }
+    }
+
+    /* ══════════════════ CONTACT SECTION ════════════════════ */
     .ek-contact {
       background: var(--c9);
       text-align: center;
-      padding: clamp(48px, 5.6vw, 80px) var(--px) clamp(32px, 3.33vw, 48px);
+      padding: clamp(48px, 5.56vw, 80px) var(--px) clamp(32px, 3.33vw, 48px);
     }
-    .ek-contact-divider { height: 1px; background: rgba(21,46,31,0.12); margin: 0 var(--px); }
     .ek-contact-label {
       font-family: 'Spline Sans', sans-serif; font-weight: 700;
-      font-size: clamp(16px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
-      color: var(--cgs); margin-bottom: clamp(20px, 2.5vw, 36px);
+      font-size: clamp(15px, 1.32vw, 19px); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--cgs); margin-bottom: clamp(16px, 2.22vw, 32px);
     }
     .ek-contact-title {
       font-family: 'Instrument Serif', serif; font-weight: 400;
       font-size: clamp(24px, 3.54vw, 51px); line-height: 1.2;
       color: var(--cgs);
-      max-width: min(802px, 90%);
-      margin: 0 auto clamp(28px, 3.33vw, 48px);
+      max-width: min(802px, 90%); margin: 0 auto clamp(24px, 2.78vw, 40px);
     }
-    .ek-contact-divider-bottom { height: 1px; background: rgba(21,46,31,0.12); margin: clamp(32px, 4vw, 56px) var(--px) 0; }
+    .ek-contact-div { height: 1px; background: rgba(21,46,31,0.12); margin: clamp(32px, 4vw, 56px) var(--px) 0; }
 
-    /* ══ RELATED CASES ════════════════════════════════════ */
-    .ek-related { background: var(--c9); padding-bottom: clamp(32px, 4vw, 56px); }
+    /* ══════════════════ RELATED CASES ══════════════════════ */
+    .ek-related { background: var(--c9); padding-bottom: clamp(24px, 3.33vw, 48px); }
     .ek-related-heading {
       font-family: 'Spline Sans', sans-serif; font-weight: 700;
       font-size: clamp(28px, 4.17vw, 60px); line-height: 1.1;
       letter-spacing: clamp(-1px, -0.17vw, -2.4px);
       color: var(--c1);
-      padding: clamp(28px, 2.78vw, 40px) var(--px) clamp(20px, 2vw, 28px);
+      padding: clamp(24px, 2.78vw, 40px) var(--px) clamp(16px, 2vw, 28px);
     }
-    .ek-list-divider { height: 1px; background: rgba(21,46,31,0.12); }
-    .ek-list-row {
+    .ek-row-div { height: 1px; background: rgba(21,46,31,0.12); }
+    .ek-row {
       display: grid;
-      grid-template-columns: clamp(120px, 22%, 320px) 1fr auto;
+      grid-template-columns: clamp(100px, 22%, 320px) 1fr auto;
       align-items: center;
       gap: clamp(12px, 2vw, 32px);
       padding: clamp(14px, 1.81vw, 26px) var(--px);
-      text-decoration: none;
+      color: inherit; text-decoration: none;
       transition: background 0.2s;
+      cursor: pointer;
     }
-    .ek-list-row:hover { background: rgba(21,46,31,0.03); }
-    .ek-list-row.dark { background: var(--cs); color: var(--cv); }
-    .ek-list-row.dark:hover { background: #222; }
-    .ek-list-row.current { opacity: 0.4; pointer-events: none; }
-    .ek-list-client {
+    .ek-row:hover { background: rgba(14,32,22,0.03); }
+    .ek-row.dark { background: var(--cs); color: var(--cv); }
+    .ek-row.dark:hover { background: #222; }
+    .ek-row.current { opacity: 0.38; pointer-events: none; }
+    .ek-row-client {
       font-family: 'Spline Sans', sans-serif; font-weight: 500;
       font-size: clamp(13px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
     }
-    .ek-list-info {}
-    .ek-list-title {
+    .ek-row-title {
       font-family: 'Spline Sans', sans-serif; font-weight: 500;
       font-size: clamp(13px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
     }
-    .ek-list-subtitle {
+    .ek-row-sub {
       font-family: 'Spline Sans', sans-serif; font-weight: 400;
       font-size: clamp(12px, 1.11vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
       opacity: 0.55;
     }
-    .ek-list-thumbs { display: flex; gap: clamp(4px, 0.55vw, 8px); }
-    .ek-thumb {
-      width: clamp(56px, 7.2vw, 103px);
-      height: clamp(40px, 5vw, 72px);
-      border-radius: 6px; overflow: hidden; flex-shrink: 0;
-    }
+    .ek-row.dark .ek-row-sub { opacity: 0.65; }
+    .ek-thumbs { display: flex; gap: clamp(4px, 0.56vw, 8px); }
+    .ek-thumb { width: clamp(56px, 7.2vw, 103px); height: clamp(40px, 5vw, 72px); border-radius: 6px; overflow: hidden; flex-shrink: 0; }
     .ek-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     @media (max-width: 700px) {
-      .ek-list-row { grid-template-columns: 1fr 1fr; }
-      .ek-list-thumbs { display: none; }
+      .ek-row { grid-template-columns: 1fr 1fr; }
+      .ek-thumbs { display: none; }
     }
 
-    /* ══ FOOTER ══════════════════════════════════════════════ */
-    footer {
-      background: var(--cd);
-      padding: clamp(32px, 4.44vw, 64px) 0 0;
-      overflow: hidden;
-    }
+    /* ══════════════════ FOOTER ══════════════════════════════ */
+    footer { background: var(--cd); padding: clamp(32px, 4.44vw, 64px) 0 0; overflow: hidden; }
     .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
       gap: clamp(24px, 3.33vw, 48px);
       padding: 0 var(--px) clamp(24px, 3.33vw, 48px);
     }
     .footer-group { margin-bottom: clamp(12px, 1.67vw, 24px); }
-    .footer-label {
-      font-family: 'Spline Sans', sans-serif; font-weight: 700;
-      font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
-      color: var(--cgs); margin-bottom: 4px;
-    }
-    .footer-val {
-      font-family: 'Spline Sans', sans-serif; font-weight: 500;
-      font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
-      color: var(--cgs); opacity: 0.65;
-    }
+    .footer-label { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em; color: var(--cgs); margin-bottom: 4px; }
+    .footer-val { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em; color: var(--cgs); opacity: 0.65; }
     .footer-socials { display: flex; gap: 16px; }
-    .footer-tagline {
-      font-family: 'Spline Sans', sans-serif; font-weight: 700;
-      font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; letter-spacing: -0.01em;
-      color: var(--cgs);
-      margin-top: clamp(16px, 2.22vw, 32px);
-    }
-    .footer-cta-text {
-      font-family: 'Instrument Serif', serif; font-weight: 400;
-      font-size: clamp(20px, 2.6vw, 38px); line-height: 1.2;
-      color: var(--cgs); margin-bottom: clamp(20px, 2.22vw, 32px);
-    }
-    .footer-copyright {
-      font-family: 'Spline Sans', sans-serif; font-weight: 500;
-      font-size: clamp(12px, 1.1vw, 16px); color: var(--cgs); opacity: 0.55;
-      padding: 0 var(--px) clamp(16px, 2.22vw, 32px);
-    }
-    .footer-wordmark {
-      display: flex; align-items: flex-end;
-      overflow: hidden;
-      line-height: 0;
-      margin-top: clamp(16px, 2.78vw, 40px);
-    }
+    .footer-tagline { font-family: 'Spline Sans', sans-serif; font-weight: 700; font-size: clamp(12px, 1.1vw, 16px); line-height: 1.4; color: var(--cgs); margin-top: clamp(16px, 2.22vw, 32px); }
+    .footer-cta-text { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 38px); line-height: 1.2; color: var(--cgs); margin-bottom: clamp(20px, 2.22vw, 32px); }
+    .footer-copy { font-family: 'Spline Sans', sans-serif; font-weight: 500; font-size: clamp(12px, 1.1vw, 16px); color: var(--cgs); opacity: 0.55; padding: 0 var(--px) clamp(16px, 2.22vw, 32px); }
+    .footer-wordmark { overflow: hidden; line-height: 0; margin-top: clamp(16px, 2.78vw, 40px); }
     .footer-wordmark img { width: 100%; display: block; max-height: 180px; object-fit: cover; object-position: bottom; }
     @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
@@ -402,7 +401,7 @@
 </head>
 <body>
 
-  <!-- ═════════════════════ HEADER ═════════════════════ -->
+  <!-- ═══════════ HEADER ═══════════ -->
   <header class="site-header">
     <div class="container">
       <a href="index.html">
@@ -427,56 +426,62 @@
     <a href="#">Ska vi snacka?</a>
   </nav>
 
-  <!-- ═════════════════════ HERO ═════════════════════ -->
+  <!-- ═══════════ HERO: Image-5.jpg – outdoor ECOKRAFT billboard ═══════════ -->
   <section class="ek-hero">
-    <img src="spajder/Images/Image-1.jpg" alt="Ecokraft – billboard">
+    <img src="spajder/Images/Ecokraft/Image-5.jpg" alt="Ecokraft – utomhusskyltar">
   </section>
 
-  <!-- ═════════════════════ INFO BANNER ═════════════════════ -->
+  <!-- ═══════════ INFO BANNER ═══════════ -->
   <div class="ek-banner">
-    <div class="ek-banner-left">
+    <div>
       <p class="ek-banner-client">Ecokraft</p>
-      <p class="ek-banner-label">Vägen mot ett självförsörjande norden</p>
+      <p class="ek-banner-sub">Vägen mot ett självförsörjande norden</p>
     </div>
     <p class="ek-banner-title">Förnyat varumärke för att möta nya utmaningar och ta nya delar av marknaden.</p>
   </div>
 
-  <!-- ═════════════════════ META ═════════════════════ -->
-  <div class="ek-divider"></div>
+  <!-- divider at ~958px -->
+  <div class="ek-div"></div>
+
+  <!-- ═══════════ META: description + service columns ═══════════ -->
   <section class="ek-meta">
-    <div class="ek-meta-desc" data-fade>
-      <p>Sedan 2008 har Ecokraft hjälpt företag och privatpersoner att bli mer självförsörjande med el från solen.</p>
-      <p>Idag driver Ecokraft omställningen till ett långsiktigt hållbart liv genom att fortsätta sträva efter absolut kundnöjdhet, hållbarhet i alla steg och noggrannhet i allt de gör. Med deras långa erfarenhet utbildar och inspirerar Ecokraft fler människor att göra medvetna val som främjar både miljön och deras ekonomi.</p>
+    <div data-fade>
+      <p class="ek-meta-desc">Sedan 2008 har Ecokraft hjälpt företag och privatpersoner att bli mer självförsörjande med el från solen.</p>
+      <p class="ek-meta-desc" style="margin-top:1em;">Idag driver Ecokraft omställningen till ett långsiktigt hållbart liv genom att fortsätta sträva efter absolut kundnöjdhet, hållbarhet i alla steg och noggrannhet i allt de gör. Med deras långa erfarenhet utbildar och inspirerar Ecokraft fler människor att göra medvetna val som främjar både miljön och deras ekonomi.</p>
     </div>
-    <div class="ek-meta-col" data-fade data-fade-delay="1">
+    <div data-fade data-fade-delay="1">
       <p class="ek-meta-col-head">Strategi</p>
       <p class="ek-meta-col-item">Research</p>
       <p class="ek-meta-col-item">Kommunikation</p>
       <p class="ek-meta-col-item">Positionering</p>
       <p class="ek-meta-col-item">Varumärkesstrategi</p>
     </div>
-    <div class="ek-meta-col" data-fade data-fade-delay="2">
+    <div data-fade data-fade-delay="1">
       <p class="ek-meta-col-head">Visuell identitet</p>
       <p class="ek-meta-col-item">Logotyp</p>
       <p class="ek-meta-col-item">Visuell identitet</p>
       <p class="ek-meta-col-item">Varumärkesbok</p>
     </div>
-    <div class="ek-meta-col" data-fade data-fade-delay="2">
+    <div data-fade data-fade-delay="2">
       <p class="ek-meta-col-head">Hemsida</p>
       <p class="ek-meta-col-item">Webbutveckling</p>
       <p class="ek-meta-col-item">UI/UX design</p>
       <p class="ek-meta-col-item">SEO</p>
     </div>
   </section>
-  <div class="ek-divider"></div>
 
-  <!-- ═════════════════════ FULL-WIDTH IMAGE ═════════════════════ -->
-  <section class="ek-fullimg tall">
-    <img src="spajder/Images/Image-5.jpg" alt="Ecokraft – natur">
+  <!-- divider at ~1249px -->
+  <div class="ek-div"></div>
+
+  <!-- ═══════════ HIGHLIGHTED SECTION: Highlighted Section.jpg – laptop lifestyle ═══════════ -->
+  <section class="ek-highlighted">
+    <img src="spajder/Images/Ecokraft/Highlighted Section.jpg" alt="Ecokraft – hemsida">
   </section>
 
-  <!-- ═════════════════════ UTMANING ═════════════════════ -->
-  <div class="ek-divider" style="margin-top:0;"></div>
+  <!-- divider at ~2094px -->
+  <div class="ek-div"></div>
+
+  <!-- ═══════════ UTMANING text section ═══════════ -->
   <section class="ek-text">
     <p class="ek-text-label" data-fade>Utmaning.</p>
     <div class="ek-text-body" data-fade data-fade-delay="1">
@@ -484,64 +489,75 @@
       <p>Varumärket och produkten ska kännas som en naturlig del av en modern livsstil – inspirerande, lättillgänglig och hållbar utan att kräva uppoffringar.</p>
     </div>
   </section>
-  <div class="ek-divider"></div>
 
-  <!-- ═════════════════════ 2-COL IMAGES ═════════════════════ -->
-  <div class="ek-2col" style="padding-top: clamp(8px,1vw,12px);">
-    <div class="ek-2col-img" data-fade-scale>
-      <img src="spajder/Images/Image-3.jpg" alt="Ecokraft identitet">
+  <!-- divider at ~2463px -->
+  <div class="ek-div"></div>
+
+  <!-- ═══════════ 2-COL SQUARES: Image.jpg + ECO_LOGO_ANIMERING.mp4 ═══════════ -->
+  <div class="ek-2col" style="padding-top: clamp(8px,0.83vw,12px);">
+    <!-- Left: Image.jpg – Ecokraft branded deck chairs -->
+    <div class="ek-2col-sq" data-fade-scale>
+      <img src="spajder/Images/Ecokraft/Image.jpg" alt="Ecokraft – profilprodukter">
     </div>
-    <div class="ek-2col-img" data-fade-scale data-fade-delay="1">
-      <img src="spajder/Images/Image.jpg" alt="Ecokraft kampanj">
+    <!-- Right: ECO_LOGO_ANIMERING.mp4 – logo animation, poster = Image Frame-1.jpg -->
+    <div class="ek-2col-sq" data-fade-scale data-fade-delay="1">
+      <video autoplay loop muted playsinline poster="spajder/Images/Ecokraft/Image Frame-1.jpg">
+        <source src="spajder/Images/Ecokraft/ECO_LOGO_ANIMERING.mp4" type="video/mp4">
+        <img src="spajder/Images/Ecokraft/Image Frame-1.jpg" alt="Ecokraft logotyp">
+      </video>
     </div>
   </div>
 
-  <!-- ═════════════════════ EQUIPMENT / LAPTOP MOCKUP ═════════════════════ -->
-  <div class="ek-equipment" style="margin-top: clamp(8px,1vw,12px);">
-    <div class="ek-equipment-text" data-fade>
+  <!-- ═══════════ EQUIPMENT SECTION: Equipment Section.jpg – iPad/Surface on naturvit ═══════════ -->
+  <div class="ek-equipment" data-fade>
+    <div class="ek-equipment-text">
       <p class="ek-equipment-label">Digitalt formspråk</p>
-      <p class="ek-equipment-title">En webb som speglar kraft och rörelse i varje scroll.</p>
+      <p class="ek-equipment-title">En webb byggd för att inspirera till handling och skapa förtroende.</p>
     </div>
     <div class="ek-equipment-img">
-      <img src="spajder/Images/Desktop - 5.jpg" alt="Ecokraft webbdesign">
+      <img src="spajder/Images/Ecokraft/Equipment Section.jpg" alt="Ecokraft – webbdesign">
     </div>
   </div>
 
-  <!-- ═════════════════════ LARGE VERTICAL IMAGE ═════════════════════ -->
-  <div class="ek-tall" style="margin-top: clamp(8px,1vw,12px);">
-    <div class="ek-tall-inner">
-      <img src="spajder/Images/Image-4.jpg" alt="Ecokraft produkt" style="max-height: clamp(400px, 65vw, 860px);">
-    </div>
-  </div>
-
-  <!-- ═════════════════════ TESTIMONIAL ═════════════════════ -->
-  <div class="ek-divider" style="margin-top: clamp(24px,2.78vw,40px);"></div>
+  <!-- ═══════════ TESTIMONIAL ═══════════ -->
   <section class="ek-testimonial">
-    <p class="ek-testimonial-quote" data-fade>"Spajder har framgångsrikt skapat en identitet som fångar både storheten i vår globala ambition och den enkelhet vi alltid strävar efter."</p>
-    <p class="ek-testimonial-name" data-fade data-fade-delay="1">Leif Loket Olsson</p>
-    <p class="ek-testimonial-company" data-fade data-fade-delay="1">Ecokraft</p>
+    <div class="ek-test-top-div"></div>
+    <p class="ek-test-quote" data-fade>"Spajder har framgångsrikt skapat en identitet som fångar både storheten i vår globala ambition och den enkelhet vi alltid strävar efter."</p>
+    <p class="ek-test-name" data-fade data-fade-delay="1">Leif Loket Olsson</p>
+    <p class="ek-test-company" data-fade data-fade-delay="1">Ecokraft</p>
+    <div class="ek-test-bot-div"></div>
   </section>
-  <div class="ek-divider"></div>
 
-  <!-- ═════════════════════ 2-COL IMAGES #2 ═════════════════════ -->
-  <div class="ek-2col" style="padding-top: clamp(8px,1vw,12px);">
-    <div class="ek-2col-img" style="aspect-ratio: 4/3;" data-fade-scale>
-      <img src="spajder/Images/Image-2.jpg" alt="Ecokraft visuell identitet">
-    </div>
-    <div class="ek-2col-img" style="aspect-ratio: 4/3;" data-fade-scale data-fade-delay="1">
-      <img src="spajder/Images/Image-5.jpg" alt="Ecokraft kampanjbild">
+  <!-- ═══════════ VERY TALL COMPOSITE: Image-2.jpg – multi-device mockups ═══════════ -->
+  <div class="ek-tall">
+    <div class="ek-tall-inner" data-fade-scale>
+      <img src="spajder/Images/Ecokraft/Image-2.jpg" alt="Ecokraft – digitala tjänster">
     </div>
   </div>
 
-  <!-- ═════════════════════ TALL IMAGE #2 ═════════════════════ -->
-  <div class="ek-tall" style="margin-top: clamp(6px,0.83vw,12px);">
-    <div class="ek-tall-inner">
-      <img src="spajder/Images/Image-1.jpg" alt="Ecokraft outdoor" style="max-height: clamp(300px, 60vw, 860px);">
+  <!-- ═══════════ 2-COL RECTANGLES: Image-1.jpg + Image-3.jpg ═══════════ -->
+  <div class="ek-2col">
+    <!-- Left: Image-1.jpg – city bus stop billboard -->
+    <div class="ek-2col-rect" data-fade-scale>
+      <img src="spajder/Images/Ecokraft/Image-1.jpg" alt="Ecokraft – stadsreklam">
+    </div>
+    <!-- Right: Image-3.jpg – outdoor digital sign -->
+    <div class="ek-2col-rect" data-fade-scale data-fade-delay="1">
+      <img src="spajder/Images/Ecokraft/Image-3.jpg" alt="Ecokraft – digital skylt">
     </div>
   </div>
 
-  <!-- ═════════════════════ LÖSNING ═════════════════════ -->
-  <div class="ek-divider" style="margin-top: clamp(24px,2.78vw,40px);"></div>
+  <!-- ═══════════ LARGE IMAGE 1: Large Image.jpg – Ecokraft conference ═══════════ -->
+  <div class="ek-large">
+    <div class="ek-large-inner" data-fade-scale>
+      <img src="spajder/Images/Ecokraft/Large Image.jpg" alt="Ecokraft – konferens">
+    </div>
+  </div>
+
+  <!-- divider at ~9162px -->
+  <div class="ek-div" style="margin-top: clamp(24px,2.78vw,40px);"></div>
+
+  <!-- ═══════════ LÖSNING text section ═══════════ -->
   <section class="ek-text">
     <p class="ek-text-label" data-fade>Lösning.</p>
     <div class="ek-text-body" data-fade data-fade-delay="1">
@@ -549,20 +565,43 @@
       <p>Ecokrafts varumärke är mer än bara en logotyp eller en slogan; det är summan av alla upplevelser och känslor de skapar hos sina kunder. Genom vår grafiska identitet som en guide, kan vi tillsammans bygga och vårda ett varumärke som står för trygghet, professionalitet och kraft.</p>
     </div>
   </section>
-  <div class="ek-divider"></div>
 
-  <!-- ═════════════════════ 2-COL IMAGES #3 ═════════════════════ -->
-  <div class="ek-2col" style="padding-top: clamp(8px,1vw,12px); padding-bottom: clamp(8px,1vw,12px);">
-    <div class="ek-2col-img" data-fade-scale>
-      <img src="spajder/Images/Image.jpg" alt="Ecokraft">
-    </div>
-    <div class="ek-2col-img" data-fade-scale data-fade-delay="1">
-      <img src="spajder/Images/Image-3.jpg" alt="Ecokraft">
+  <!-- divider at ~9364px -->
+  <div class="ek-div"></div>
+
+  <!-- ═══════════ RIGHT-ONLY IMAGE: Image-4.jpg – Instagram posts (NO border-radius) ═══════════ -->
+  <div class="ek-right-img">
+    <div class="ek-right-img-placeholder"></div>
+    <div class="ek-right-img-asset" data-fade-scale>
+      <img src="spajder/Images/Ecokraft/Image-4.jpg" alt="Ecokraft – sociala medier">
     </div>
   </div>
 
-  <!-- ═════════════════════ CONTACT ═════════════════════ -->
-  <div class="ek-contact-divider"></div>
+  <!-- ═══════════ LARGE IMAGE 2: Large Image-1.jpg – solar technician ═══════════ -->
+  <div class="ek-large">
+    <div class="ek-large-inner" data-fade-scale>
+      <img src="spajder/Images/Ecokraft/Large Image-1.jpg" alt="Ecokraft – solcellstekniker">
+    </div>
+  </div>
+
+  <!-- ═══════════ 2-COL SQUARES: SoMe_Eco.mp4 + Image Frame.jpg ═══════════ -->
+  <div class="ek-2col" style="padding-bottom: clamp(8px,0.83vw,12px);">
+    <!-- Left: SoMe_Eco.mp4 – social media video -->
+    <div class="ek-2col-sq" data-fade-scale>
+      <video autoplay loop muted playsinline>
+        <source src="spajder/Images/Ecokraft/SoMe_Eco.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!-- Right: Image Frame.jpg – phones on dark surface -->
+    <div class="ek-2col-sq" data-fade-scale data-fade-delay="1">
+      <img src="spajder/Images/Ecokraft/Image Frame.jpg" alt="Ecokraft – sociala kanaler">
+    </div>
+  </div>
+
+  <!-- divider at ~11873px -->
+  <div class="ek-div"></div>
+
+  <!-- ═══════════ CONTACT CTA ═══════════ -->
   <section class="ek-contact">
     <p class="ek-contact-label" data-fade>Låt oss snacka!</p>
     <p class="ek-contact-title" data-fade data-fade-delay="1">Vill du göra samma grej fast på ditt sätt? Eller något helt nytt? Vi är på.</p>
@@ -572,51 +611,51 @@
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a1a1a"/><path d="M14 20h12M22 15.5l4.5 4.5-4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </div>
-    <div class="ek-contact-divider-bottom"></div>
+    <div class="ek-contact-div"></div>
   </section>
 
-  <!-- ═════════════════════ RELATED CASES ═════════════════════ -->
+  <!-- ═══════════ RELATED CASES ═══════════ -->
   <section class="ek-related">
     <h2 class="ek-related-heading" data-fade>Fler case.</h2>
 
-    <div class="ek-list-divider"></div>
-    <a class="ek-list-row" href="#" data-fade>
-      <p class="ek-list-client">Norrkraft</p>
-      <div class="ek-list-info">
-        <p class="ek-list-title">Förnyat varumärke för att möta nya utmaningar</p>
-        <p class="ek-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+    <div class="ek-row-div"></div>
+    <a class="ek-row" href="#" data-fade>
+      <p class="ek-row-client">Norrkraft</p>
+      <div>
+        <p class="ek-row-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="ek-row-sub">Webbutveckling, Visuell identitet och Sociala medier</p>
       </div>
-      <div class="ek-list-thumbs">
-        <div class="ek-thumb"><img src="spajder/Images/Image-3.jpg" alt=""></div>
-        <div class="ek-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
-        <div class="ek-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
-        <div class="ek-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
+      <div class="ek-thumbs">
+        <div class="ek-thumb"><img src="spajder/Images/Ecokraft/Image-3.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Ecokraft/Image-4.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Ecokraft/Image.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Ecokraft/Image-2.jpg" alt=""></div>
       </div>
     </a>
 
-    <div class="ek-list-divider"></div>
-    <a class="ek-list-row" href="#" data-fade>
-      <p class="ek-list-client">Västerås Ventilation</p>
-      <div class="ek-list-info">
-        <p class="ek-list-title">Förnyat varumärke för att möta nya utmaningar</p>
-        <p class="ek-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+    <div class="ek-row-div"></div>
+    <a class="ek-row" href="#" data-fade>
+      <p class="ek-row-client">Västerås Ventilation</p>
+      <div>
+        <p class="ek-row-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="ek-row-sub">Webbutveckling, Visuell identitet och Sociala medier</p>
       </div>
-      <div class="ek-list-thumbs">
+      <div class="ek-thumbs">
         <div class="ek-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
         <div class="ek-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
         <div class="ek-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
-        <div class="ek-thumb"><img src="spajder/Images/Image-1.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
       </div>
     </a>
 
-    <div class="ek-list-divider"></div>
-    <a class="ek-list-row dark" href="#" data-fade>
-      <p class="ek-list-client">Lock n Load</p>
-      <div class="ek-list-info">
-        <p class="ek-list-title">Förnyat varumärke för att möta nya utmaningar</p>
-        <p class="ek-list-subtitle">Webbutveckling, Visuell identitet och Sociala medier</p>
+    <div class="ek-row-div"></div>
+    <a class="ek-row dark" href="#" data-fade>
+      <p class="ek-row-client">Lock n Load</p>
+      <div>
+        <p class="ek-row-title">Förnyat varumärke för att möta nya utmaningar</p>
+        <p class="ek-row-sub">Webbutveckling, Visuell identitet och Sociala medier</p>
       </div>
-      <div class="ek-list-thumbs">
+      <div class="ek-thumbs">
         <div class="ek-thumb"><img src="spajder/Images/Image-2.jpg" alt=""></div>
         <div class="ek-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
         <div class="ek-thumb"><img src="spajder/Images/Image-5.jpg" alt=""></div>
@@ -624,24 +663,24 @@
       </div>
     </a>
 
-    <div class="ek-list-divider"></div>
-    <div class="ek-list-row current">
-      <p class="ek-list-client">Ecokraft</p>
-      <div class="ek-list-info">
-        <p class="ek-list-title">Förnyat varumärke för att möta nya utmaningar och ta nya delar av marknaden</p>
-        <p class="ek-list-subtitle">Research · Visuell identitet · Webbutveckling · SEO</p>
+    <div class="ek-row-div"></div>
+    <div class="ek-row current">
+      <p class="ek-row-client">Ecokraft</p>
+      <div>
+        <p class="ek-row-title">Förnyat varumärke för att möta nya utmaningar och ta nya delar av marknaden</p>
+        <p class="ek-row-sub">Research · Visuell identitet · Webbutveckling · SEO</p>
       </div>
-      <div class="ek-list-thumbs">
-        <div class="ek-thumb"><img src="spajder/Images/Image-3.jpg" alt=""></div>
-        <div class="ek-thumb"><img src="spajder/Images/Image-1.jpg" alt=""></div>
-        <div class="ek-thumb"><img src="spajder/Images/Image.jpg" alt=""></div>
-        <div class="ek-thumb"><img src="spajder/Images/Image-4.jpg" alt=""></div>
+      <div class="ek-thumbs">
+        <div class="ek-thumb"><img src="spajder/Images/Ecokraft/Image-5.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Ecokraft/Image-1.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Ecokraft/Image.jpg" alt=""></div>
+        <div class="ek-thumb"><img src="spajder/Images/Ecokraft/Image Frame.jpg" alt=""></div>
       </div>
     </div>
-    <div class="ek-list-divider"></div>
+    <div class="ek-row-div"></div>
   </section>
 
-  <!-- ═════════════════════ FOOTER ═════════════════════ -->
+  <!-- ═══════════ FOOTER ═══════════ -->
   <footer>
     <div class="container">
       <div class="footer-grid" data-fade>
@@ -683,7 +722,7 @@
           </div>
         </div>
       </div>
-      <p class="footer-copyright">©️ Spajder</p>
+      <p class="footer-copy">©️ Spajder</p>
     </div>
     <div class="footer-wordmark">
       <img src="spajder/SVG/Spajder_Landscape_Dark.svg" alt="SPAJDER">
@@ -711,7 +750,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
 
     document.querySelectorAll('[data-fade], [data-fade-scale]').forEach(el => observer.observe(el));
   </script>
